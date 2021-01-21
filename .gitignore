@@ -1,7 +1,4 @@
-videos/*.avi
-videos/*.mp4
-videos/*.mov
-videos/*.mpeg
+
 frames/full/*.jpg
 frames/full/*.png
 frames/full/*.gif
