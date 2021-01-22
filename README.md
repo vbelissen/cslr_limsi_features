@@ -1,13 +1,51 @@
 # Feature extractor for cslr_limsi
 
+## Main script
+- `scripts/main.sh`
+  - Runs all scripts for all videos inside `videos/`
+  - Parameters:
+    - aaa
+    - aaa
+  - Outputs: 
+    - See detail of other scripts
+
 ## Included scripts
-- `scripts/video_to_frames.sh`: converts any video to frames, in a separate folder inside `frames/full/`
-- `scripts/video_to_openpose_json.sh`: converts any video to openpose data, in a separate folder inside `features/openpose/`
-- `scripts/frames_to_3DFace.sh`: converts all frames of any video to a numpy file (`videoName_3DFace_raw.npy`) containing the 3D coordinates of face landmarks (Adrian Bulat's FaceAlignment model). Data is centered around the mid-point between eyes, and normalized by the average distance between eyes
-- `scripts/openpose_json_to_clean_numpy.sh`: cleans openpose data of any video, generate hand crop images (in a separate folder inside `frames/hand/`) and outputs several numpy files:
-  - `videoName_2DBody_raw.npy`
-  - `videoName_3DBody_raw.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
-  - `videoName_2DFace_raw.npy`
-  - `videoName_2DHand1_raw.npy`
-  - `videoName_2DHand2_raw.npy`
+- `scripts/video_to_frames.sh`
+  - Converts any video to frames, in a separate folder inside `frames/full/`
+  - Parameters:
+    - `videoName`
+  - Outputs:
+    - `frames/full/videoName/00001.jpg`
+    - ...
+    - `frames/full/videoName/07342.jpg` (if the video contains 7342 frames)
+- `scripts/video_to_openpose_json.sh`
+  - Converts any video to openpose data, in a separate folder inside `features/openpose/`
+  - Parameters:
+    - `videoName`
+  - Outputs:
+    - `features/openpose/videoName/keypoints_json0000000001.json`
+    - ...
+    - `features/openpose/videoName/keypoints_json0000007342.json` (if the video contains 7342 frames)
+- `scripts/frames_to_3DFace.sh`
+  - Converts all frames of any video to a numpy file containing the 3D coordinates of face landmarks (Adrian Bulat's FaceAlignment model). Data is centered around the mid-point between eyes, and normalized by the average distance between eyes.
+  - Parameters:
+    - `videoName`
+  - Outputs:
+    - `features/final/videoName_3DFace_predict_raw.npy`
+- `scripts/openpose_json_to_clean_numpy_and_hand_crops.sh`
+  - Cleans openpose data of any video, generate hand crop images (in a separate folder inside `frames/hand/`) and outputs several numpy files
+  - Parameters:
+    - `videoName`
+  - Outputs
+    - `frames/hand/videoName/00001_G.jpg`
+    - `frames/hand/videoName/00001_D.jpg`
+    - ...
+    - `frames/full/videoName/07342_G.jpg`
+    - `frames/full/videoName/07342_D.jpg` (if the video contains 7342 frames)
+    - `videoName_2DBody_OP_raw.npy`
+    - `videoName_3DBody_predict_raw.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
+    - `videoName_2DFace_OP_raw.npy`
+    - `videoName_2DHand1_OP_raw.npy`
+    - `videoName_2DHand2_OP_raw.npy`
 - `scripts/3DFace_raw_to_headAngles.sh`: uses 3DFace data of any video to generate a numpy file (`videoName_headAngles.npy`) containing the 3 Euler angles for the rotation of the head
+- `scripts/hand_crops_to_HS_probabilities.sh`: computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
