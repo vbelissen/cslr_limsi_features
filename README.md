@@ -4,8 +4,8 @@
 - **`scripts/main.sh`**
   - Runs all scripts for all videos inside `videos/`
   - Parameters:
-    - aaa
-    - aaa
+    - `--keep_full_frames`: if you want not to delete full frames after all features are computed
+    - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
   - Outputs: 
     - See detail of other scripts
 
