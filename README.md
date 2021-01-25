@@ -25,9 +25,9 @@ All scripts have to be run from the main folder (`cslr_limsi_features`).
   - Parameters:
     - `videoName`
   - Outputs:
-    - `features/openpose/videoName/keypoints_json0000000001.json`
+    - `features/openpose/videoName/keypoints_json000000000000.json`
     - ...
-    - `features/openpose/videoName/keypoints_json0000007342.json` (if the video contains 7342 frames)
+    - `features/openpose/videoName/keypoints_json000000007341.json` (if the video contains 7342 frames)
 ### **`scripts/frames_to_3DFace.sh`**
   - Converts all frames of any video to a numpy file containing the 3D coordinates of face landmarks (Adrian Bulat's FaceAlignment model). Data is centered around the mid-point between eyes, and normalized by the average distance between eyes.
   - Parameters:
