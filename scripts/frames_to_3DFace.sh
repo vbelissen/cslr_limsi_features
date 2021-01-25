@@ -7,7 +7,7 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits]]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits]"
   echo "  -v, --vidName            Video name without extension"
   echo "  --vidExt                 Video file extension"
   echo "  --framesExt              Frame files extension"
