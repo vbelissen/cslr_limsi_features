@@ -12,8 +12,6 @@ function usage() {
   echo "  --vidExt                 Video file extension"
   echo "  --framesExt              Frame files extension"
   echo "  -n, --nDigits            Number of digits for frame numbering"
-#  echo "  --keep_full_frames       For not deleting full frames         (optional, default=0)"
-#  echo "  --keep_hand_crop_frames  For not deleting hand crop frames    (optional, default=0)"
   echo ""
   echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5"
   exit 1
@@ -34,7 +32,6 @@ if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 
-path2vid=`cat scripts/paths/path_to_videos.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`

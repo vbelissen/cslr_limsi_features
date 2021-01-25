@@ -45,11 +45,11 @@ path2openPose=`cat scripts/paths/path_to_openpose.txt`
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
 if [[ "$HAND" = true ]] && [[ "$FACE" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
+    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
 elif [[ "$HAND" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
+    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
 elif [[ "$FACE" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --face --no_display
+    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --face --no_display
 else
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --no_display
+    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --no_display
 fi

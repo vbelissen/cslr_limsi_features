@@ -1,8 +1,11 @@
 frames/full/*
 !frames/full/.gitkeep
 
-features/openpose/*
-!features/openpose/.gitkeep
+features/openpose/clean_data/*
+!features/openpose/clean_data/.gitkeep
+
+features/openpose/json/*
+!features/openpose/json/.gitkeep
 
 videos/*
 !videos/.gitkeep

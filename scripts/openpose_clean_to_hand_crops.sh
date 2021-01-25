@@ -7,17 +7,13 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [-h, --hand] [-f, --face]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits]"
   echo "  -v, --vidName            Video name without extension"
   echo "  --vidExt                 Video file extension"
   echo "  --framesExt              Frame files extension"
   echo "  -n, --nDigits            Number of digits for frame numbering"
-  echo "  -h, --hand               OpenPose computed on hands too"
-  echo "  -f, --face               OpenPose computed on face too"
-#  echo "  --keep_full_frames       For not deleting full frames         (optional, default=0)"
-#  echo "  --keep_hand_crop_frames  For not deleting hand crop frames    (optional, default=0)"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 -h -f"
+  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5"
   exit 1
 }
 
@@ -31,8 +27,6 @@ while [[ "$#" > 0 ]]; do case $1 in
   --vidExt) VIDEXT="$2"; shift;shift;;
   --framesExt) FRAMESEXT="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
-  -h|--hand) HAND=true; shift;;
-  -f|--face) FACE=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -48,24 +42,13 @@ path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 
-vEnv=`cat scripts/virtual_env_names/vEnv_for_clean_numpy.txt`
+vEnv=`cat scripts/virtual_env_names/vEnv_for_hand_crops.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
-if [[ "$HAND" = true ]] && [[ "$FACE" = true ]]; then
-    typeData="pfh"
-elif [[ "$HAND" = true ]]; then
-    typeData="ph"
-elif [[ "$FACE" = true ]]; then
-    typeData="pf"
-else
-    typeData="p"
-fi
+mkdir "${path2handFrames}${VIDNAME}"
 
-if [[ "$HAND" = true ]]; then
-    mkdir "${path2handFrames}${VIDNAME}"
-fi
 
 source activate ${vEnv}
-python "${path2utils}openpose_json_to_clean_numpy_hand_crops.py" ${nImg} ${path2frames} ${VIDNAME} ${FRAMESEXT} ${NDIGITS} ${path2features} ${path2handFrames} ${typeData}
+python "${path2utils}openpose_clean_to_hand_crops.py" ${nImg} ${path2frames} ${VIDNAME} ${FRAMESEXT} ${NDIGITS} ${path2features} ${path2handFrames}
 source deactivate

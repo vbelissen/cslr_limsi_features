@@ -26,63 +26,11 @@ typeData        = sys.argv[8]
 model = model_from_json(open('reconstruction/models/mocap_COCOhanches_mlp.json').read())
 model.load_weights('reconstruction/models/mocap_COCOhanches_val_best.h5')
 
-confMoy = 0.1
-confMinPose = 0.08#0.2
-confMinFace = 0.4
-confMinHand = 0.2
-savitzky_window = 17
-savitzky_order = 6
-
-(a,b,c,d) = trOP.dataReadTabPoseFaceHandLR(nimg, 0, path2features+'openpose/'+vidName+'/'+vidName+'_', 12, '_keypoints.json', typeData, 'COCO')
-
-# Mise a nan des genoux et chevilles
-a[:,  9:11, 0:2] = np.nan
-a[:, 12:14, 0:2] = np.nan
-a[:,  9:11,   2] = 0
-a[:, 12:14,   2] = 0
-
-(a1,b1,c1,d1) = trOP.nettoyageComplet(a,b,c,d,confMoy,confMinPose,confMinFace,confMinHand,typeData)
-(a2,b2,c2,d2) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData,typePose)
-(a3,b3,c3,d3) = trOP.filtrageSavGol(a2,b2,c2,d2,savitzky_window,savitzky_order,typeData,typePose)
-
-
-
-
-# JUSTE POUR TESTER UN TRUC
-#for i in range(n):
-#    if(np.isnan(a3[i,8,0])):
-#        a3[i,8,0] = 270
-#        a3[i,8,1] = 400
-#
-#    if(np.isnan(a3[i,11,0])):
-#        a3[i,11,0] = 380
-#        a3[i,11,1] = 400
-
-
-
-
-
-
-larg_epaules_moy = np.mean(np.sqrt(np.square(a3[:,5,0]-a3[:,2,0])+np.square(a3[:,5,1]-a3[:,2,1])))
-centreMainGD     = trOP.centreMainGD(a3[:,3,0:2],a3[:,4,0:2],a3[:,6,0:2],a3[:,7,0:2])
-
-width  = int(1.3*larg_epaules_moy)
-height = width
-
-for i in range(nimg):
-    im = Image.open(path2frames+vidName+'/'+str(i+1).zfill(nDigits)+'.'+framesExt)
-    leftG = int(round(centreMainGD[i,0,1]-width/2))
-    topG = int(round(centreMainGD[i,1,1]-height/2))
-    boxG = (leftG, topG, leftG+width, topG+height)
-    areaG = im.crop(boxG)
-    areaG.save(path2handFrames+vidName+'/'+str(i+1).zfill(nDigits)+'_G.png', "PNG")
-    #areaG_mirr = areaG.transpose(Image.FLIP_LEFT_RIGHT)
-    #areaG_mirr.save('./results/testsLexique/lex_05_MainGD/'+str(i+1).zfill(4)+'_G_mirr.png', "PNG")
-    leftD = int(round(centreMainGD[i,0,0]-width/2))
-    topD = int(round(centreMainGD[i,1,0]-height/2))
-    boxD = (leftD, topD, leftD+width, topD+height)
-    areaD = im.crop(boxD)
-    areaD.save(path2handFrames+vidName+'/'+str(i+1).zfill(nDigits)+'_D.png', "PNG")
+clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'.npz', allow_pickle=True)
+a3 = clean_data['a3']
+b3 = clean_data['b3']
+c3 = clean_data['c3']
+d3 = clean_data['d3']
 
 
 # remove legs
