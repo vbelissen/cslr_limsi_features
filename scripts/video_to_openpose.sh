@@ -31,8 +31,10 @@ esac; done
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
 if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
-if [ -z "$HAND" ]; then usage "Hand computation is not set."; fi;
-if [ -z "$FACE" ]; then usage "Face computation is not set."; fi;
+#if [ -z "$HAND" ]; then usage "Hand computation is not set."; fi;
+#if [ -z "$FACE" ]; then usage "Face computation is not set."; fi;
+
+echo "$HAND"
 
 path2vid=`cat scripts/paths/path_to_videos.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
