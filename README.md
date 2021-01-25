@@ -35,7 +35,7 @@
     - `videoName`
   - Outputs:
     - `features/final/videoName_3DFace_predict_raw.npy`
-### **`scripts/openpose_json_to_clean_numpy_and_hand_crops.sh`**
+### **`scripts/openpose_json_to_clean_numpy_hand_crops.sh`**
   - Cleans openpose data of any video, generate hand crop images (in a separate folder inside `frames/hand/`) and outputs several numpy files
   - Parameters:
     - `videoName`
