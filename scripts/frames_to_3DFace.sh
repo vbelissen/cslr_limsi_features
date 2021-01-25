@@ -7,13 +7,13 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [-h, --hand] [-f, --face]"
+  echo "Usage: $0 [-v vidName] [--vidExt]"
   echo "  -v, --vidName            Video name without extension"
   echo "  --vidExt                 Video file extension"
 #  echo "  --keep_full_frames       For not deleting full frames         (optional, default=0)"
 #  echo "  --keep_hand_crop_frames  For not deleting hand crop frames    (optional, default=0)"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 -h -f"
+  echo "Example: $0 -v test_video_1 --vidExt mp4"
   exit 1
 }
 
@@ -33,5 +33,10 @@ path2features=`cat scripts/paths/path_to_features.txt`
 path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 
+vEnv=`cat scripts/virtual_env_names/vEnv_for_3DFace.txt`
+
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
-echo $nImg
+
+source activate ${vEnv}
+python "${path2utils}frames_to_3DFace.py" ${nImg}
+source deactivate

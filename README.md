@@ -1,6 +1,7 @@
 # Feature extractor for cslr_limsi
 
-All scripts have to be run from the main folder (`cslr_limsi_features`).
+- All scripts have to be run from the main folder (`cslr_limsi_features`).
+- You will need several virtual Python environments, the names must are stored in `scripts/virtual_env_names/`.
 
 ## Main script
 ### **`scripts/main.sh`**
