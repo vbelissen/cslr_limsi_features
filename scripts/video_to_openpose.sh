@@ -34,21 +34,17 @@ if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
 if [ -z "$HAND" ]; then usage "Hand computation is not set."; fi;
 if [ -z "$FACE" ]; then usage "Face computation is not set."; fi;
 
-
 path2vid=`cat scripts/paths/path_to_videos.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 path2openPose=`cat scripts/paths/path_to_openpose.txt`
-hand=true
-face=false
-
 
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
-if [[ "$hand" = true && "$face" = true ]]; then
+if [[ "$HAND" = true && "$FACE" = true ]]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
-elif [ "$hand" = true ]; then
+elif [ "$HAND" = true ]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
-elif [ "$face" = true ]; then
+elif [ "$FACE" = true ]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --face --no_display
 else
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --no_display
