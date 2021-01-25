@@ -20,15 +20,15 @@ function usage() {
 }
 
 # default params values
-HAND=0
-FACE=0
+HAND=false
+FACE=false
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --vidExt) VIDEXT="$2"; shift;shift;;
-  -h|--hand) HAND=1; shift;shift;;
-  -f|--face) FACE=1; shift;shift;;
+  -h|--hand) HAND=true; shift;shift;;
+  -f|--face) FACE=true; shift;shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -44,13 +44,13 @@ path2openPose=`cat scripts/paths/path_to_openpose.txt`
 
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
-if [[ (($HAND)) && (($FACE)) ]]; then
+if [[ "$HAND" = true && "$FACE" = true ]]; then
   echo "Hand and face"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
-elif [[ (($HAND)) ]]; then
+elif [ "$HAND" = true ]; then
     echo "Hand"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
-elif [[ (($FACE)) ]]; then
+elif [ "$FACE" = true ]; then
     echo "Face"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --face --no_display
 else
