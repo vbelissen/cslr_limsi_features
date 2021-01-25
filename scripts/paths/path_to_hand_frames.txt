@@ -1,1 +1,1 @@
-/Users/belissen/Code/cslr_limsi_features/frames/hand/
+/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/frames/hand/
