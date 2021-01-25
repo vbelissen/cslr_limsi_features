@@ -1,12 +1,14 @@
 # Feature extractor for cslr_limsi
 
+All scripts have to be run from the main folder (`cslr_limsi_features`).
+
 ## Main script
 - **`scripts/main.sh`**
   - Runs all scripts for all videos inside `videos/`
   - Parameters:
     - aaa
     - aaa
-  - Outputs: 
+  - Outputs:
     - See detail of other scripts
 
 ## Included scripts

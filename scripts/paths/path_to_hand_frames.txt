@@ -1,1 +1,1 @@
-'/Users/belissen/Code/cslr_limsi_features/frames/hand/'
+/Users/belissen/Code/cslr_limsi_features/frames/hand/
