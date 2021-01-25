@@ -44,13 +44,13 @@ path2openPose=`cat scripts/paths/path_to_openpose.txt`
 
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
-if [[ "$HAND" = 1 && "$FACE" = 1 ]]; then
+if [[ (($HAND)) && (($FACE)) ]]; then
   echo "Hand and face"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
-elif [ "$HAND" = 1 ]; then
+elif [ (($HAND)) ]; then
     echo "Hand"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
-elif [ "$FACE" = 1 ]; then
+elif [ (($FACE)) ]; then
     echo "Face"
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --face --no_display
 else
