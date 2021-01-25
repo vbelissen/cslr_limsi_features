@@ -27,8 +27,8 @@ FACE=false
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --vidExt) VIDEXT="$2"; shift;shift;;
-  -h|--hand) HAND=true; shift;shift;;
-  -f|--face) FACE=true; shift;shift;;
+  -h|--hand) HAND=true; shift;;
+  -f|--face) FACE=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
