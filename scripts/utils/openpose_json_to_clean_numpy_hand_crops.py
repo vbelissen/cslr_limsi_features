@@ -3,7 +3,6 @@ import traitementOpenposeData.traitementPrincipal as trOP
 import reconstruction.normalization as nor
 import orientationTete.orientationTete as OT
 
-
 from keras.models import model_from_json
 from scipy.spatial import procrustes
 from scipy import signal
@@ -13,62 +12,43 @@ from matplotlib import cm
 import matplotlib.pyplot as plt
 
 import Image
-
 import sys
 
-
+nimg            = int(sys.argv[1])
+path2frames     = sys.argv[2]
+vidName         = sys.argv[3]
+framesExt       = sys.argv[4]
+nDigits         = int(sys.argv[5])
+path2features   = sys.argv[6]
+path2handFrames = sys.argv[7]
+typeData        = sys.argv[8]
 
 model = model_from_json(open('reconstruction/models/mocap_COCOhanches_mlp.json').read())
 model.load_weights('reconstruction/models/mocap_COCOhanches_val_best.h5')
-#model.load_weights('mocap_mlp.h5')
-
-session = sys.argv[1]
-task = sys.argv[2]
-AB = sys.argv[3]
-n = int(sys.argv[4])
-
-s1 = '/people/belissen/Videos/DictaSign/results/poses/openpose_files/DictaSign_lsf_S'+session+'_T'+task+'_'+AB+'_front/DictaSign_lsf_S'+session+'_T'+task+'_'+AB+'_front_'
-s11 = ''
-chiffres = 12
-s2 ='_keypoints.json'
 
 Ximg = 720
 Yimg = 576
-fps = 25
-confMoy = 0.1 
+confMoy = 0.1
 confMinPose = 0.08#0.2
 confMinFace = 0.4
 confMinHand = 0.2
 savitzky_window = 17
 savitzky_order = 6
-K = 4
-separ = False
-indice_personne = 0
-typePose = 'COCO'
-typeData = 'p'
 
-
-
-
-(a,b,c,d) = trOP.dataReadTabPoseFaceHandLR(separ,n,indice_personne,s1,s11,chiffres,s2,typeData,typePose)
-#plot_XYConf_PoseFaceHandLR(a,b,c,d,n,Ximg,Yimg,fps,colorPose,colorFace,colorHand,typeData,typePose)
+(a,b,c,d) = trOP.dataReadTabPoseFaceHandLR(nimg, 0, path2features+'openpose/'+vidName+'/'+vidName+'_', 12, '_keypoints.json', typeData, 'COCO')
 
 # Mise a nan des genoux et chevilles
-a[:,9:11,0:2] = np.nan
-a[:,12:14,0:2] = np.nan
-a[:,9:11,2] = 0
-a[:,12:14,2] = 0
+a[:,  9:11, 0:2] = np.nan
+a[:, 12:14, 0:2] = np.nan
+a[:,  9:11,   2] = 0
+a[:, 12:14,   2] = 0
 
 (a1,b1,c1,d1) = trOP.nettoyageComplet(a,b,c,d,confMoy,confMinPose,confMinFace,confMinHand,typeData)
-#plot_XYConf_PoseFaceHandLR(a1,b1,c1,d1,n,Ximg,Yimg,fps,colorPose,colorFace,colorHand,typeData,typePose)
 
-(a2,b2,c2,d2) = trOP.interpNan(a1,b1,c1,d1,n,typeData,typePose)
-#plot_XYConf_PoseFaceHandLR(a2,b2,c2,d2,n,Ximg,Yimg,fps,colorPose,colorFace,colorHand,typeData,typePose)
+(a2,b2,c2,d2) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData,typePose)
 
 (a3,b3,c3,d3) = trOP.filtrageSavGol(a2,b2,c2,d2,savitzky_window,savitzky_order,typeData,typePose)
-#plot_XYConf_PoseFaceHandLR(a3,b3,c3,d3,n,Ximg,Yimg,fps,colorPose,colorFace,colorHand,typeData,typePose)
 
-#(a4,b4,c4,d4) = effaceZeroKconsecutif(a3,b3,c3,d3,K,confMinPose,confMinFace,confMinHand,typeData,typePose)
 
 
 
@@ -77,7 +57,7 @@ a[:,12:14,2] = 0
 #    if(np.isnan(a3[i,8,0])):
 #        a3[i,8,0] = 270
 #        a3[i,8,1] = 400
-#    
+#
 #    if(np.isnan(a3[i,11,0])):
 #        a3[i,11,0] = 380
 #        a3[i,11,1] = 400
@@ -94,7 +74,7 @@ centreMainGD = trOP.centreMainGD(a3[:,3,0:2],a3[:,4,0:2],a3[:,6,0:2],a3[:,7,0:2]
 width = int(1.3*larg_epaules_moy)
 height = width
 
-for i in range(n):
+for i in range(nimg):
     im = Image.open('/people/belissen/Videos/DictaSign/convert/img/DictaSign_lsf_S'+session+'_T'+task+'_'+AB+'_front/'+str(i+1).zfill(5)+'.jpg')
     leftG = int(round(centreMainGD[i,0,1]-width/2))
     topG = int(round(centreMainGD[i,1,1]-height/2))
@@ -198,20 +178,20 @@ for i in range(tabTot.shape[0]):
 
 
 indices2 = np.array([30,29,28,27,0,1,2,14,15,16,31,32,33,34,35])
-tabTotXZ = np.zeros((n,2*tabTot.shape[0]))
-tabTotY = np.zeros((n,tabTot.shape[0]))
+tabTotXZ = np.zeros((nimg,2*tabTot.shape[0]))
+tabTotY = np.zeros((nimg,tabTot.shape[0]))
 
 for i in range(tabTot.shape[0]):
-    tabTotXZ[:,2*i] = tabTot[i,0,:] 
+    tabTotXZ[:,2*i] = tabTot[i,0,:]
     tabTotXZ[:,2*i+1] = tabTot[i,2,:]
-    tabTotY[:,i] = tabTot[i,1,:] 
+    tabTotY[:,i] = tabTot[i,1,:]
 
 anglesTete2 = OT.eulerAnglesTete(tabTotXZ,tabTotY,indices2)
 
 tmp = True
 while tmp == True:
     tmp = False
-    for i in range(n):
+    for i in range(nimg):
         for j in range(3):
             if anglesTete[i,j]>180:
                 anglesTete[i,j] -= 360
@@ -227,212 +207,5 @@ while tmp == True:
                 tmp = True
 
 
-
-
-#
-#
-#
-#plt.figure()
-#ax = plt.subplot(311)
-#ax.plot(anglesTete[:,0],label='tete 1 - angX')
-#ax.plot(anglesTete2[:,0],label='tete 2 - angX')
-#
-#ax.legend()
-#ax = plt.subplot(312)
-#ax.plot(anglesTete[:,1],label='tete 1 - angY')
-#ax.plot(anglesTete2[:,1],label='tete 2 - angY')
-#
-#ax.legend()
-#ax = plt.subplot(313)
-#ax.plot(anglesTete[:,2],label='tete 1 - angZ')
-#ax.plot(anglesTete2[:,2],label='tete 2 - angZ')
-#
-#ax.legend()
-
-
-
-
-
-
-
-
-    
-#tabLienPose = np.array([]).astype(int)
-#
-#for i in range(0,4):
-#    tabLienPose = np.append(tabLienPose,[i,i+1])
-#tabLienPose = np.append(tabLienPose,[1,5])
-#for i in range(5,7):
-#    tabLienPose = np.append(tabLienPose,[i,i+1])
-#tabLienPose = np.append(tabLienPose,[1,8])
-##for i in range(8,10):
-##    tabLienPose = np.append(tabLienPose,[i,i+1])
-#tabLienPose = np.append(tabLienPose,[1,11])
-##for i in range(11,13):
-##    tabLienPose = np.append(tabLienPose,[i,i+1])
-#tabLienPose = np.append(tabLienPose,[0,14,14,16,0,15,15,17])
-#    
-#tabLienPose = tabLienPose.reshape(-1,2)
-
-
-
-
-
-#nimg = 33
-#
-#
-#
-#fig = plt.figure()
-#ax = fig.add_subplot(111, projection='3d')
-#
-#ax.elev = 30
-#ax.azim = 60
-
-
-
-
-
-
-
-#xdata = X_test2[nimg, 0::2] 
-#ydata = output2[nimg,:]
-#zdata = X_test2[nimg, 1::2] 
-#
-#xmin = min(xdata)
-#xmax = max(xdata)
-#ymin = min(ydata)
-#ymax = max(ydata)
-#zmin = min(zdata)
-#zmax = max(zdata)
-#
-#xmoy = (xmax + xmin)/2
-#ymoy = (ymax + ymin)/2
-#zmoy = (zmax + zmin)/2
-#
-#xdata = xdata - xmoy
-#ydata = ydata - ymoy
-#zdata = zdata - zmoy
-#
-#ax.scatter(xdata,ydata,zdata)
-#
-#ax.scatter(tabTot[:,0,nimg]-xmoy,tabTot[:,1,nimg]-ymoy,tabTot[:,2,nimg]-zmoy,s=0.5)
-#
-#ax.set_xlabel('X Label')
-#ax.set_ylabel('Y Label')
-#ax.set_zlabel('Z Label')
-#
-#Ax = xmax - xmin
-#Ay = ymax - ymin
-#Az = zmax - zmin
-#
-#Amax = max([Ax,Ay,Az])
-#
-#ax.set_xlim(-0.6*Amax, 0.6*Amax)
-#ax.set_ylim(-0.6*Amax, 0.6*Amax)
-#ax.set_zlim(-0.6*Amax, 0.6*Amax)
-#
-#ax.plot3D(tabTot[:17,0,nimg]-xmoy,tabTot[:17,1,nimg]-ymoy, tabTot[:17,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[17:22,0,nimg]-xmoy,tabTot[17:22,1,nimg]-ymoy, tabTot[17:22,2,nimg]-zmoy, color='blue')
-#ax.plot3D(tabTot[22:27,0,nimg]-xmoy,tabTot[22:27,1,nimg]-ymoy, tabTot[22:27,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[27:31,0,nimg]-xmoy,tabTot[27:31,1,nimg]-ymoy, tabTot[27:31,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[31:36,0,nimg]-xmoy,tabTot[31:36,1,nimg]-ymoy, tabTot[31:36,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[36:42,0,nimg]-xmoy,tabTot[36:42,1,nimg]-ymoy, tabTot[36:42,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[42:48,0,nimg]-xmoy,tabTot[42:48,1,nimg]-ymoy, tabTot[42:48,2,nimg]-zmoy, color='blue' )
-#ax.plot3D(tabTot[48:,0,nimg]-xmoy,tabTot[48:,1,nimg]-ymoy, tabTot[48:,2,nimg]-zmoy, color='blue' )
-#
-#
-#for i in range(tabLienPose.shape[0]):
-#    ideb = tabLienPose[i,0]
-#    ind_deb = np.where(pts_kept == ideb)[0][0]
-#    ifin = tabLienPose[i,1]
-#    ind_fin = np.where(pts_kept == ifin)[0][0]
-#    #On ne cree un lien que si le point a ete detecte, c'est a dire
-#    #si ses coordonnees ne sont pas a 0
-#    plt.plot([xdata[ind_deb],xdata[ind_fin]],[ydata[ind_deb],ydata[ind_fin]],[zdata[ind_deb],zdata[ind_fin]])#,color = 'blue')
-#
-#fig.tight_layout()
-#
-#
-#
-#
-#
-#
-#fig = plt.figure()
-#
-##centrage au niveau des hanches
-#
-#
-#
-#xmin = np.min(X_test2[:, 0::2])
-#xmax = np.max(X_test2[:, 0::2])
-#ymin = np.min(output2)
-#ymax = np.max(output2)
-#zmin = np.min(X_test2[:, 1::2])
-#zmax = np.max(X_test2[:, 1::2])
-#
-#xmoy = (xmax + xmin)/2
-#ymoy = (ymax + ymin)/2
-#zmoy = (zmax + zmin)/2
-#
-#Ax = xmax - xmin
-#Ay = ymax - ymin
-#Az = zmax - zmin
-#
-#Amax = max([Ax,Ay,Az])
-#
-#for nimg in range(data1_pose.shape[0]):
-#    
-#    print(str(int(float(nimg)/data1_pose.shape[0]*100))+' %')
-#    plt.clf()
-#    ax = fig.add_subplot(111, projection='3d')
-#    ax.elev = 10#30
-#    ax.azim = 90+30*np.sin(nimg*1.0/80*np.pi) #80#+nimg
-#
-#
-#    xdata = X_test2[nimg, 0::2] 
-#    ydata = output2[nimg,:]
-#    zdata = X_test2[nimg, 1::2] 
-#    
-#    xdata = xdata - xmoy
-#    ydata = ydata - ymoy
-#    zdata = zdata - zmoy
-#
-#
-#
-#    ax.scatter(xdata,ydata,zdata,s=1)
-#    
-#    ax.scatter(tabTot[:,0,nimg]-xmoy,tabTot[:,1,nimg]-ymoy,tabTot[:,2,nimg]-zmoy,s=0.5)
-#    
-#    ax.set_xlabel('X Label')
-#    ax.set_ylabel('Y Label')
-#    ax.set_zlabel('Z Label')
-#    
-#    
-#    
-#    ax.set_xlim(-0.6*Amax, 0.6*Amax)
-#    ax.set_ylim(-0.6*Amax, 0.6*Amax)
-#    ax.set_zlim(-0.6*Amax, 0.6*Amax)
-#
-#    ax.plot3D(tabTot[:17,0,nimg]-xmoy,tabTot[:17,1,nimg]-ymoy, tabTot[:17,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[17:22,0,nimg]-xmoy,tabTot[17:22,1,nimg]-ymoy, tabTot[17:22,2,nimg]-zmoy, color='blue')
-#    ax.plot3D(tabTot[22:27,0,nimg]-xmoy,tabTot[22:27,1,nimg]-ymoy, tabTot[22:27,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[27:31,0,nimg]-xmoy,tabTot[27:31,1,nimg]-ymoy, tabTot[27:31,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[31:36,0,nimg]-xmoy,tabTot[31:36,1,nimg]-ymoy, tabTot[31:36,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[36:42,0,nimg]-xmoy,tabTot[36:42,1,nimg]-ymoy, tabTot[36:42,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[42:48,0,nimg]-xmoy,tabTot[42:48,1,nimg]-ymoy, tabTot[42:48,2,nimg]-zmoy, color='blue' )
-#    ax.plot3D(tabTot[48:,0,nimg]-xmoy,tabTot[48:,1,nimg]-ymoy, tabTot[48:,2,nimg]-zmoy, color='blue' )
-#
-#    for i in range(tabLienPose.shape[0]):
-#        ideb = tabLienPose[i,0]
-#        ind_deb = np.where(pts_kept == ideb)[0][0]
-#        ifin = tabLienPose[i,1]
-#        ind_fin = np.where(pts_kept == ifin)[0][0]
-#        #On ne cree un lien que si le point a ete detecte, c'est a dire
-#        #si ses coordonnees ne sont pas a 0
-#        plt.plot([xdata[ind_deb],xdata[ind_fin]],[ydata[ind_deb],ydata[ind_fin]],[zdata[ind_deb],zdata[ind_fin]])#,color = 'blue')
-#    
-#    fig.tight_layout()
-#    #plt.savefig('./results/testsLexique/lex_05/'+str(nimg).zfill(4)+'.jpg',dpi=250)
-#    plt.pause(0.0001)
 
 np.savez('/people/belissen/Videos/DictaSign/results/poses/3D_npy/'+'S'+session+'_task'+task+'_'+AB, tabTot=tabTot, X_test2=X_test2, output2=output2, anglesTete=anglesTete, anglesTete2=anglesTete2)

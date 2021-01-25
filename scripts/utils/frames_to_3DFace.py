@@ -33,7 +33,7 @@ framesExt     = sys.argv[4]
 nDigits       = int(sys.argv[5])
 path2features = sys.argv[6]
 
-tabTot = np.zeros((68,3,nimg))
+tabTot = np.zeros((68, 3, nimg))
 
 for i in range(nimg):
     input = io.imread(path2frames+vidName+'/'+str(i+1).zfill(nDigits)+'.'+framesExt)
@@ -42,7 +42,7 @@ for i in range(nimg):
         tabTot[:,:,i] = preds[0]
     else:
         tabTot[:,:,i] = np.nan
-    
+
 
 savitzky_window = 17
 savitzky_order = 6
