@@ -19,6 +19,10 @@ function usage() {
   exit 1
 }
 
+# default params values
+HAND=0
+FACE=0
+
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
@@ -42,11 +46,11 @@ path2openPose=`cat scripts/paths/path_to_openpose.txt`
 
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
-if [[ "$HAND" = true && "$FACE" = true ]]; then
+if [[ "$HAND" = 1 && "$FACE" = 1 ]]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
-elif [ "$HAND" = true ]; then
+elif [ "$HAND" = 1 ]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
-elif [ "$FACE" = true ]; then
+elif [ "$FACE" = 1 ]; then
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --face --no_display
 else
     ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/${VIDNAME}" --no_display
