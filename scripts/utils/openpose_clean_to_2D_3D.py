@@ -37,8 +37,6 @@ if handOP:
 if faceOP:
     np.save(path2features+'final/'+vidName'+_2DFace', b3)
 
-
-
 # Determination des angles de suivi de la tete
 nez_ind      = np.where(pts_kept == 0)[0][0]
 oeil1_ind    = np.where(pts_kept == 14)[0][0]
@@ -48,15 +46,12 @@ oreille2_ind = np.where(pts_kept == 17)[0][0]
 
 data_pose2D = np.copy(a3[:,:,0:2])
 
-#data1_face = b3[:,:,0:2]
-
 # Transfo des donnees pour pouvoir faire tourner la reconstruction
 data_pose2D = trOP.transfo_data_OP_recons(data_pose2D, pts_kept)
 
 # On change le signe des donnees pour que z soit vers le haut
 # Attention, x va de droite a gauche quand on est en face !
 data_pose2D = -data_pose2D
-#data2_face = -data1_face
 
 if body3D:
     model = model_from_json(open('reconstruction/models/mocap_COCOhanches_mlp.json').read())
