@@ -1,7 +1,5 @@
 import face_alignment
 from skimage import io
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
 from scipy.interpolate import interp1d
@@ -73,4 +71,4 @@ tailleGlob_Red = tailleGlob/tailleGlob_moy
 for i in range(nimg):
     tabTot[:,:,i] = tabTot[:,:,i]/tailleGlob_Red[i]
 
-np.save(path2features+'final/'+vidName'+_3DFace_predict_raw', tabTot)
+np.save(path2features+'final/'+vidName'+_3DFace_predict_raw_temp', tabTot)
