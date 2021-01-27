@@ -31,7 +31,6 @@ framesExt     = sys.argv[4]
 nDigits       = int(sys.argv[5])
 path2features = sys.argv[6]
 
-print('AAAAA')
 tabTot = np.zeros((68, 3, nimg))
 
 for i in range(nimg):
@@ -58,7 +57,7 @@ for j in range(3):
 # Forcer le visage 3D a etre de taille constante
 pts1 = [0,  1,15,16]
 pts2 = [27,28,29,30]
-print('BBBBB')
+
 tailleGlob = np.zeros(nimg)
 for p1 in pts1:
     for p2 in pts2:
@@ -71,6 +70,5 @@ tailleGlob_Red = tailleGlob/tailleGlob_moy
 
 for i in range(nimg):
     tabTot[:,:,i] = tabTot[:,:,i]/tailleGlob_Red[i]
-print('CCCCC')
+
 np.save(path2features+'final/'+vidName+'_3DFace_predict_raw_temp', tabTot)
-print('DDDDDD')
