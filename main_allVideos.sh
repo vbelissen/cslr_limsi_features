@@ -39,15 +39,6 @@ HS_STRING=""
 KEEP_FULL_FRAMES_STRING=""
 KEEP_HAND_CROP_FRAMES_STRING=""
 
-if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
-if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
-if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
-if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
-if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
-if [[ "$KEEP_FULL_FRAMES" = true ]]; then KEEP_FULL_FRAMES_STRING=" --keep_full_frames"; fi;
-if [[ "$KEEP_HAND_CROP_FRAMES" = true ]]; then KEEP_HAND_CROP_FRAMES_STRING=" --keep_hand_crop_frames"; fi;
-
-
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   --framesExt) FRAMESEXT="$2"; shift;shift;;
@@ -61,6 +52,14 @@ while [[ "$#" > 0 ]]; do case $1 in
   --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
+
+if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
+if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
+if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
+if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
+if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
+if [[ "$KEEP_FULL_FRAMES" = true ]]; then KEEP_FULL_FRAMES_STRING=" --keep_full_frames"; fi;
+if [[ "$KEEP_HAND_CROP_FRAMES" = true ]]; then KEEP_HAND_CROP_FRAMES_STRING=" --keep_hand_crop_frames"; fi;
 
 # verify params
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;

@@ -40,12 +40,6 @@ FACEOP_STRING=""
 BODY3D_STRING=""
 FACE3D_STRING=""
 
-if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
-if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
-if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
-if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
-
-
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
@@ -61,6 +55,11 @@ while [[ "$#" > 0 ]]; do case $1 in
   --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
+
+if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
+if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
+if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
+if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;

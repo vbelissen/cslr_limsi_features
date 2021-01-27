@@ -14,11 +14,6 @@ from scipy.misc import imread
 from scipy.interpolate import interp1d
 
 
-plt.ion()
-
-plt.style.use('classic')
-
-
 # Le type de Pose (COCO ou MPI) définit un nombre de points
 def nbPtsPose(typePose):
     if typePose == 'COCO':
