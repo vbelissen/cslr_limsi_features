@@ -51,6 +51,6 @@ else
     typeData="p"
 fi
 
-conda activate ${vEnv}
+source activate ${vEnv}
 python "${path2utils}openpose_json_to_clean_data.py" ${nImg} ${VIDNAME} ${path2features} ${typeData}
-conda deactivate
+source deactivate

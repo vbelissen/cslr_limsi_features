@@ -42,6 +42,6 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_3DFace.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
-conda activate ${vEnv}
+source activate ${vEnv}
 python "${path2utils}frames_to_3DFace_temp.py" ${nImg} ${path2frames} ${VIDNAME} ${FRAMESEXT} ${NDIGITS} ${path2features}
-conda deactivate
+source deactivate

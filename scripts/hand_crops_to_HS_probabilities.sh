@@ -38,6 +38,6 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_HS_probabilitites.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
-conda activate ${vEnv}
+source activate ${vEnv}
 python "${path2utils}hand_crops_to_HS_probabilities.py" ${nImg} ${VIDNAME} ${NDIGITS} ${path2features} ${path2handFrames}
-conda deactivate
+source deactivate

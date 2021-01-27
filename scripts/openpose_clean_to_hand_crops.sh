@@ -51,6 +51,6 @@ nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 mkdir "${path2handFrames}${VIDNAME}"
 
 
-conda activate ${vEnv}
+source activate ${vEnv}
 python "${path2utils}openpose_clean_to_hand_crops.py" ${nImg} ${path2frames} ${VIDNAME} ${FRAMESEXT} ${NDIGITS} ${path2features} ${path2handFrames}
-conda deactivate
+source deactivate

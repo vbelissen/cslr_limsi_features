@@ -49,8 +49,8 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_2D_3D.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
-conda activate ${vEnv}
+source activate ${vEnv}
 python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D}
-conda deactivate
+source deactivate
 
 if [[ "$FACE3D" = true ]]; then rm "${path2features}final/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;
