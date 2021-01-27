@@ -18,7 +18,7 @@ nDigits         = int(sys.argv[5])
 path2features   = sys.argv[6]
 path2handFrames = sys.argv[7]
 
-clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'.npz', allow_pickle=True)
+clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'_openpose_clean.npz', allow_pickle=True)
 a3 = clean_data['a3']
 
 larg_epaules_moy = np.mean(np.sqrt(np.square(a3[:,5,0]-a3[:,2,0])+np.square(a3[:,5,1]-a3[:,2,1])))

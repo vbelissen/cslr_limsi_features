@@ -23,7 +23,7 @@ face3D          = bool(sys.argv[7])
 # remove legs
 pts_kept = np.array([0,1,2,3,4,5,6,7,8,11,14,15,16,17])
 
-clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'.npz', allow_pickle=True)
+clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'_openpose_clean.npz', allow_pickle=True)
 a3 = clean_data['a3']
 b3 = clean_data['b3']
 c3 = clean_data['c3']
@@ -32,10 +32,10 @@ d3 = clean_data['d3']
 np.save(path2features+'final/'+vidName+'_2DBody', a3[:, pts_kept, :])
 
 if handOP:
-    np.savez(path2features+'final/'+vidName'+_2DHands.npz', handL_2D=c3, handR_2D=d3)
+    np.savez(path2features+'final/'+vidName+'_2DHands.npz', handL_2D=c3, handR_2D=d3)
 
 if faceOP:
-    np.save(path2features+'final/'+vidName'+_2DFace', b3)
+    np.save(path2features+'final/'+vidName+'_2DFace', b3)
 
 # Determination des angles de suivi de la tete
 nez_ind      = np.where(pts_kept == 0)[0][0]
@@ -77,13 +77,13 @@ if body3D:
     data_pose3D_final[:,:,2] = a3[:, :, 1]
     data_pose3D_final[:,:,3] = a3[:, :, 2]
 
-    np.save(path2features+'final/'+vidName'+_3DBody', data_pose3D_final)
+    np.save(path2features+'final/'+vidName+'_3DBody', data_pose3D_final)
 
     indices    = np.array([nez_ind, oeil1_ind, oeil2_ind, oreille1_ind, oreille2_ind])
     anglesTete = OT.eulerAnglesTete(data_pose2D_normalized, depth_pose2D_normalized, indices)
     anglesTete = np.mod(anglesTete, 360)-180
 
-    np.save(path2features+'final/'+vidName'+_headAngles_from_3Dbody', anglesTete)
+    np.save(path2features+'final/'+vidName+'_headAngles_from_3Dbody', anglesTete)
 
 
 if face3D:
@@ -101,7 +101,7 @@ if face3D:
     mil_yeux_OP = (oeil2_OP+oeil1_OP)/2
 
     # Donnees visage 3D
-    tabTot = np.load(path2features+'final/'+vidName'+_3DFace_predict_raw_temp.npy')
+    tabTot = np.load(path2features+'final/'+vidName+'_3DFace_predict_raw_temp.npy')
     tabTot[:,     0, :] *=-1
     tabTot[:,     1, :] *=-1
     tabTot[:, [1,2], :]  = tabTot[:, [2,1], :]
@@ -124,7 +124,7 @@ if face3D:
         tabTotFinal[:, i, 0] = tabTot[i, 0, :]
         tabTotFinal[:, i, 1] = tabTot[i, 1, :]
         tabTotFinal[:, i, 2] = tabTot[i, 2, :]
-    np.save(path2features+'final/'+vidName'+_3DFace_predict_raw', tabTotFinal)
+    np.save(path2features+'final/'+vidName+'_3DFace_predict_raw', tabTotFinal)
 
     indices2 = np.array([30, 29, 28, 27, 0, 1, 2, 14, 15, 16, 31, 32, 33, 34, 35])
     tabTotXZ = np.zeros((nimg, 2*tabTot.shape[0]))
@@ -138,4 +138,4 @@ if face3D:
     anglesTete2 = OT.eulerAnglesTete(tabTotXZ,tabTotY,indices2)
     anglesTete2 = np.mod(anglesTete2, 360)-180
 
-    np.save(path2features+'final/'+vidName'+_headAngles_from_3Dface', anglesTete2)
+    np.save(path2features+'final/'+vidName+'_headAngles_from_3Dface', anglesTete2)

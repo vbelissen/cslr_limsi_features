@@ -71,4 +71,4 @@ tailleGlob_Red = tailleGlob/tailleGlob_moy
 for i in range(nimg):
     tabTot[:,:,i] = tabTot[:,:,i]/tailleGlob_Red[i]
 
-np.save(path2features+'final/'+vidName'+_3DFace_predict_raw_temp', tabTot)
+np.save(path2features+'final/'+vidName+'_3DFace_predict_raw_temp', tabTot)

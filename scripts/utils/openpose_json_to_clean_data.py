@@ -33,4 +33,4 @@ a[:, 12:14,   2] = 0
 (a3, b3, c3, d3) = trOP.filtrageSavGol(a2,b2,c2,d2,savitzky_window,savitzky_order,typeData,'COCO')
 
 
-np.savez(path2features+'openpose/clean_data/'+vidName+'openpose_clean', a3=a3 , b3=b3, c3=c3, d3=d3)
+np.savez(path2features+'openpose/clean_data/'+vidName+'_openpose_clean', a3=a3 , b3=b3, c3=c3, d3=d3)

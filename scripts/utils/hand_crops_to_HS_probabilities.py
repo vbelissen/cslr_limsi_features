@@ -74,4 +74,4 @@ for hand_suffix in suffixes:
 
     #Tab_predict = Tab_predict.astype(int)
 
-    np.save(path2features+'final/'+vidName'+_HS_probs'+hand_suffix, Tab_probs)
+    np.save(path2features+'final/'+vidName+'_HS_probs'+hand_suffix, Tab_probs)
