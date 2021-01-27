@@ -29,7 +29,7 @@ b3 = clean_data['b3']
 c3 = clean_data['c3']
 d3 = clean_data['d3']
 
-np.save(path2features+'final/'+vidName'+_2DBody', a3[:, pts_kept, :])
+np.save(path2features+'final/'+vidName+'_2DBody', a3[:, pts_kept, :])
 
 if handOP:
     np.savez(path2features+'final/'+vidName'+_2DHands.npz', handL_2D=c3, handR_2D=d3)
