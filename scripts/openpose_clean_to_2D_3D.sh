@@ -51,4 +51,4 @@ source activate ${vEnv}
 python "${path2utils}openpose_json_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D}
 source deactivate
 
-if [ "$FACE3D" = true ]]; then rm "${path2features}final/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;
+if [[ "$FACE3D" = true ]]; then rm "${path2features}final/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;

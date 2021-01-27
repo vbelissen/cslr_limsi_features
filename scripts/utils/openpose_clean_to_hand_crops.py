@@ -20,9 +20,6 @@ path2handFrames = sys.argv[7]
 
 clean_data = np.load(path2features+'openpose/clean_data/'+vidName+'.npz', allow_pickle=True)
 a3 = clean_data['a3']
-b3 = clean_data['b3']
-c3 = clean_data['c3']
-d3 = clean_data['d3']
 
 larg_epaules_moy = np.mean(np.sqrt(np.square(a3[:,5,0]-a3[:,2,0])+np.square(a3[:,5,1]-a3[:,2,1])))
 centreMainGD     = trOP.centreMainGD(a3[:,3,0:2],a3[:,4,0:2],a3[:,6,0:2],a3[:,7,0:2])

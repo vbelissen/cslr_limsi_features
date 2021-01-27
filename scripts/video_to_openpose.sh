@@ -7,7 +7,7 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [-h, --hand] [-f, --face]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [-h, --handOP] [-f, --faceOP]"
   echo "  -v, --vidName            Video name without extension"
   echo "  --vidExt                 Video file extension"
   echo "  -h, --hand               OpenPose computed on hands too"
@@ -27,8 +27,8 @@ FACE=false
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --vidExt) VIDEXT="$2"; shift;shift;;
-  -h|--hand) HAND=true; shift;;
-  -f|--face) FACE=true; shift;;
+  -h|--handOP) HAND=true; shift;;
+  -f|--faceOP) FACE=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
