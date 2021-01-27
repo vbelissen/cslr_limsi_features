@@ -7,7 +7,7 @@ from scipy.spatial import procrustes
 from scipy import signal
 import scipy.io
 
-import Image
+from Pillow import Image
 import sys
 
 nimg            = int(sys.argv[1])
