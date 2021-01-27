@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Getting a first file version for 3D face estimation"
+
 CLEAR='\033[0m'
 RED='\033[0;31m'
 

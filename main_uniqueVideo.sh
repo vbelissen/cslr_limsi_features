@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Main script"
+
 CLEAR='\033[0m'
 RED='\033[0;31m'
 
@@ -71,6 +73,7 @@ path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 
 video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT} ${HANDOP_STRING}${FACEOP_STRING}
+if [[ "$FACE3D" = true ]]; then frames_to_3DFace_temp.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
 openpose_json_to_clean_data.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}
 openpose_clean_to_hand_crops.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
