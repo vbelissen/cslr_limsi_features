@@ -73,5 +73,5 @@ for file in ${yourfilenames}; do
     extension="${filename##*.}"
     filename="${filename%.*}"
     echo $filename
-    main_uniqueVideo.sh -v ${filename} --vidExt ${extension} --framesExt ${FRAMESEXT} -n ${NDIGITS} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}${KEEP_FULL_FRAMES_STRING}${KEEP_HAND_CROP_FRAMES_STRING}
+    ./main_uniqueVideo.sh -v ${filename} --vidExt ${extension} --framesExt ${FRAMESEXT} -n ${NDIGITS} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}${KEEP_FULL_FRAMES_STRING}${KEEP_HAND_CROP_FRAMES_STRING}
 done

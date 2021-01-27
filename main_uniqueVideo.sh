@@ -71,13 +71,13 @@ if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not se
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 
-video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT} ${HANDOP_STRING}${FACEOP_STRING}
-if [[ "$FACE3D" = true ]]; then frames_to_3DFace_temp.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
-openpose_json_to_clean_data.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}
-openpose_clean_to_hand_crops.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
-if [[ "$HS" = true ]]; then hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
+./video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+./video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT} ${HANDOP_STRING}${FACEOP_STRING}
+if [[ "$FACE3D" = true ]]; then ./frames_to_3DFace_temp.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
+./openpose_json_to_clean_data.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}
+./openpose_clean_to_hand_crops.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+./openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
+if [[ "$HS" = true ]]; then ./hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
