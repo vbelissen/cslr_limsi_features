@@ -34,7 +34,7 @@ path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 
-vEnv=`cat scripts/virtual_env_names/vEnv_for_HS_probabilitites.txt`
+vEnv=`cat scripts/virtual_env_names/vEnv_for_HS_probabilities.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
