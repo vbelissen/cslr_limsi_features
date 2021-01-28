@@ -409,6 +409,111 @@ def interpNan(a,b,c,d,n,typeData,typePose):
     return(a1,b1,c1,d1)
 
 
+def prolongationNanDebutFin(a,b,c,d,typePose):
+
+    a1 = np.array(a)
+    b1 = np.array(b)
+    c1 = np.array(c)
+    d1 = np.array(d)
+
+    nPP = nbPtsPose(typePose)
+
+    for i in range(nPP):
+        nans, x = nan_helper(a1[:, i, 0])
+        if (~nans).size != 0:
+            if nans[0]:
+                firstNonNanWhere = np.where(~nans)[0][0]
+                a1[:firstNonNanWhere, i, 0] = a1[firstNonNanWhere, i, 0]
+            if nans[-1]:
+                lastNonNanWhere = np.where(~nans)[0][-1]
+                a1[lastNonNanWhere+1:, i, 0] = a1[lastNonNanWhere, i, 0]
+        else:
+            a1[:, i, 0] = 0
+
+        nans, x = nan_helper(a1[:, i, 1])
+        if (~nans).size != 0:
+            if nans[0]:
+                firstNonNanWhere = np.where(~nans)[0][0]
+                a1[:firstNonNanWhere, i, 1] = a1[firstNonNanWhere, i, 1]
+            if nans[-1]:
+                lastNonNanWhere = np.where(~nans)[0][-1]
+                a1[lastNonNanWhere+1:, i, 1] = a1[lastNonNanWhere, i, 1]
+        else:
+            a1[:, i, 1] = 0
+
+    if typeData == 'pfh' or typeData == 'pf':
+        for i in range(70):
+            nans, x = nan_helper(b1[:, i, 0])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    b1[:firstNonNanWhere, i, 0] = b1[firstNonNanWhere, i, 0]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    b1[lastNonNanWhere+1:, i, 0] = b1[lastNonNanWhere, i, 0]
+            else:
+                b1[:, i, 0] = 0
+
+            nans, x = nan_helper(b1[:, i, 1])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    b1[:firstNonNanWhere, i, 1] = b1[firstNonNanWhere, i, 1]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    b1[lastNonNanWhere+1:, i, 1] = b1[lastNonNanWhere, i, 1]
+            else:
+                b1[:, i, 1] = 0
+
+
+    if typeData == 'pfh' or typeData == 'ph':
+        for i in range(21):
+            nans, x = nan_helper(c1[:, i, 0])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    c1[:firstNonNanWhere, i, 0] = c1[firstNonNanWhere, i, 0]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    c1[lastNonNanWhere+1:, i, 0] = c1[lastNonNanWhere, i, 0]
+            else:
+                c1[:, i, 0] = 0
+
+            nans, x = nan_helper(c1[:, i, 1])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    c1[:firstNonNanWhere, i, 1] = c1[firstNonNanWhere, i, 1]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    c1[lastNonNanWhere+1:, i, 1] = c1[lastNonNanWhere, i, 1]
+            else:
+                c1[:, i, 1] = 0
+
+            nans, x = nan_helper(d1[:, i, 0])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    d1[:firstNonNanWhere, i, 0] = d1[firstNonNanWhere, i, 0]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    d1[lastNonNanWhere+1:, i, 0] = d1[lastNonNanWhere, i, 0]
+            else:
+                d1[:, i, 0] = 0
+
+            nans, x = nan_helper(d1[:, i, 1])
+            if (~nans).size != 0:
+                if nans[0]:
+                    firstNonNanWhere = np.where(~nans)[0][0]
+                    d1[:firstNonNanWhere, i, 1] = d1[firstNonNanWhere, i, 1]
+                if nans[-1]:
+                    lastNonNanWhere = np.where(~nans)[0][-1]
+                    d1[lastNonNanWhere+1:, i, 1] = d1[lastNonNanWhere, i, 1]
+            else:
+                d1[:, i, 1] = 0
+
+    return(a1,b1,c1,d1)
+
 # Fonction de filtrage de Savitzky-Golay
 def filtrageSavGol(a,b,c,d,savitzky_window,savitzky_order,typeData,typePose):
 

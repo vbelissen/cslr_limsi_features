@@ -28,9 +28,12 @@ a[:, 12:14, 0:2] = np.nan
 a[:,  9:11,   2] = 0
 a[:, 12:14,   2] = 0
 
-(a1, b1, c1, d1) = trOP.nettoyageComplet(a,b,c,d,confMoy,confMinPose,confMinFace,confMinHand,typeData)
-(a2, b2, c2, d2) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData,'COCO')
-(a3, b3, c3, d3) = trOP.filtrageSavGol(a2,b2,c2,d2,savitzky_window,savitzky_order,typeData,'COCO')
+(a1, b1, c1, d1) = trOP.prolongationNanDebutFin(a,b,c,d,typeData)
 
+
+#(a1, b1, c1, d1) = trOP.nettoyageComplet(a,b,c,d,confMoy,confMinPose,confMinFace,confMinHand,typeData)
+#(a2, b2, c2, d2) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData,'COCO')
+#(a3, b3, c3, d3) = trOP.filtrageSavGol(a2,b2,c2,d2,savitzky_window,savitzky_order,typeData,'COCO')
+(a3, b3, c3, d3) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData,'COCO')
 
 np.savez(path2features+'openpose/clean_data/'+vidName+'_openpose_clean', a3=a3 , b3=b3, c3=c3, d3=d3)
