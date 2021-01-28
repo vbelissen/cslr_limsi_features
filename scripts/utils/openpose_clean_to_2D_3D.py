@@ -90,8 +90,8 @@ if body3D:
 if face3D:
     # Distance moyenne entre les yeux
     if body3D:
-        oeil1_OP = np.transpose(np.array([data_pose2D_dim[:, 2*oeil1_ind], output2[:, oeil1_ind], data_pose2D_dim[:, 2*oeil1_ind+1]]))
-        oeil2_OP = np.transpose(np.array([data_pose2D_dim[:, 2*oeil2_ind], output2[:, oeil2_ind], data_pose2D_dim[:, 2*oeil2_ind+1]]))
+        oeil1_OP = np.transpose(np.array([data_pose2D[:, 2*oeil1_ind], depth_pose3D_dim[:, oeil1_ind], data_pose2D[:, 2*oeil1_ind+1]]))
+        oeil2_OP = np.transpose(np.array([data_pose2D[:, 2*oeil2_ind], depth_pose3D_dim[:, oeil2_ind], data_pose2D[:, 2*oeil2_ind+1]]))
     else:
         oeil1_OP = np.transpose(np.array([data_pose2D[:, 2*oeil1_ind], np.zeros(nimg), data_pose2D[:, 2*oeil1_ind+1]]))
         oeil1_OP = np.transpose(np.array([data_pose2D[:, 2*oeil2_ind], np.zeros(nimg), data_pose2D[:, 2*oeil2_ind+1]]))
