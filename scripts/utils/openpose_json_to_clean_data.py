@@ -28,7 +28,7 @@ a[:, 12:14, 0:2] = np.nan
 a[:,  9:11,   2] = 0
 a[:, 12:14,   2] = 0
 
-(a1, b1, c1, d1) = trOP.prolongationNanDebutFin(a,b,c,d,typeData)
+(a1, b1, c1, d1) = trOP.prolongationNanDebutFin(a, b, c, d, typeData, typePose='COCO')
 
 
 #(a1, b1, c1, d1) = trOP.nettoyageComplet(a,b,c,d,confMoy,confMinPose,confMinFace,confMinHand,typeData)

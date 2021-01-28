@@ -409,7 +409,7 @@ def interpNan(a,b,c,d,n,typeData,typePose):
     return(a1,b1,c1,d1)
 
 
-def prolongationNanDebutFin(a,b,c,d,typePose):
+def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
 
     a1 = np.array(a)
     b1 = np.array(b)
