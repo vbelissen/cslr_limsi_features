@@ -8,7 +8,7 @@ from scipy.spatial import procrustes
 from scipy import signal
 import scipy.io
 
-import Image
+from PIL import Image
 import sys
 
 nimg            = int(sys.argv[1])

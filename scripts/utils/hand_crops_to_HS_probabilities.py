@@ -1,7 +1,7 @@
 import numpy as np
 import caffe
 
-import Image
+from PIL import Image
 
 import sys
 import os.path
