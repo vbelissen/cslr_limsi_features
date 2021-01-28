@@ -72,11 +72,11 @@ if body3D:
     #data_pose2D_dim[:, 0::2] = data_pose2D_dim[:, 0::2] + np.outer(mx, np.ones((1, (data_pose2D_dim.shape[1])/2)))
     #data_pose2D_dim[:, 1::2] = data_pose2D_dim[:, 1::2] + np.outer(mz, np.ones((1, (data_pose2D_dim.shape[1])/2)))
 
-    data_pose3D_final = np.zeros((a3.shape[0], a3.shape[1], 4)) # x,y,z,conf
-    data_pose3D_final[:,:,0] = a3[:, :, 0]
+    data_pose3D_final = np.zeros((a3.shape[0], pts_kept.size, 4)) # x,y,z,conf
+    data_pose3D_final[:,:,0] = data_pose2D[:, 0::2]#a3[:, :, 0]
     data_pose3D_final[:,:,1] = depth_pose3D_dim
-    data_pose3D_final[:,:,2] = a3[:, :, 1]
-    data_pose3D_final[:,:,3] = a3[:, :, 2]
+    data_pose3D_final[:,:,2] = data_pose2D[:, 1::2]#a3[:, :, 1]
+    data_pose3D_final[:,:,3] = a3[:, pts_kept, 2]
 
     np.save(path2features+'final/'+vidName+'_3DBody', data_pose3D_final)
 
