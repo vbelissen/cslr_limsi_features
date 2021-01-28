@@ -44,13 +44,14 @@ path2features=`cat scripts/paths/path_to_features.txt`
 path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
+path2body3Dmodels=`cat scripts/paths/path_to_body_3D_models.txt`
 
 vEnv=`cat scripts/virtual_env_names/vEnv_for_2D_3D.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
-python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D}
+python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D} ${path2body3Dmodels}
 source deactivate
 
 if [[ "$FACE3D" = true ]]; then rm "${path2features}final/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;

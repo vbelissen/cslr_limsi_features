@@ -11,13 +11,14 @@ import scipy.io
 from PIL import Image
 import sys
 
-nimg            = int(sys.argv[1])
-vidName         = sys.argv[2]
-path2features   = sys.argv[3]
-handOP          = bool(sys.argv[4])
-faceOP          = bool(sys.argv[5])
-body3D          = bool(sys.argv[6])
-face3D          = bool(sys.argv[7])
+nimg              = int(sys.argv[1])
+vidName           = sys.argv[2]
+path2features     = sys.argv[3]
+handOP            = bool(sys.argv[4])
+faceOP            = bool(sys.argv[5])
+body3D            = bool(sys.argv[6])
+face3D            = bool(sys.argv[7])
+path2body3Dmodels = sys.argv[8]
 
 
 # remove legs
@@ -54,8 +55,8 @@ data_pose2D = trOP.transfo_data_OP_recons(data_pose2D, pts_kept)
 data_pose2D = -data_pose2D
 
 if body3D:
-    model = model_from_json(open('reconstruction/models/mocap_COCOhanches_mlp.json').read())
-    model.load_weights('reconstruction/models/mocap_COCOhanches_val_best.h5')
+    model = model_from_json(open(path2body3Dmodels+'mocap_COCOhanches_mlp.json').read())
+    model.load_weights(path2body3Dmodels+'mocap_COCOhanches_val_best.h5')
 
     mx = data_pose2D[:, 0::2].mean(axis = 1)
     mz = data_pose2D[:, 1::2].mean(axis = 1)
