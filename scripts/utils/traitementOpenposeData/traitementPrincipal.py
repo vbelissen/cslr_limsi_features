@@ -420,7 +420,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
 
     for i in range(nPP):
         nans, x = nan_helper(a1[:, i, 0])
-        if (~nans).size != 0:
+        if np.sum(~nans)> 0:
             if nans[0]:
                 firstNonNanWhere = np.where(~nans)[0][0]
                 a1[:firstNonNanWhere, i, 0] = a1[firstNonNanWhere, i, 0]
@@ -431,7 +431,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
             a1[:, i, 0] = 0
 
         nans, x = nan_helper(a1[:, i, 1])
-        if (~nans).size != 0:
+        if np.sum(~nans)> 0:
             if nans[0]:
                 firstNonNanWhere = np.where(~nans)[0][0]
                 a1[:firstNonNanWhere, i, 1] = a1[firstNonNanWhere, i, 1]
@@ -444,7 +444,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
     if typeData == 'pfh' or typeData == 'pf':
         for i in range(70):
             nans, x = nan_helper(b1[:, i, 0])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     b1[:firstNonNanWhere, i, 0] = b1[firstNonNanWhere, i, 0]
@@ -455,7 +455,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
                 b1[:, i, 0] = 0
 
             nans, x = nan_helper(b1[:, i, 1])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     b1[:firstNonNanWhere, i, 1] = b1[firstNonNanWhere, i, 1]
@@ -469,7 +469,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
     if typeData == 'pfh' or typeData == 'ph':
         for i in range(21):
             nans, x = nan_helper(c1[:, i, 0])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     c1[:firstNonNanWhere, i, 0] = c1[firstNonNanWhere, i, 0]
@@ -480,7 +480,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
                 c1[:, i, 0] = 0
 
             nans, x = nan_helper(c1[:, i, 1])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     c1[:firstNonNanWhere, i, 1] = c1[firstNonNanWhere, i, 1]
@@ -491,7 +491,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
                 c1[:, i, 1] = 0
 
             nans, x = nan_helper(d1[:, i, 0])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     d1[:firstNonNanWhere, i, 0] = d1[firstNonNanWhere, i, 0]
@@ -502,7 +502,7 @@ def prolongationNanDebutFin(a, b, c, d, typeData, typePose):
                 d1[:, i, 0] = 0
 
             nans, x = nan_helper(d1[:, i, 1])
-            if (~nans).size != 0:
+            if np.sum(~nans)> 0:
                 if nans[0]:
                     firstNonNanWhere = np.where(~nans)[0][0]
                     d1[:firstNonNanWhere, i, 1] = d1[firstNonNanWhere, i, 1]
