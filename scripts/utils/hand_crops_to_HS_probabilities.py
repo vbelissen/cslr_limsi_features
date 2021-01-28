@@ -1,4 +1,7 @@
 import numpy as np
+import os
+os.environ['GLOG_minloglevel'] = '2'
+
 import caffe
 
 from PIL import Image
