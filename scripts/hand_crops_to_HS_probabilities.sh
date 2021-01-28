@@ -33,11 +33,12 @@ path2features=`cat scripts/paths/path_to_features.txt`
 path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
+path2caffeModel=`cat scripts/paths/path_to_caffe_model.txt`
 
 vEnv=`cat scripts/virtual_env_names/vEnv_for_HS_probabilities.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
-python "${path2utils}hand_crops_to_HS_probabilities.py" ${nImg} ${VIDNAME} ${NDIGITS} ${path2features} ${path2handFrames}
+python "${path2utils}hand_crops_to_HS_probabilities.py" ${nImg} ${VIDNAME} ${NDIGITS} ${path2features} ${path2handFrames} ${path2caffeModel}
 source deactivate

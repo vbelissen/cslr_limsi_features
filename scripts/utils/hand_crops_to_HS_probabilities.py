@@ -10,18 +10,22 @@ import os.path
 caffe.set_mode_gpu()
 caffe.set_device(0)
 
-""" Load net """
-hand_net = caffe.Net('./1miohands-modelzoo-v2/mod_submit-net.prototxt',
-                     './1miohands-modelzoo-v2/1miohands-v2.caffemodel',
-                     caffe.TEST)
 
-suffixes = ['_G', '_D']
 
 nimg            = int(sys.argv[1])
 vidName         = sys.argv[2]
 nDigits         = int(sys.argv[3])
 path2features   = sys.argv[4]
 path2handFrames = sys.argv[5]
+path2caffeModel = sys.argv[6]
+
+""" Load net """
+hand_net = caffe.Net(path2caffeModel+'mod_submit-net.prototxt',
+                     path2caffeModel+'1miohands-v2.caffemodel',
+                     caffe.TEST)
+
+suffixes = ['_G', '_D']
+
 
 for hand_suffix in suffixes:
 
