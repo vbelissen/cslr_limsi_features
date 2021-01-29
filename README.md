@@ -70,50 +70,77 @@
 ### **`scripts/video_to_frames.sh`**
   - Converts any video to frames, in a separate folder inside `frames/full/`
   - Parameters:
-    - `videoName`
+    - `-v`, `--vidName`: Video name without extension
+    - `--vidExt`: Video file extension
+    - `--framesExt`: Frame files extension for ffmpeg
+    - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
   - Outputs:
-    - `frames/full/videoName/00001.jpg`
+    - `frames/full/vidName/00001.jpg`
     - ...
-    - `frames/full/videoName/07342.jpg` (if the video contains 7342 frames)
+    - `frames/full/vidName/07342.jpg` (if the video contains 7342 frames)
 ### **`scripts/video_to_openpose_json.sh`**
   - Converts any video to openpose data, in a separate folder inside `features/openpose/`
   - Parameters:
-    - `videoName`
+    - `-v`, `--vidName`: Video name without extension
+    - `--vidExt`: Video file extension
+    - `-h`, `--handOP`: OpenPose computed on hands
+    - `-f`, `--faceOP`: OpenPose computed on face
   - Outputs:
-    - `features/openpose/videoName/keypoints_json000000000000.json`
+    - `features/openpose/vidName/keypoints_json000000000000.json`
     - ...
-    - `features/openpose/videoName/keypoints_json000000007341.json` (if the video contains 7342 frames)
-### **`scripts/frames_to_3DFace.sh`**
+    - `features/openpose/vidName/keypoints_json000000007341.json` (if the video contains 7342 frames)
+### **`scripts/frames_to_3DFace_temp.sh`**
   - Converts all frames of any video to a numpy file containing the 3D coordinates of face landmarks (Adrian Bulat's FaceAlignment model). Data is centered around the mid-point between eyes, and normalized by the average distance between eyes.
   - Parameters:
-    - `videoName`
+    - `-v`, `--vidName`: Video name without extension
+    - `--vidExt`: Video file extension
+    - `--framesExt`: Frame files extension for ffmpeg
+    - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
   - Outputs:
-    - `features/final/videoName_3DFace_predict_raw.npy`
-### **`scripts/openpose_json_to_clean_numpy_hand_crops.sh`**
-  - Cleans openpose data of any video, generate hand crop images (in a separate folder inside `frames/hand/`) and outputs several numpy files
+    - `features/final/vidName_3DFace_predict_raw_temp.npy`
+### **`scripts/openpose_json_to_clean_data.sh`**
+  - Cleans openpose data of any video (basically interpolating NaN values), and assembles this data to a numpy (npz) file, with 4 arrays (a3 for body, b3 for head, c3 and d3 for hands).
   - Parameters:
-    - `videoName`
+    - `-v`, `--vidName`: Video name without extension
+    - `-h`, `--handOP`: OpenPose computed on hands
+    - `-f`, `--faceOP`: OpenPose computed on face
   - Outputs:
-    - `frames/hand/videoName/00001_hand1.jpg`
-    - `frames/hand/videoName/00001_hand2.jpg`
+    - `features/openpose/vidName_openpose_clean.npz`
+### **`scripts/openpose_clean_to_hand_crops.sh`**
+  - Generate hand crop images (in a separate folder inside `frames/hand/`) using openpose clean data and original images
+  - Parameters:
+    - `-v`, `--vidName`: Video name without extension
+-    - `--framesExt`: Frame files extension for ffmpeg
+    - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
+  - Outputs:
+    - `frames/hand/vidName/00001_G.png`
+    - `frames/hand/vidName/00001_D.png`
     - ...
-    - `frames/hand/videoName/07342_hand1.jpg`
-    - `frames/hand/videoName/07342_hand2.jpg` (if the video contains 7342 frames)
-    - `features/final/videoName_2DBody_OP_raw.npy`
-    - `features/final/videoName_3DBody_predict_raw.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
-    - `features/final/videoName_2DFace_OP_raw.npy`
-    - `features/final/videoName_2DHand1_OP_raw.npy`
-    - `features/final/videoName_2DHand2_OP_raw.npy`
+    - `frames/hand/vidName/07342_G.png`
+    - `frames/hand/vidName/07342_D.png` (if the video contains 7342 frames)
+
+
+
+
+
+
+
+
+- `features/final/vidName_2DBody_OP_raw.npy`
+    - `features/final/vidName_3DBody_predict_raw.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
+    - `features/final/vidName_2DFace_OP_raw.npy`
+    - `features/final/vidName_2DHand1_OP_raw.npy`
+    - `features/final/vidName_2DHand2_OP_raw.npy`
 ### **`scripts/3DFace_raw_to_headAngles.sh`**
   - Uses 3DFace data of any video to generate a numpy file containing the 3 Euler angles for the rotation of the head
   - Parameters:
-    - `videoName`
+    - `vidName`
   - Outputs:
-    - `features/final/videoName_headAngles.npy`
+    - `features/finalvidName_headAngles.npy`
 ### **`scripts/hand_crops_to_HS_probabilities.sh`**
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
   - Parameters:
-    - `videoName`
+    - `vidName`
   - Outputs:
-    - `features/final/videoName_HShand1.npy`
-    - `features/final/videoName_HShand2.npy`
+    - `features/final/vidName_HShand1.npy`
+    - `features/final/vidName_HShand2.npy`
