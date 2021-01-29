@@ -30,13 +30,22 @@
 - Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`.
 
 ## Main script
-### **`scripts/main.sh`**
-  - Runs all scripts for all videos inside `videos/`
+### **`main_allVideos.sh`**
+  - Runs all scripts in `scripts/` for all videos inside `videos/`
   - Parameters:
+    - `--framesExt`: Frame files extension for ffmpeg
+    - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
+    - `--handOP`: OpenPose computed on hands
+    - `--faceOP`: OpenPose computed on face
+    - `--body3D`: 3D Body computed
+    - `--face3D`: 3D Face computed
+    - `--hs`: Hand shapes probabilities (Koller cafe model)
     - `--keep_full_frames`: if you want not to delete full frames after all features are computed
     - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
+    - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - See detail of other scripts
+  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --addCaffePath`
 
 ## Included scripts
 ### **`scripts/video_to_frames.sh`**
