@@ -1,6 +1,9 @@
 frames/full/*
 !frames/full/.gitkeep
 
+frames/hand/*
+!frames/hand/.gitkeep
+
 features/openpose/clean_data/*
 !features/openpose/clean_data/.gitkeep
 
