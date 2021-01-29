@@ -118,21 +118,24 @@
     - ...
     - `frames/hand/vidName/07342_G.png`
     - `frames/hand/vidName/07342_D.png` (if the video contains 7342 frames)
-
-
-
-
-
-
-
-
-- `features/final/vidName_2DBody_OP_raw.npy`
-    - `features/final/vidName_3DBody_predict_raw.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
-    - `features/final/vidName_2DFace_OP_raw.npy`
-    - `features/final/vidName_2DHand1_OP_raw.npy`
-    - `features/final/vidName_2DHand2_OP_raw.npy`
-### **`scripts/3DFace_raw_to_headAngles.sh`**
-  - Uses 3DFace data of any video to generate a numpy file containing the 3 Euler angles for the rotation of the head
+### **`scripts/openpose_clean_to_2D_3D.sh`**
+  - Getting coherent 2D/3D data for body/face/hands from openpose cleaned file, prediction model and 3D face estimation
+  - Parameters:
+    - `-v`, `--vidName`: Video name without extension
+    - `--handOP`: OpenPose computed on hands
+    - `--faceOP`: OpenPose computed on face
+    - `--body3D`: 3D Body computed too
+    - `--face3D`: 3D Face computed too
+  - Outputs:
+    - `features/final/vidName_2DBody.npy`
+    - `features/final/vidName_2DHands.npz`
+    - `features/final/vidName_2DFace.npy`
+    - `features/final/vidName_headAngles_from_3DBody.npy`
+    - `features/final/vidName_3DBody.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
+    - `features/final/vidName_3DFace_predict_raw.npy`
+    - `features/final/vidName_headAngles_from_3DFace.npy`
+### **`scripts/hand_crops_to_HS_probabilities.sh`**
+  - Getting hand shapes probabilities (Koller) from hand crops
   - Parameters:
     - `vidName`
   - Outputs:
@@ -140,7 +143,9 @@
 ### **`scripts/hand_crops_to_HS_probabilities.sh`**
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
   - Parameters:
-    - `vidName`
+    - `-v`, `--vidName`: Video name without extension
+    - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
+    - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
-    - `features/final/vidName_HShand1.npy`
-    - `features/final/vidName_HShand2.npy`
+    - `features/final/vidName_HS_probs_G.npy`
+    - `features/final/vidName_HS_probs_D.npy`
