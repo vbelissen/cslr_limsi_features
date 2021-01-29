@@ -9,18 +9,23 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [-n nDigits]"
+  echo "Usage: $0 [-v vidName] [-n nDigits] [--addCaffePath]"
   echo "  -v, --vidName            Video name without extension"
   echo "  -n, --nDigits            Number of digits for frame numbering"
+  echo "  --addCaffePath           Add Caffe to path"
   echo ""
-  echo "Example: $0 -v test_video_1 -n 5"
+  echo "Example: $0 -v test_video_1 -n 5 --addCaffePath"
   exit 1
 }
+
+# default params values
+ADDCAFFEPATH=false
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
+  --addCaffePath) ADDCAFFEPATH=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -40,5 +45,6 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_HS_probabilities.txt`
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
+if [[ "$ADDCAFFEPATH" = true ]]; then ./scripts/add_caffe_path.sh; fi;
 python "${path2utils}hand_crops_to_HS_probabilities.py" ${nImg} ${VIDNAME} ${NDIGITS} ${path2features} ${path2handFrames} ${path2caffeModel}
 source deactivate
