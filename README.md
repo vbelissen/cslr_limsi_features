@@ -1,7 +1,33 @@
 # Feature extractor for cslr_limsi
 
 - All scripts have to be run from the main folder (`cslr_limsi_features`).
-- You will need several virtual Python environments, the names must are stored in `scripts/virtual_env_names/`.
+- The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.
+
+## Requirements
+
+- Openpose, tested with CUDA8.0
+- Three virtual Python environments:
+  - `cslr_limsi_features_env1`:
+    - python 3.7
+    - numpy
+    - scipy (1.1.0)
+    - pillow
+    - pytorch (0.4.1)
+    - dlib (installed via pip)
+    - scikit-image
+    - opencv-python
+  - `cslr_limsi_features_env2`:
+    - python 3.6
+    - tensorflow-gpu 1.2.1
+    - keras 2.1.5
+    - pillow
+    - scipy (1.1.0)
+  - `cslr_limsi_features_env3` (used with Caffe):
+    - python 2.7
+    - pillow
+    - numpy
+    - scipy 1.1.0
+- Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`.
 
 ## Main script
 ### **`scripts/main.sh`**
