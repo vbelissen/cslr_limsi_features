@@ -11,8 +11,8 @@ function usage() {
   fi
   echo "Usage: $0 [-v vidName] [-h, --handOP] [-f, --faceOP]"
   echo "  -v, --vidName            Video name without extension"
-  echo "  -h, --hand               OpenPose computed on hands too"
-  echo "  -f, --face               OpenPose computed on face too"
+  echo "  -h, --handOP             OpenPose computed on hands too"
+  echo "  -f, --faceOP             OpenPose computed on face too"
   echo ""
   echo "Example: $0 -v test_video_1 -h -f"
   exit 1
