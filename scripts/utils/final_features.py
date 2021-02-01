@@ -6,7 +6,7 @@ path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/le
 
 video_list = []
 left_handed_list = []
-with open(path2leftHandedList, 'r') as open_left_handed:
+with open(path2leftHandedList, 'r', encoding='utf-8') as open_left_handed:
     reader_left_handed = csv.reader(open_left_handed, delimiter=';')
     for i in reader_left_handed:
         print(i)
