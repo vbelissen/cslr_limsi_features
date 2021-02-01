@@ -9,20 +9,18 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits]"
+  echo "Usage: $0 [-v vidName] [--framesExt] [-n nDigits]"
   echo "  -v, --vidName            Video name without extension"
-  echo "  --vidExt                 Video file extension"
   echo "  --framesExt              Frame files extension"
   echo "  -n, --nDigits            Number of digits for frame numbering"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5"
+  echo "Example: $0 -v test_video_1 --framesExt jpg -n 5"
   exit 1
 }
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
-  --vidExt) VIDEXT="$2"; shift;shift;;
   --framesExt) FRAMESEXT="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
@@ -30,7 +28,6 @@ esac; done
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
-if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 

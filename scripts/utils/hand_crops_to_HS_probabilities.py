@@ -72,7 +72,7 @@ for hand_suffix in suffixes:
         #features = hand_net.blobs['pool5/7x7_s1'].data[0,:,0,0].copy()
         #Tab_features[j,:] = features
 
-        """ Get labels """
+        """ Get temps """
         predict = out['loss3/loss3'].argmax(axis = 1)
         prob = [probs[predict[it]] for it, probs in enumerate(out['loss3/loss3'])]
 
@@ -81,4 +81,4 @@ for hand_suffix in suffixes:
 
     #Tab_predict = Tab_predict.astype(int)
 
-    np.save(path2features+'final/'+vidName+'_HS_probs'+hand_suffix, Tab_probs)
+    np.save(path2features+'temp/'+vidName+'_HS_probs'+hand_suffix, Tab_probs)

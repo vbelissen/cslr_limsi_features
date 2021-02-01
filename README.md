@@ -43,10 +43,12 @@
     - `--hs`: Hand shapes probabilities (Koller cafe model)
     - `--keep_full_frames`: if you want not to delete full frames after all features are computed
     - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
+    - `--keep_openpose_json`: if you want not to delete openpose json files after all features are computed
+    - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
     - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --addCaffePath`
+  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features --addCaffePath`
 
 ### **`main_uniqueVideo.sh`**
   - Runs all scripts in `scripts/` for one video inside `videos/`
@@ -58,6 +60,7 @@
     - `scripts/openpose_clean_to_hand_crops.sh`
     - `scripts/openpose_clean_to_2D_3D.sh`
     - `scripts/hand_crops_to_HS_probabilities.sh` (if `--hs`, see parameters)
+    - `scripts/get_final_features.sh`
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--vidExt`: Video file extension
@@ -70,10 +73,12 @@
     - `--hs`: Hand shapes probabilities (Koller cafe model)
     - `--keep_full_frames`: if you want not to delete full frames after all features are computed
     - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
+    - `--keep_openpose_json`: if you want not to delete openpose json files after all features are computed
+    - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
     - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --addCaffePath`
+  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features --addCaffePath`
 
 ## Included scripts
 ### **`scripts/video_to_frames.sh`**
@@ -103,11 +108,10 @@
   - Calls `scripts/utils/frames_to_3DFace_temp.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_3DFace.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
-    - `--vidExt`: Video file extension
     - `--framesExt`: Frame files extension for ffmpeg
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
   - Outputs:
-    - `features/final/vidName_3DFace_predict_raw_temp.npy`
+    - `features/temp/vidName_3DFace_predict_raw_temp.npy`
 ### **`scripts/openpose_json_to_clean_data.sh`**
   - Cleans openpose data of any video (basically interpolating NaN values), and assembles this data to a numpy (npz) file, with 4 arrays (a3 for body, b3 for head, c3 and d3 for hands).
   - Calls `scripts/utils/openpose_json_to_clean_data.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_clean_numpy.txt` (default is `cslr_limsi_features_env1`)
@@ -140,13 +144,13 @@
     - `--body3D`: 3D Body computed too
     - `--face3D`: 3D Face computed too
   - Outputs:
-    - `features/final/vidName_2DBody.npy`
-    - `features/final/vidName_2DHands.npz`
-    - `features/final/vidName_2DFace.npy`
-    - `features/final/vidName_headAngles_from_3DBody.npy`
-    - `features/final/vidName_3DBody.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
-    - `features/final/vidName_3DFace_predict_raw.npy`
-    - `features/final/vidName_headAngles_from_3DFace.npy`
+    - `features/temp/vidName_2DBody.npy`
+    - `features/temp/vidName_2DHands.npz`
+    - `features/temp/vidName_2DFace.npy`
+    - `features/temp/vidName_headAngles_from_3DBody.npy`
+    - `features/temp/vidName_3DBody.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
+    - `features/temp/vidName_3DFace_predict_raw.npy`
+    - `features/temp/vidName_headAngles_from_3DFace.npy`
 ### **`scripts/hand_crops_to_HS_probabilities.sh`**
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
   - Calls:
@@ -157,5 +161,14 @@
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
     - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
-    - `features/final/vidName_HS_probs_G.npy`
-    - `features/final/vidName_HS_probs_D.npy`
+    - `features/temp/vidName_HS_probs_G.npy`
+    - `features/temp/vidName_HS_probs_D.npy`
+### **`scripts/get_final_features.sh`**
+  - Aaa
+  - Calls:
+    - aaa `aaa.py`, with the virtual environment defined in `scripts/virtual_env_names/aaa.txt` (default is `aaa`)
+    - Parameters:
+      - aaa
+  - Outputs:
+      - `features/final/vidName_handShapes_dom.npy`
+      - ...

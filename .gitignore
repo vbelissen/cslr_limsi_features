@@ -13,5 +13,8 @@ features/openpose/json/*
 features/final/*
 !features/final/.gitkeep
 
+features/temp/*
+!features/temp/.gitkeep
+
 videos/*
 !videos/.gitkeep
