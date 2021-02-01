@@ -32,6 +32,7 @@
 ## Main scripts
 ### **`main_allVideos.sh`**
   - Runs all scripts in `scripts/` for all videos inside `videos/`
+  - Calls `main_uniqueVideo.sh` for each video
   - Parameters:
     - `--framesExt`: Frame files extension for ffmpeg
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
@@ -49,6 +50,14 @@
 
 ### **`main_uniqueVideo.sh`**
   - Runs all scripts in `scripts/` for one video inside `videos/`
+  - Calls:
+    - `scripts/video_to_frames.sh`
+    - `scripts/video_to_openpose.sh`
+    - `scripts/frames_to_3DFace_temp.sh` (if `--face3D`, see parameters)
+    - `scripts/openpose_json_to_clean_data.sh`
+    - `scripts/openpose_clean_to_hand_crops.sh`
+    - `scripts/openpose_clean_to_2D_3D.sh`
+    - `scripts/hand_crops_to_HS_probabilities.sh` (if `--hs`, see parameters)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--vidExt`: Video file extension
@@ -91,6 +100,7 @@
     - `features/openpose/vidName/keypoints_json000000007341.json` (if the video contains 7342 frames)
 ### **`scripts/frames_to_3DFace_temp.sh`**
   - Converts all frames of any video to a numpy file containing the 3D coordinates of face landmarks (Adrian Bulat's FaceAlignment model). Data is centered around the mid-point between eyes, and normalized by the average distance between eyes.
+  - Calls `scripts/utils/frames_to_3DFace_temp.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_3DFace.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--vidExt`: Video file extension
