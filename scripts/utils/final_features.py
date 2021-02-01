@@ -2,8 +2,7 @@ import numpy as np
 import csv
 
 
-
-path2leftHandedList = '/Users/belissen/Code/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
+path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
 
 video_list = []
 left_handed_list = []
