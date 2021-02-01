@@ -9,6 +9,7 @@ left_handed_list = []
 with open(path2leftHandedList, 'r') as open_left_handed:
     reader_left_handed = csv.reader(open_left_handed)#, delimiter='\t')
     for i in reader_left_handed:
+        print(i)
         video_list.append(i[0])
         left_handed_list.append(i[1])
 
