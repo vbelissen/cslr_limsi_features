@@ -110,6 +110,7 @@
     - `features/final/vidName_3DFace_predict_raw_temp.npy`
 ### **`scripts/openpose_json_to_clean_data.sh`**
   - Cleans openpose data of any video (basically interpolating NaN values), and assembles this data to a numpy (npz) file, with 4 arrays (a3 for body, b3 for head, c3 and d3 for hands).
+  - Calls `scripts/utils/openpose_json_to_clean_data.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_clean_numpy.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `-h`, `--handOP`: OpenPose computed on hands
@@ -118,6 +119,7 @@
     - `features/openpose/vidName_openpose_clean.npz`
 ### **`scripts/openpose_clean_to_hand_crops.sh`**
   - Generate hand crop images (in a separate folder inside `frames/hand/`) using openpose clean data and original images
+  - Calls `scripts/utils/openpose_clean_to_hand_crops.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_hand_crops.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
 -    - `--framesExt`: Frame files extension for ffmpeg
@@ -130,6 +132,7 @@
     - `frames/hand/vidName/07342_D.png` (if the video contains 7342 frames)
 ### **`scripts/openpose_clean_to_2D_3D.sh`**
   - Getting coherent 2D/3D data for body/face/hands from openpose cleaned file, prediction model and 3D face estimation
+  - Calls `scripts/utils/openpose_clean_to_2D_3D.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_2D_3D.txt` (default is `cslr_limsi_features_env2`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--handOP`: OpenPose computed on hands
@@ -145,13 +148,10 @@
     - `features/final/vidName_3DFace_predict_raw.npy`
     - `features/final/vidName_headAngles_from_3DFace.npy`
 ### **`scripts/hand_crops_to_HS_probabilities.sh`**
-  - Getting hand shapes probabilities (Koller) from hand crops
-  - Parameters:
-    - `vidName`
-  - Outputs:
-    - `features/finalvidName_headAngles.npy`
-### **`scripts/hand_crops_to_HS_probabilities.sh`**
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
+  - Calls:
+    - `scripts/utils/hand_crops_to_HS_probabilities.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_HS_probabilities.txt` (default is `cslr_limsi_features_env3`)
+    - `scripts/add_caffe_path.sh`(if `--addCaffePath`, see parameters)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
