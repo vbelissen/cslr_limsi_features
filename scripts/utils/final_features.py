@@ -22,7 +22,7 @@ with open(path2leftHandedList, 'r', encoding='utf-8-sig') as open_left_handed:
 
 
 left_handed_found = find_element_in_list(vidName, video_list)
-print(left_handed_found)
+print(left_handed_list)
 if left_handed_found is None:
     left_handed = False
 else:
