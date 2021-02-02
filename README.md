@@ -129,11 +129,11 @@
 -    - `--framesExt`: Frame files extension for ffmpeg
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
   - Outputs:
-    - `frames/hand/vidName/00001_G.png`
-    - `frames/hand/vidName/00001_D.png`
+    - `frames/hand/vidName/00001_L.png`
+    - `frames/hand/vidName/00001_R.png`
     - ...
-    - `frames/hand/vidName/07342_G.png`
-    - `frames/hand/vidName/07342_D.png` (if the video contains 7342 frames)
+    - `frames/hand/vidName/07342_L.png`
+    - `frames/hand/vidName/07342_R.png` (if the video contains 7342 frames)
 ### **`scripts/openpose_clean_to_2D_3D.sh`**
   - Getting coherent 2D/3D data for body/face/hands from openpose cleaned file, prediction model and 3D face estimation
   - Calls `scripts/utils/openpose_clean_to_2D_3D.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_2D_3D.txt` (default is `cslr_limsi_features_env2`)
@@ -161,8 +161,8 @@
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
     - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
-    - `features/temp/vidName_HS_probs_G.npy`
-    - `features/temp/vidName_HS_probs_D.npy`
+    - `features/temp/vidName_HS_probs_L.npy`
+    - `features/temp/vidName_HS_probs_R.npy`
 ### **`scripts/get_final_features.sh`**
   - Aaa
   - Calls:

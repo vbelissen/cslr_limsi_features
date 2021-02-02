@@ -27,7 +27,7 @@ hand_net = caffe.Net(path2caffeModel+'mod_submit-net.prototxt',
                      path2caffeModel+'1miohands-v2.caffemodel',
                      caffe.TEST)
 
-suffixes = ['_G', '_D']
+suffixes = ['_L', '_R']
 
 
 for hand_suffix in suffixes:

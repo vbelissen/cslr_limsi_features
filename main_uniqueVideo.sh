@@ -90,7 +90,7 @@ if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
 if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}${ADDCAFFEPATH_STRING}; fi;
-./scripts/get_final_features.sh -v ${VIDNAME}
+#./scripts/get_final_features.sh -v ${VIDNAME}
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
