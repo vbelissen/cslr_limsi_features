@@ -39,6 +39,14 @@ else:
     handOrder = ['R', 'L']
 
 
+body2D_raw =
+face2D_raw =
+if body3D:
+    body3D_raw =
+if face3D:
+    face3D_raw =
+if handOP:
+    hand3D_raw = 
 
 
 a=np.zeros(10)

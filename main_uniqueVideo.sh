@@ -95,4 +95,4 @@ if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VID
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
 if [[ "$KEEP_OPENPOSE_JSON" = false ]]; then rm -rf ${path2openpose}${VIDNAME}; fi;
-if [[ "$KEEP_TEMPORARY_FEATURES" = false ]]; then rm "${path2features}temp/${VIDNAME}*"; fi;
+if [[ "$KEEP_TEMPORARY_FEATURES" = false ]]; then rm "${path2features}temp/${VIDNAME}"*; fi;
