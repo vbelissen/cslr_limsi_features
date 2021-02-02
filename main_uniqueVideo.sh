@@ -9,7 +9,7 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [--handOP] [--faceOP] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features] [--addCaffePath]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [--handOP] [--faceOP] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features]"
   echo "  -v, --vidName             Video name without extension"
   echo "  --vidExt                  Video file extension"
   echo "  --framesExt               Frame files extension"
@@ -23,9 +23,8 @@ function usage() {
   echo "  --keep_hand_crop_frames   For not deleting hand crop frames    (optional, default=0)"
   echo "  --keep_openpose_json      For not deleting openpose json files (optional, default=0)"
   echo "  --keep_temporary_features For not deleting temporary features (optional, default=0)"
-  echo "  --addCaffePath            Add Caffe to path"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features --addCaffePath"
+  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features"
   exit 1
 }
 
@@ -39,13 +38,11 @@ KEEP_FULL_FRAMES=false
 KEEP_HAND_CROP_FRAMES=false
 KEEP_OPENPOSE_JSON=false
 KEEP_TEMPORARY_FEATURES=false
-ADDCAFFEPATH=false
 
 HANDOP_STRING=""
 FACEOP_STRING=""
 BODY3D_STRING=""
 FACE3D_STRING=""
-ADDCAFFEPATH_STRING=""
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
@@ -62,7 +59,6 @@ while [[ "$#" > 0 ]]; do case $1 in
   --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=true; shift;;
   --keep_openpose_json) KEEP_OPENPOSE_JSON=true; shift;;
   --keep_temporary_features) KEEP_TEMPORARY_FEATURES=true; shift;;
-  --addCaffePath) ADDCAFFEPATH=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -70,7 +66,6 @@ if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
 if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
 if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
 if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
-if [[ "$ADDCAFFEPATH" = true ]]; then ADDCAFFEPATH_STRING=" --addCaffePath"; fi;
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
@@ -89,7 +84,7 @@ if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME}
 ./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
-if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}${ADDCAFFEPATH_STRING}; fi;
+if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
 #./scripts/get_final_features.sh -v ${VIDNAME}
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;

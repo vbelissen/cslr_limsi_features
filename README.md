@@ -27,7 +27,13 @@
     - pillow
     - numpy
     - scipy 1.1.0
-- Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`.
+- Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`. It might be necessary to add Caffe to PATH before running the scripts, for instance by exectuting this in shell:
+```
+export CAFFE_ROOT=/people/belissen/caffe/
+export PYTHONPATH=/people/belissen/caffe/distribute/python:$PYTHONPATH
+export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
+```
+
 
 ## Main scripts
 ### **`main_allVideos.sh`**
