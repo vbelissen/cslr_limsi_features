@@ -2,7 +2,7 @@ import numpy as np
 import csv
 
 
-vidName             = 'DictaSign_lsf_S2_T1_A11_front'
+vidName             = 'DictaSign_lsf_S5_T1_A9_front'
 path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
 
 def find_element_in_list(element, list_element):
