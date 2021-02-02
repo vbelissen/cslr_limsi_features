@@ -17,6 +17,9 @@ left_handed_list = []
 with open(path2leftHandedList, 'r', encoding='utf-8-sig') as open_left_handed:
     reader_left_handed = csv.reader(open_left_handed, delimiter=';')
     for i in reader_left_handed:
+        video_list.append(i[0])
+        left_handed_list.append(i[1])
+
 
 left_handed_found = find_element_in_list(vidName, video_list)
 if left_handed_found is None:
