@@ -9,28 +9,21 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [-h, --handOP] [-f, --faceOP]"
+  echo "Usage: $0 [-v vidName] [--vidExt]"
   echo "  -v, --vidName            Video name without extension"
   echo "  --vidExt                 Video file extension"
-  echo "  -h, --handOP             OpenPose computed on hands too"
-  echo "  -f, --faceOP             OpenPose computed on face too"
 #  echo "  --keep_full_frames       For not deleting full frames         (optional, default=0)"
 #  echo "  --keep_hand_crop_frames  For not deleting hand crop frames    (optional, default=0)"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 -h -f"
+  echo "Example: $0 -v test_video_1 --vidExt mp4"
   exit 1
 }
 
-# default params values
-HAND=false
-FACE=false
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --vidExt) VIDEXT="$2"; shift;shift;;
-  -h|--handOP) HAND=true; shift;;
-  -f|--faceOP) FACE=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -46,12 +39,4 @@ path2openPose=`cat scripts/paths/path_to_openpose.txt`
 
 mkdir "${path2features}openpose/${VIDNAME}"
 cd "${path2openPose}"
-if [[ "$HAND" = true ]] && [[ "$FACE" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
-elif [[ "$HAND" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --no_display
-elif [[ "$FACE" = true ]]; then
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --face --no_display
-else
-    ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --no_display
-fi
+./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display

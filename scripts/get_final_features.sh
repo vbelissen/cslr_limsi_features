@@ -9,30 +9,24 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--handOP] [--faceOP] [--body3D] [--face3D]"
+  echo "Usage: $0 [-v vidName] [--load3D]"
   echo "  -v, --vidName            Video name without extension"
-  echo "  --handOP                 OpenPose computed on hands too"
-  echo "  --faceOP                 OpenPose computed on face too"
-  echo "  --body3D                 3D Body computed too"
-  echo "  --face3D                 3D Face computed too"
+  echo "  --load3D                 3D Body and Face computed too"
+  echo "  --hs                     Hand Shapes computed (Koller caffe model)"
   echo ""
-  echo "Example: $0 -v test_video_1 --handOP --faceOP --body3D --face3D "
+  echo "Example: $0 -v test_video_1 --load3D --hs"
   exit 1
 }
 
 # default params values
-HANDOP=false
-FACEOP=false
-BODY3D=false
-FACE3D=false
+LOAD3D=false
+HS=false
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
-  --handOP) HANDOP=true; shift;;
-  --faceOP) FACEOP=true; shift;;
-  --body3D) BODY3D=true; shift;;
-  --face3D) FACE3D=true; shift;;
+  --load3D) LOAD3D=true; shift;;
+  --hs) HS=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -49,5 +43,5 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_final_features.txt`
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
-python "${path2utils}final_features.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D}
+python "${path2utils}final_features.py" ${nImg} ${VIDNAME} ${path2features} ${LOAD3D} ${HS}
 source deactivate

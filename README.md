@@ -51,10 +51,9 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
     - `--keep_openpose_json`: if you want not to delete openpose json files after all features are computed
     - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
-    - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features --addCaffePath`
+  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
 
 ### **`main_uniqueVideo.sh`**
   - Runs all scripts in `scripts/` for one video inside `videos/`
@@ -81,10 +80,9 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--keep_hand_crop_frames`: if you want not to delete hand crop frames after all features are computed
     - `--keep_openpose_json`: if you want not to delete openpose json files after all features are computed
     - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
-    - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features --addCaffePath`
+  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
 
 ## Included scripts
 ### **`scripts/video_to_frames.sh`**
@@ -161,11 +159,9 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
   - Calls:
     - `scripts/utils/hand_crops_to_HS_probabilities.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_HS_probabilities.txt` (default is `cslr_limsi_features_env3`)
-    - `scripts/add_caffe_path.sh`(if `--addCaffePath`, see parameters)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
-    - `--addCaffePath`: if Caffe needs to be added to PATH
   - Outputs:
     - `features/temp/vidName_HS_probs_L.npy`
     - `features/temp/vidName_HS_probs_R.npy`

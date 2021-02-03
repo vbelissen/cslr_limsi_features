@@ -14,11 +14,9 @@ import sys
 nimg              = int(sys.argv[1])
 vidName           = sys.argv[2]
 path2features     = sys.argv[3]
-handOP            = bool(sys.argv[4])
-faceOP            = bool(sys.argv[5])
-body3D            = bool(sys.argv[6])
-face3D            = bool(sys.argv[7])
-path2body3Dmodels = sys.argv[8]
+body3D            = bool(sys.argv[4])
+face3D            = bool(sys.argv[5])
+path2body3Dmodels = sys.argv[6]
 
 
 # remove legs
@@ -31,12 +29,8 @@ c3 = clean_data['c3']
 d3 = clean_data['d3']
 
 np.save(path2features+'temp/'+vidName+'_2DBody', a3[:, pts_kept, :])
-
-if handOP:
-    np.savez(path2features+'temp/'+vidName+'_2DHands.npz', handL_2D=c3, handR_2D=d3)
-
-if faceOP:
-    np.save(path2features+'temp/'+vidName+'_2DFace', b3)
+np.savez(path2features+'temp/'+vidName+'_2DHands.npz', handL_2D=c3, handR_2D=d3)
+np.save(path2features+'temp/'+vidName+'_2DFace', b3)
 
 # Determination des angles de suivi de la tete
 nez_ind      = np.where(pts_kept == 0)[0][0]

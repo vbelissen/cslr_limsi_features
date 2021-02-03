@@ -9,28 +9,22 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--handOP] [--faceOP] [--body3D] [--face3D]"
+  echo "Usage: $0 [-v vidName] [--body3D] [--face3D]"
   echo "  -v, --vidName            Video name without extension"
-  echo "  --handOP                 OpenPose computed on hands too"
-  echo "  --faceOP                 OpenPose computed on face too"
   echo "  --body3D                 3D Body computed too"
   echo "  --face3D                 3D Face computed too"
   echo ""
-  echo "Example: $0 -v test_video_1 --handOP --faceOP --body3D --face3D "
+  echo "Example: $0 -v test_video_1 --body3D --face3D "
   exit 1
 }
 
 # default params values
-HANDOP=false
-FACEOP=false
 BODY3D=false
 FACE3D=false
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
-  --handOP) HANDOP=true; shift;;
-  --faceOP) FACEOP=true; shift;;
   --body3D) BODY3D=true; shift;;
   --face3D) FACE3D=true; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
@@ -51,7 +45,7 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_2D_3D.txt`
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
-python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${HANDOP} ${FACEOP} ${BODY3D} ${FACE3D} ${path2body3Dmodels}
+python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${BODY3D} ${FACE3D} ${path2body3Dmodels}
 source deactivate
 
 if [[ "$FACE3D" = true ]]; then rm "${path2features}temp/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;

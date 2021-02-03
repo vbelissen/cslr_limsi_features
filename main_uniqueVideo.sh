@@ -9,13 +9,11 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [--handOP] [--faceOP] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features]"
   echo "  -v, --vidName             Video name without extension"
   echo "  --vidExt                  Video file extension"
   echo "  --framesExt               Frame files extension"
   echo "  -n, --nDigits             Number of digits for frame numbering"
-  echo "  --handOP                  OpenPose computed on hands too"
-  echo "  --faceOP                  OpenPose computed on face too"
   echo "  --body3D                  3D Body computed too"
   echo "  --face3D                  3D Face computed too"
   echo "  --hs                      Hand Shapes (Koller caffe model)"
@@ -24,13 +22,11 @@ function usage() {
   echo "  --keep_openpose_json      For not deleting openpose json files (optional, default=0)"
   echo "  --keep_temporary_features For not deleting temporary features (optional, default=0)"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features"
+  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features"
   exit 1
 }
 
 # default params values
-HANDOP=false
-FACEOP=false
 BODY3D=false
 FACE3D=false
 HS=false
@@ -50,8 +46,6 @@ while [[ "$#" > 0 ]]; do case $1 in
   --vidExt) VIDEXT="$2"; shift;shift;;
   --framesExt) FRAMESEXT="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
-  --handOP) HANDOP=true; shift;;
-  --faceOP) FACEOP=true; shift;;
   --body3D) BODY3D=true; shift;;
   --face3D) FACE3D=true; shift;;
   --hs) HS=true; shift;;
@@ -62,8 +56,6 @@ while [[ "$#" > 0 ]]; do case $1 in
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
-if [[ "$HANDOP" = true ]]; then HANDOP_STRING=" --handOP"; fi;
-if [[ "$FACEOP" = true ]]; then FACEOP_STRING=" --faceOP"; fi;
 if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
 if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
 
@@ -73,19 +65,26 @@ if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 
+if [[ "$BODY3D" = true ]] && [[ "$FACE3D" = true ]]; then
+  $LOAD3D=true
+else
+  $LOAD3D=false
+fi
+
 path2frames=`cat scripts/paths/path_to_frames.txt`
 path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 path2openpose=`cat scripts/paths/path_to_openpose.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 
 ./scripts/video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT} ${HANDOP_STRING}${FACEOP_STRING}
+./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
 if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
-./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}
+./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME} ${HANDOP_STRING}${FACEOP_STRING}${BODY3D_STRING}${FACE3D_STRING}
+./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
 if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
-#./scripts/get_final_features.sh -v ${VIDNAME}
+./scripts/get_final_features.sh -v ${VIDNAME}
+if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --load3D; fi;
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
