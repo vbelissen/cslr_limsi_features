@@ -38,8 +38,8 @@ else:
 
 if hsKoller:
     final_handShapes = np.zeros((nimg, 122))
-    final_handShapes[:, :61] = np.load(path2features+'final/'+vidName+'_HS_probs_'+handOrder[0]+'.npy')
-    final_handShapes[:, 61:] = np.load(path2features+'final/'+vidName+'_HS_probs_'+handOrder[1]+'.npy')
+    final_handShapes[:, :61] = np.load(path2features+'temp/'+vidName+'_HS_probs_'+handOrder[0]+'.npy')
+    final_handShapes[:, 61:] = np.load(path2features+'temp/'+vidName+'_HS_probs_'+handOrder[1]+'.npy')
 
 hand2D_raw  = np.load(path2features+'temp/'+vidName+'_2DHands.npz')
 nbPtsHand2D = hand2D_raw['handL_2D'].shape[1]
