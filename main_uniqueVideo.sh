@@ -66,9 +66,9 @@ if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 
 if [[ "$BODY3D" = true ]] && [[ "$FACE3D" = true ]]; then
-  $LOAD3D=true
+  LOAD3D=true
 else
-  $LOAD3D=false
+  LOAD3D=false
 fi
 
 path2frames=`cat scripts/paths/path_to_frames.txt`
