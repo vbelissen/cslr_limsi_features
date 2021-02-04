@@ -267,8 +267,8 @@ elbow1_relShoulder_acc = np.swapaxes(dataPose_acc[3, :, :] - dataPose_acc[2, :, 
 elbow2_relShoulder_acc = np.swapaxes(dataPose_acc[6, :, :] - dataPose_acc[5, :, :], 0, 1)
 
 # Position des epaules 1 et 2 relative au pt 1
-shoulder1_wrtPt1 = np.swapaxes(dataPose[2, :, :] - dataPose[1, :, :], 0, 1))
-shoulder2_wrtPt1 = np.swapaxes(dataPose[5, :, :] - dataPose[1, :, :], 0, 1))
+shoulder1_wrtPt1 = np.swapaxes(dataPose[2, :, :] - dataPose[1, :, :], 0, 1)
+shoulder2_wrtPt1 = np.swapaxes(dataPose[5, :, :] - dataPose[1, :, :], 0, 1)
 
 shoulder1_wrtPt1_vel = np.swapaxes(dataPose_vel[2, :, :] - dataPose_vel[1, :, :], 0, 1)
 shoulder2_wrtPt1_vel = np.swapaxes(dataPose_vel[5, :, :] - dataPose_vel[1, :, :], 0, 1)
