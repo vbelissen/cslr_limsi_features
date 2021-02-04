@@ -172,7 +172,7 @@ for i in range(nimg):
         ifin = i
     dataFace_vel[:, :, i] = dataFace[:, :, ifin] - dataFace[:, :, ideb]
     dataPose_vel[:, :, i] = dataPose[:, :, ifin] - dataPose[:, :, ideb]
-    if body3D or face3D:
+    if load3D:
         headAngles_vel[i, :] = headAngles[ifin, :] - headAngles[ideb, :]
 
 dataFace_vel *= (1/fps)
