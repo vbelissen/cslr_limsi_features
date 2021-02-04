@@ -35,10 +35,9 @@ KEEP_HAND_CROP_FRAMES=false
 KEEP_OPENPOSE_JSON=false
 KEEP_TEMPORARY_FEATURES=false
 
-HANDOP_STRING=""
-FACEOP_STRING=""
 BODY3D_STRING=""
 FACE3D_STRING=""
+HS_STRING=""
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
@@ -58,6 +57,7 @@ esac; done
 
 if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
 if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
+if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
@@ -83,8 +83,8 @@ if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
 if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
-./scripts/get_final_features.sh -v ${VIDNAME}
-if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --load3D; fi;
+./scripts/get_final_features.sh -v ${VIDNAME}${HS_STRING}
+if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --load3D${HS_STRING}; fi;
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;

@@ -40,7 +40,7 @@ if hsKoller:
     final_handShapes[:, :61] = np.load(path2features+'final/'+vidName+'_HS_probs_'+handOrder[0]+'.npy')
     final_handShapes[:, 61:] = np.load(path2features+'final/'+vidName+'_HS_probs_'+handOrder[1]+'.npy')
 
-hand2D_raw = np.load(path2features+'temp/'+vidName+'_2DHands.npz')
+hand2D_raw  = np.load(path2features+'temp/'+vidName+'_2DHands.npz')
 nbPtsHand2D = hand2D_raw['handL_2D'].shape[1]
 
 
@@ -470,8 +470,7 @@ ortho_shoulder2_acc = ortho_shoulder2_acc_tmp * 1 / fps
 
 
 if load3D:
-    output_bodyFace_3Draw_hands_None = np.column_stack((poseRaw_final, faceRaw_final))
-
+    output_bodyFace_3Draw_hands_None      = np.column_stack((poseRaw_final, faceRaw_final))
     output_bodyFace_3Dfeatures_hands_None = np.column_stack((headAngles,
                                                              headAngles_vel,
                                                              headAngles_acc,
@@ -551,8 +550,7 @@ if load3D:
         output_bodyFace_3Draw_hands_OP_HS      = np.column_stack((final_handShapes, hand2D_raw_final, poseRaw_final, faceRaw_final))
         output_bodyFace_3Dfeatures_hands_OP_HS = np.column_stack((final_handShapes, hand2D_raw_final, output_bodyFace_3Dfeatures_hands_None))
 else:
-    output_bodyFace_2Draw_hands_None = np.column_stack((poseRaw_final, faceRaw_final))
-
+    output_bodyFace_2Draw_hands_None      = np.column_stack((poseRaw_final, faceRaw_final))
     output_bodyFace_2Dfeatures_hands_None = np.column_stack((hand1_wrtPt1[:, 0::2],
                                                              hand2_wrtPt1[:, 0::2],
                                                              hand1_wrtPt1_vel[:, 0::2],
@@ -618,35 +616,23 @@ else:
         output_bodyFace_2Dfeatures_hands_OP_HS = np.column_stack((final_handShapes, hand2D_raw_final, output_bodyFace_2Dfeatures_hands_None))
 
 
-
-
-
-
-'2Draw',
-                              '2Draw_HS',
-                              '2Draw_HS_noOP',
-                              '2Draw_noHands',
-                              '2Dfeatures',
-                              '2Dfeatures_HS',
-                              '2Dfeatures_HS_noOP',
-                              '2Dfeatures_noHands',
-                              '3Draw',
-                              '3Draw_HS',
-                              '3Draw_HS_noOP',
-                              '3Draw_noHands',
-                              '3Dfeatures',
-                              '3Dfeatures_HS',
-                              '3Dfeatures_HS_noOP',
-                              '3Dfeatures_noHands',
-
-
-
-
-
-
-
-a=np.zeros(10)
-np.save(path2features+'final/'+vidName+'_bodyFace_2D_raw', a)
-np.save(path2features+'final/'+vidName+'_bodyFace_3D_raw', a)
-np.save(path2features+'final/'+vidName+'_bodyFace_2D_features', a)
-np.save(path2features+'final/'+vidName+'_bodyFace_3D_features', a)
+if load3D:
+    np.save(path2features+'final/'+vidName+'_bodyFace_3D_raw_hands_None',      output_bodyFace_3Draw_hands_None)
+    np.save(path2features+'final/'+vidName+'_bodyFace_3D_features_hands_None', output_bodyFace_3Dfeatures_hands_None)
+    np.save(path2features+'final/'+vidName+'_bodyFace_3D_raw_hands_OP',        output_bodyFace_3Draw_hands_OP)
+    np.save(path2features+'final/'+vidName+'_bodyFace_3D_features_hands_OP',   output_bodyFace_3Dfeatures_hands_OP)
+    if hsKoller:
+        np.save(path2features+'final/'+vidName+'_bodyFace_3D_raw_hands_HS',         output_bodyFace_3Draw_hands_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_3D_features_hands_HS',    output_bodyFace_3Dfeatures_hands_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_3D_raw_hands_OP_HS',      output_bodyFace_3Draw_hands_OP_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_3D_features_hands_OP_HS', output_bodyFace_3Dfeatures_hands_OP_HS)
+else:
+    np.save(path2features+'final/'+vidName+'_bodyFace_2D_raw_hands_None',      output_bodyFace_2Draw_hands_None)
+    np.save(path2features+'final/'+vidName+'_bodyFace_2D_features_hands_None', output_bodyFace_2Dfeatures_hands_None)
+    np.save(path2features+'final/'+vidName+'_bodyFace_2D_raw_hands_OP',        output_bodyFace_2Draw_hands_OP)
+    np.save(path2features+'final/'+vidName+'_bodyFace_2D_features_hands_OP',   output_bodyFace_2Dfeatures_hands_OP)
+    if hsKoller:
+        np.save(path2features+'final/'+vidName+'_bodyFace_2D_raw_hands_HS',         output_bodyFace_2Draw_hands_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_2D_features_hands_HS',    output_bodyFace_2Dfeatures_hands_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_2D_raw_hands_OP_HS',      output_bodyFace_2Draw_hands_OP_HS)
+        np.save(path2features+'final/'+vidName+'_bodyFace_2D_features_hands_OP_HS', output_bodyFace_2Dfeatures_hands_OP_HS)

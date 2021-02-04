@@ -9,7 +9,7 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--load3D]"
+  echo "Usage: $0 [-v vidName] [--load3D] [--hs] "
   echo "  -v, --vidName            Video name without extension"
   echo "  --load3D                 3D Body and Face computed too"
   echo "  --hs                     Hand Shapes computed (Koller caffe model)"
