@@ -4,9 +4,11 @@ import sys
 
 nimg                = int(sys.argv[1])
 vidName             = sys.argv[2]
-path2features       = sys.argv[3]
-load3D              = bool(sys.argv[4])
-hsKoller            = bool(sys.argv[5])
+fps                 = int(sys.argv[3])
+path2features       = sys.argv[4]
+load3D              = bool(sys.argv[5])
+hsKoller            = bool(sys.argv[6])
+
 
 path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
 

@@ -9,9 +9,10 @@ function usage() {
   if [ -n "$1" ]; then
     echo -e "${RED}👉 $1${CLEAR}\n";
   fi
-  echo "Usage: $0 [-v vidName] [--vidExt] [--framesExt] [-n nDigits] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features]"
+  echo "Usage: $0 [-v vidName] [--vidExt] [--fps] [--framesExt] [-n nDigits] [--body3D] [--face3D] [--hs] [--keep_full_frames] [--keep_hand_crop_frames] [--keep_openpose_json] [--keep_temporary_features]"
   echo "  -v, --vidName             Video name without extension"
   echo "  --vidExt                  Video file extension"
+  echo "  --fps                     Framerate per second"
   echo "  --framesExt               Frame files extension"
   echo "  -n, --nDigits             Number of digits for frame numbering"
   echo "  --body3D                  3D Body computed too"
@@ -22,7 +23,7 @@ function usage() {
   echo "  --keep_openpose_json      For not deleting openpose json files (optional, default=0)"
   echo "  --keep_temporary_features For not deleting temporary features (optional, default=0)"
   echo ""
-  echo "Example: $0 -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features"
+  echo "Example: $0 -v test_video_1 --vidExt mp4 --fps 25 --framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features"
   exit 1
 }
 
@@ -44,6 +45,7 @@ while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --vidExt) VIDEXT="$2"; shift;shift;;
   --framesExt) FRAMESEXT="$2"; shift;shift;;
+  --fps) FPS="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
   --body3D) BODY3D=true; shift;;
   --face3D) FACE3D=true; shift;;
@@ -62,6 +64,7 @@ if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
 if [ -z "$VIDEXT" ]; then usage "Video extension is not set."; fi;
+if [ -z "$FPS" ]; then usage "Framerate is not set"; fi;
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 
@@ -83,8 +86,8 @@ if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
 if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
-./scripts/get_final_features.sh -v ${VIDNAME}${HS_STRING}
-if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --load3D${HS_STRING}; fi;
+./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS}${HS_STRING}
+if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS} --load3D${HS_STRING}; fi;
 
 if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
