@@ -1,6 +1,8 @@
 import numpy as np
 import csv
 import sys
+from sklearn import preprocessing
+
 
 nimg                = int(sys.argv[1])
 vidName             = sys.argv[2]
