@@ -122,9 +122,6 @@ poseRaw_final = np.reshape(poseRaw_final, (nimg, -1))
 faceRaw_final = np.swapaxes(faceRaw_final, 0, 2)
 faceRaw_final = np.reshape(faceRaw_final, (nimg, -1))
 
-dataPoseTmp = np.swapaxes(dataPoseTmp, 0, 2)
-dataPoseTmp = np.reshape(dataPoseTmp, (dataPoseTmp.shape[0], -1))
-
 hand2D_raw_1 = hand2D_raw['hand'+handOrder[0]+'_2D']
 hand2D_raw_2 = hand2D_raw['hand'+handOrder[1]+'_2D']
 if left_handed:
