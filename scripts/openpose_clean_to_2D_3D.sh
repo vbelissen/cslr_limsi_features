@@ -19,14 +19,14 @@ function usage() {
 }
 
 # default params values
-BODY3D=false
-FACE3D=false
+BODY3D=0
+FACE3D=0
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
-  --body3D) BODY3D=true; shift;;
-  --face3D) FACE3D=true; shift;;
+  --body3D) BODY3D=1; shift;;
+  --face3D) FACE3D=1; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
@@ -48,4 +48,4 @@ source activate ${vEnv}
 python "${path2utils}openpose_clean_to_2D_3D.py" ${nImg} ${VIDNAME} ${path2features} ${BODY3D} ${FACE3D} ${path2body3Dmodels}
 source deactivate
 
-if [[ "$FACE3D" = true ]]; then rm "${path2features}temp/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;
+if [[ "$FACE3D" = 1 ]]; then rm "${path2features}temp/${VIDNAME}_3DFace_predict_raw_temp.npy"; fi;

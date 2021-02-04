@@ -20,21 +20,17 @@ function usage() {
 }
 
 # default params values
-LOAD3D=false
-HS=false
-
-echo $LOAD3D
+LOAD3D=0
+HS=0
 
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;
   --fps) FPS="$2"; shift;shift;;
-  --load3D) LOAD3D=true; shift;;
-  --hs) HS=true; shift;;
+  --load3D) LOAD3D=1; shift;;
+  --hs) HS=1; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
-
-echo $LOAD3D
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;

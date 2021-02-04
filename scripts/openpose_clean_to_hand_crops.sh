@@ -18,10 +18,6 @@ function usage() {
   exit 1
 }
 
-# default params values
-HAND=false
-FACE=false
-
 # parse params
 while [[ "$#" > 0 ]]; do case $1 in
   -v|--vidName) VIDNAME="$2"; shift;shift;;

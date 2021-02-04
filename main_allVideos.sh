@@ -24,13 +24,13 @@ function usage() {
 }
 
 # default params values
-BODY3D=false
-FACE3D=false
-HS=false
-KEEP_FULL_FRAMES=false
-KEEP_HAND_CROP_FRAMES=false
-KEEP_OPENPOSE_JSON=false
-KEEP_TEMPORARY_FEATURES=false
+BODY3D=0
+FACE3D=0
+HS=0
+KEEP_FULL_FRAMES=0
+KEEP_HAND_CROP_FRAMES=0
+KEEP_OPENPOSE_JSON=0
+KEEP_TEMPORARY_FEATURES=0
 
 BODY3D_STRING=""
 FACE3D_STRING=""
@@ -45,23 +45,23 @@ while [[ "$#" > 0 ]]; do case $1 in
   --fps) FPS="$2"; shift;shift;;
   --framesExt) FRAMESEXT="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
-  --body3D) BODY3D=true; shift;;
-  --face3D) FACE3D=true; shift;;
-  --hs) HS=true; shift;;
-  --keep_full_frames) KEEP_FULL_FRAMES=true; shift;;
-  --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=true; shift;;
-  --keep_openpose_json) KEEP_OPENPOSE_JSON=true; shift;;
-  --keep_temporary_features) KEEP_TEMPORARY_FEATURES=true; shift;;
+  --body3D) BODY3D=1; shift;;
+  --face3D) FACE3D=1; shift;;
+  --hs) HS=1; shift;;
+  --keep_full_frames) KEEP_FULL_FRAMES=1; shift;;
+  --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=1; shift;;
+  --keep_openpose_json) KEEP_OPENPOSE_JSON=1; shift;;
+  --keep_temporary_features) KEEP_TEMPORARY_FEATURES=1; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
-if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
-if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
-if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
-if [[ "$KEEP_FULL_FRAMES" = true ]]; then KEEP_FULL_FRAMES_STRING=" --keep_full_frames"; fi;
-if [[ "$KEEP_HAND_CROP_FRAMES" = true ]]; then KEEP_HAND_CROP_FRAMES_STRING=" --keep_hand_crop_frames"; fi;
-if [[ "$KEEP_OPENPOSE_JSON" = true ]]; then KEEP_OPENPOSE_JSON_STRING=" --keep_openpose_json"; fi;
-if [[ "$KEEP_TEMPORARY_FEATURES" = true ]]; then KEEP_TEMPORARY_FEATURES_STRING=" --keep_temporary_features"; fi;
+if [[ "$BODY3D" = 1 ]]; then BODY3D_STRING=" --body3D"; fi;
+if [[ "$FACE3D" = 1 ]]; then FACE3D_STRING=" --face3D"; fi;
+if [[ "$HS" = 1 ]]; then HS_STRING=" --hs"; fi;
+if [[ "$KEEP_FULL_FRAMES" = 1 ]]; then KEEP_FULL_FRAMES_STRING=" --keep_full_frames"; fi;
+if [[ "$KEEP_HAND_CROP_FRAMES" = 1 ]]; then KEEP_HAND_CROP_FRAMES_STRING=" --keep_hand_crop_frames"; fi;
+if [[ "$KEEP_OPENPOSE_JSON" = 1 ]]; then KEEP_OPENPOSE_JSON_STRING=" --keep_openpose_json"; fi;
+if [[ "$KEEP_TEMPORARY_FEATURES" = 1 ]]; then KEEP_TEMPORARY_FEATURES_STRING=" --keep_temporary_features"; fi;
 
 # verify params
 if [ -z "$FPS" ]; then usage "Framerate is not set"; fi;

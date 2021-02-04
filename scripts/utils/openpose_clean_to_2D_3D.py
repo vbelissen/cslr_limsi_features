@@ -14,8 +14,8 @@ import sys
 nimg              = int(sys.argv[1])
 vidName           = sys.argv[2]
 path2features     = sys.argv[3]
-body3D            = bool(sys.argv[4])
-face3D            = bool(sys.argv[5])
+body3D            = bool(int(sys.argv[4]))
+face3D            = bool(int(sys.argv[5]))
 path2body3Dmodels = sys.argv[6]
 
 

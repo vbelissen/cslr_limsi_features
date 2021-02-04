@@ -28,13 +28,13 @@ function usage() {
 }
 
 # default params values
-BODY3D=false
-FACE3D=false
-HS=false
-KEEP_FULL_FRAMES=false
-KEEP_HAND_CROP_FRAMES=false
-KEEP_OPENPOSE_JSON=false
-KEEP_TEMPORARY_FEATURES=false
+BODY3D=0
+FACE3D=0
+HS=0
+KEEP_FULL_FRAMES=0
+KEEP_HAND_CROP_FRAMES=0
+KEEP_OPENPOSE_JSON=0
+KEEP_TEMPORARY_FEATURES=0
 
 BODY3D_STRING=""
 FACE3D_STRING=""
@@ -47,19 +47,19 @@ while [[ "$#" > 0 ]]; do case $1 in
   --framesExt) FRAMESEXT="$2"; shift;shift;;
   --fps) FPS="$2"; shift;shift;;
   -n|--nDigits) NDIGITS="$2"; shift;shift;;
-  --body3D) BODY3D=true; shift;;
-  --face3D) FACE3D=true; shift;;
-  --hs) HS=true; shift;;
-  --keep_full_frames) KEEP_FULL_FRAMES=true; shift;;
-  --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=true; shift;;
-  --keep_openpose_json) KEEP_OPENPOSE_JSON=true; shift;;
-  --keep_temporary_features) KEEP_TEMPORARY_FEATURES=true; shift;;
+  --body3D) BODY3D=1; shift;;
+  --face3D) FACE3D=1; shift;;
+  --hs) HS=1; shift;;
+  --keep_full_frames) KEEP_FULL_FRAMES=1; shift;;
+  --keep_hand_crop_frames) KEEP_HAND_CROP_FRAMES=1; shift;;
+  --keep_openpose_json) KEEP_OPENPOSE_JSON=1; shift;;
+  --keep_temporary_features) KEEP_TEMPORARY_FEATURES=1; shift;;
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
-if [[ "$BODY3D" = true ]]; then BODY3D_STRING=" --body3D"; fi;
-if [[ "$FACE3D" = true ]]; then FACE3D_STRING=" --face3D"; fi;
-if [[ "$HS" = true ]]; then HS_STRING=" --hs"; fi;
+if [[ "$BODY3D" = 1 ]]; then BODY3D_STRING=" --body3D"; fi;
+if [[ "$FACE3D" = 1 ]]; then FACE3D_STRING=" --face3D"; fi;
+if [[ "$HS" = 1 ]]; then HS_STRING=" --hs"; fi;
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
@@ -68,10 +68,10 @@ if [ -z "$FPS" ]; then usage "Framerate is not set"; fi;
 if [ -z "$FRAMESEXT" ]; then usage "Frames extension is not set."; fi;
 if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not set."; fi;
 
-if [[ "$BODY3D" = true ]] && [[ "$FACE3D" = true ]]; then
-  LOAD3D=true
+if [[ "$BODY3D" = 1 ]] && [[ "$FACE3D" = 1 ]]; then
+  LOAD3D=1
 else
-  LOAD3D=false
+  LOAD3D=0
 fi
 
 path2frames=`cat scripts/paths/path_to_frames.txt`
@@ -81,15 +81,15 @@ path2features=`cat scripts/paths/path_to_features.txt`
 
 ./scripts/video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
-if [[ "$FACE3D" = true ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
+if [[ "$FACE3D" = 1 ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
 ./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME}
 ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
 ./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
-if [[ "$HS" = true ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
+if [[ "$HS" = 1 ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
 ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS}${HS_STRING}
-if [[ "$LOAD3D" = true ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS} --load3D${HS_STRING}; fi;
+if [[ "$LOAD3D" = 1 ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS} --load3D${HS_STRING}; fi;
 
-if [[ "$KEEP_FULL_FRAMES" = false ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
-if [[ "$KEEP_HAND_CROP_FRAMES" = false ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
-if [[ "$KEEP_OPENPOSE_JSON" = false ]]; then rm -rf ${path2openpose}${VIDNAME}; fi;
-if [[ "$KEEP_TEMPORARY_FEATURES" = false ]]; then rm "${path2features}temp/${VIDNAME}"*; fi;
+if [[ "$KEEP_FULL_FRAMES" = 0 ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
+if [[ "$KEEP_HAND_CROP_FRAMES" = 0 ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
+if [[ "$KEEP_OPENPOSE_JSON" = 0 ]]; then rm -rf ${path2openpose}${VIDNAME}; fi;
+if [[ "$KEEP_TEMPORARY_FEATURES" = 0 ]]; then rm "${path2features}temp/${VIDNAME}"*; fi;
