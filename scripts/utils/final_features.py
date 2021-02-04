@@ -11,6 +11,7 @@ path2features       = sys.argv[4]
 load3D              = bool(sys.argv[5])
 hsKoller            = bool(sys.argv[6])
 
+print(load3D)
 
 path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
 

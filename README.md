@@ -16,6 +16,7 @@
     - dlib (installed via pip)
     - scikit-image
     - opencv-python
+    - scikit-learn
   - `cslr_limsi_features_env2`:
     - python 3.6
     - tensorflow-gpu 1.2.1
