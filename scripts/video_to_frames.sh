@@ -40,5 +40,5 @@ if [ -z "$NDIGITS" ]; then usage "Number of digits for frame numbering is not se
 path2vid=`cat scripts/paths/path_to_videos.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
 
-mkdir "${path2frames}${VIDNAME}"
+mkdir -p "${path2frames}${VIDNAME}"
 ffmpeg -loglevel panic -y -i "${path2vid}${VIDNAME}.${VIDEXT}" -qscale:v 2 "${path2frames}${VIDNAME}/%0${NDIGITS}d.${FRAMESEXT}"

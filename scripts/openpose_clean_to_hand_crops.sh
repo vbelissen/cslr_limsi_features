@@ -39,7 +39,7 @@ vEnv=`cat scripts/virtual_env_names/vEnv_for_hand_crops.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
-mkdir "${path2handFrames}${VIDNAME}"
+mkdir -p "${path2handFrames}${VIDNAME}"
 
 
 source activate ${vEnv}

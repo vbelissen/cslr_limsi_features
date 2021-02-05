@@ -64,6 +64,7 @@ for entry in listOfFiles:
         #    (N_frames, N_features) = (np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')).shape
 
         data = np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')
+        N_frames = data.shape[0]
         avg       += np.nansum(data,            axis=0)
         avgSquare += np.nansum(np.square(data), axis=0)
         #nVideo  += 1
