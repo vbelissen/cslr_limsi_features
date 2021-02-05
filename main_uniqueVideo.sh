@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Main script"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 
@@ -79,16 +77,65 @@ path2handFrames=`cat scripts/paths/path_to_hand_frames.txt`
 path2openpose=`cat scripts/paths/path_to_openpose.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 
+echo "-----------------------------------------------------------------"
+echo "  STEP 1: Getting frames from video"
+echo ""
 ./scripts/video_to_frames.sh -v ${VIDNAME} --vidExt ${VIDEXT} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
-if [[ "$FACE3D" = 1 ]]; then ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}; fi;
-./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME}
-./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
-./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
-if [[ "$HS" = 1 ]]; then ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}; fi;
-./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS}${HS_STRING}
-if [[ "$LOAD3D" = 1 ]]; then ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS} --load3D${HS_STRING}; fi;
 
+echo "-----------------------------------------------------------------"
+echo "  STEP 2: Getting openpose json data from video"
+echo ""
+./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
+
+echo "-----------------------------------------------------------------"
+if [[ "$FACE3D" = 1 ]]; then
+  echo "  STEP 3: Getting a first version for 3D face estimation"
+  echo ""
+  ./scripts/frames_to_3DFace_temp.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+else
+  echo "  Skipping STEP 3 (first version for 3D face estimation)"
+  echo ""
+fi
+
+echo "-----------------------------------------------------------------"
+echo "  STEP 4: Cleaning and assembling openpose json files to a unique numpy array"
+echo ""
+./scripts/openpose_json_to_clean_data.sh -v ${VIDNAME}
+
+echo "-----------------------------------------------------------------"
+echo "  STEP 5: Getting hand crop images from openpose clean data and from original images"
+echo ""
+./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+
+echo "-----------------------------------------------------------------"
+echo "  STEP 6: Getting coherent 2D/3D data for body/face/hands from openpose cleaned file, prediction model and 3D face estimation"
+echo ""
+./scripts/openpose_clean_to_2D_3D.sh -v ${VIDNAME}${BODY3D_STRING}${FACE3D_STRING}
+
+echo "-----------------------------------------------------------------"
+if [[ "$HS" = 1 ]]; then
+  echo "  STEP 7: Getting hand shapes probabilities (Koller) from hand crops"
+  echo ""
+  ./scripts/hand_crops_to_HS_probabilities.sh -v ${VIDNAME} -n ${NDIGITS}
+else
+  echo "  Skipping STEP 7 (hand shapes probabilities (Koller) from hand crops)"
+  echo ""
+fi
+
+echo "  STEP 8: Getting final 2D features"
+echo ""
+./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS}${HS_STRING}
+
+echo "-----------------------------------------------------------------"
+if [[ "$LOAD3D" = 1 ]]; then
+  echo "  STEP 8bis: Getting final 3D features"
+  echo ""
+  ./scripts/get_final_features.sh -v ${VIDNAME} --fps ${FPS} --load3D${HS_STRING}
+fi
+
+echo "-----------------------------------------------------------------"
+echo "  STEP 9: Cleaning temporary files"
+echo ""
 if [[ "$KEEP_FULL_FRAMES" = 0 ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = 0 ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
 if [[ "$KEEP_OPENPOSE_JSON" = 0 ]]; then rm -rf ${path2openpose}${VIDNAME}; fi;

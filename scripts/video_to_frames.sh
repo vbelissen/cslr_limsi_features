@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Getting frames from video"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 

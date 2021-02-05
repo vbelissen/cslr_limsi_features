@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Getting coherent 2D/3D data for body/face/hands from openpose cleaned file, prediction model and 3D face estimation"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Getting final features"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 
@@ -32,7 +30,7 @@ while [[ "$#" > 0 ]]; do case $1 in
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
-if [[ "$LOAD3D" = 1 ]]; then echo "(3D)"; else echo "(2D)"; fi;
+if [[ "$LOAD3D" = 1 ]]; then echo "(3D features)"; else echo "(2D features)"; fi;
 
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;

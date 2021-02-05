@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Getting hand shapes probabilities (Koller) from hand crops"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo "*****************************************************************"
+echo "-----------------------------------------------------------------"
+echo ""
+echo "   MAIN SCRIPT - GETTING ALL FEATURES FOR ALL VIDEOS IN FOLDER"
+echo ""
+echo "-----------------------------------------------------------------"
+echo "*****************************************************************"
+echo ""
+
 CLEAR='\033[0m'
 RED='\033[0;31m'
 
@@ -74,6 +83,7 @@ for file in ${yourfilenames}; do
     filename=$(basename -- "$file")
     extension="${filename##*.}"
     filename="${filename%.*}"
-    echo $filename
+    echo "      Current video: $filename"
+    echo ""
     ./main_uniqueVideo.sh -v ${filename} --vidExt ${extension} --fps ${FPS} --framesExt ${FRAMESEXT} -n ${NDIGITS} ${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}${KEEP_FULL_FRAMES_STRING}${KEEP_HAND_CROP_FRAMES_STRING}${KEEP_OPENPOSE_JSON_STRING}${KEEP_TEMPORARY_FEATURES_STRING}
 done

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Getting hand crop images from openpose clean data and original images"
-
 CLEAR='\033[0m'
 RED='\033[0;31m'
 
