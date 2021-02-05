@@ -83,19 +83,19 @@ def eulerAnglesTete(X,Y,indices):
     tete, tete_moy = constructionTeteTeteMoy(X,Y,indices)
     tete_moy_symm = tete_moy#symmetrizeTeteMoy(tete_moy)
 
-    tmp = 0
+    # tmp = 0
     for i in range(X.shape[0]):
-        if (100*i/X.shape[0])%5 == 0 and tmp == 0:
-            print('Getting Euler angles: '+str(100*i/X.shape[0])+' %')
-            tmp = 1
-        if (100*i/X.shape[0])%5 != 0:
-            tmp = 0
+        # if (100*i/X.shape[0])%5 == 0 and tmp == 0:
+        #     print('Getting Euler angles: '+str(100*i/X.shape[0])+' %')
+        #     tmp = 1
+        # if (100*i/X.shape[0])%5 != 0:
+        #     tmp = 0
         def erreurAngles(angles):
             return diffRotationXYZ(tete[i,:,:],tete_moy_symm,angles[0],angles[1],angles[2])
 
         res = minimize(erreurAngles, [0,0,0], method='BFGS',options={'gtol': 1e-6, 'disp': False})
         anglesTete[i,:] = -res.x
-    print('Getting Euler angles: '+str(100)+' %')
+    # print('Getting Euler angles: '+str(100)+' %')
     return anglesTete
 
 
