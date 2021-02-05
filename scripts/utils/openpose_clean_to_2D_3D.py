@@ -121,16 +121,16 @@ if face3D:
         tabTotFinal[:, i, 2] = tabTot[i, 2, :]
     np.save(path2features+'temp/'+vidName+'_3DFace_predict_raw', tabTotFinal)
 
-    indices2 = np.array([30, 29, 28, 27, 0, 1, 2, 14, 15, 16, 31, 32, 33, 34, 35])
-    tabTotXZ = np.zeros((nimg, 2*tabTot.shape[0]))
-    tabTotY  = np.zeros((nimg,   tabTot.shape[0]))
-
-    for i in range(tabTot.shape[0]):
-        tabTotXZ[:, 2*i]   = tabTot[i, 0, :]
-        tabTotXZ[:, 2*i+1] = tabTot[i, 2, :]
-        tabTotY[:, i]      = tabTot[i, 1, :]
-
-    anglesTete2 = OT.eulerAnglesTete(tabTotXZ,tabTotY,indices2)
-    anglesTete2 = np.mod(anglesTete2, 360)-180
-
-    np.save(path2features+'temp/'+vidName+'_headAngles_from_3Dface', anglesTete2)
+    # indices2 = np.array([30, 29, 28, 27, 0, 1, 2, 14, 15, 16, 31, 32, 33, 34, 35])
+    # tabTotXZ = np.zeros((nimg, 2*tabTot.shape[0]))
+    # tabTotY  = np.zeros((nimg,   tabTot.shape[0]))
+    #
+    # for i in range(tabTot.shape[0]):
+    #     tabTotXZ[:, 2*i]   = tabTot[i, 0, :]
+    #     tabTotXZ[:, 2*i+1] = tabTot[i, 2, :]
+    #     tabTotY[:, i]      = tabTot[i, 1, :]
+    #
+    # anglesTete2 = OT.eulerAnglesTete(tabTotXZ,tabTotY,indices2)
+    # anglesTete2 = np.mod(anglesTete2, 360)-180
+    #
+    # np.save(path2features+'temp/'+vidName+'_headAngles_from_3Dface', anglesTete2)
