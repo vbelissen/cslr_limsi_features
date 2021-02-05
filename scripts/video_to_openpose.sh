@@ -37,6 +37,6 @@ path2vid=`cat scripts/paths/path_to_videos.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 path2openPose=`cat scripts/paths/path_to_openpose.txt`
 
-mkdir "${path2features}openpose/${VIDNAME}"
+mkdir "${path2features}openpose/json/${VIDNAME}"
 cd "${path2openPose}"
 ./build/examples/openpose/openpose.bin --video "${path2vid}${VIDNAME}.${VIDEXT}" --write_keypoint_json "${path2features}openpose/json/${VIDNAME}" --hand --hand_scale_number 3 --hand_scale_range 0.4 --face --no_display
