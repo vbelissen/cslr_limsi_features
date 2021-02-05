@@ -10,8 +10,7 @@ fps                 = int(sys.argv[3])
 path2features       = sys.argv[4]
 load3D              = bool(int(sys.argv[5]))
 hsKoller            = bool(int(sys.argv[6]))
-
-path2leftHandedList = '/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
+path2leftHandedList = sys.argv[7]#'/people/belissen/Python/CSLR_LIMSI/cslr_limsi_features/left_handed/left_handed_dictasign.csv'
 
 def find_element_in_list(element, list_element):
     try:

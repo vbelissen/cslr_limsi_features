@@ -12,10 +12,10 @@ nimg            = int(sys.argv[1])
 vidName         = sys.argv[2]
 path2features   = sys.argv[3]
 
-confMoy = 0.1
-confMinPose = 0.08#0.2
-confMinFace = 0.4
-confMinHand = 0.2
+confMoy = 0.05
+confMinPose = 0.05#0.2
+confMinFace = 0.2
+confMinHand = 0.1
 savitzky_window = 17
 savitzky_order = 6
 

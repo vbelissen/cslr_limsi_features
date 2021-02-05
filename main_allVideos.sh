@@ -90,3 +90,14 @@ for file in ${yourfilenames}; do
     echo ""
     ./main_uniqueVideo.sh -v ${filename} --vidExt ${extension} --fps ${FPS} --framesExt ${FRAMESEXT} -n ${NDIGITS} ${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}${KEEP_FULL_FRAMES_STRING}${KEEP_HAND_CROP_FRAMES_STRING}${KEEP_OPENPOSE_JSON_STRING}${KEEP_TEMPORARY_FEATURES_STRING}
 done
+
+echo "*****************************************************************"
+echo "-----------------------------------------------------------------"
+echo ""
+echo "   MAIN SCRIPT, FINAL STEP - GETTING NORMALIZED FEATURES"
+echo ""
+echo "-----------------------------------------------------------------"
+echo "*****************************************************************"
+echo ""
+
+./scripts/get_normalized_features.sh ${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}

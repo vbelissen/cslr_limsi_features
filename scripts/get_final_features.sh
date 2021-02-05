@@ -38,11 +38,12 @@ path2vid=`cat scripts/paths/path_to_videos.txt`
 path2features=`cat scripts/paths/path_to_features.txt`
 path2utils=`cat scripts/paths/path_to_utils.txt`
 path2frames=`cat scripts/paths/path_to_frames.txt`
+path2leftHandedList=`cat scripts/paths/path_to_left_handed_list.txt`
 
 vEnv=`cat scripts/virtual_env_names/vEnv_for_final_features.txt`
 
 nImg=$(ls "${path2frames}${VIDNAME}/" | wc -l)
 
 source activate ${vEnv}
-python "${path2utils}final_features.py" ${nImg} ${VIDNAME} ${FPS} ${path2features} ${LOAD3D} ${HS}
+python "${path2utils}final_features.py" ${nImg} ${VIDNAME} ${FPS} ${path2features} ${LOAD3D} ${HS} ${path2leftHandedList}
 source deactivate
