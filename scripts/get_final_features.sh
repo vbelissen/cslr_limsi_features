@@ -32,6 +32,8 @@ while [[ "$#" > 0 ]]; do case $1 in
   *) usage "Unknown parameter passed: $1"; shift; shift;;
 esac; done
 
+if [[ "$LOAD3D" = 1 ]]; then echo "(3D)"; else echo "(2D)"; fi;
+
 # verify params
 if [ -z "$VIDNAME" ]; then usage "Video name is not set"; fi;
 if [ -z "$FPS" ]; then usage "Framerate is not set"; fi;

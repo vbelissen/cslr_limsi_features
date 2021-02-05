@@ -31,7 +31,8 @@ a[:, 12:14,   2] = 0
 
 
 (a1, b1, c1, d1) = trOP.nettoyageComplet(a0, b0, c0, d0, confMoy, confMinPose, confMinFace, confMinHand, typeData='pfh')
-(a2, b2, c2, d2) = trOP.interpNan(a1, b1, c1, d1, nimg, typeData='pfh', typePose='COCO')
+(a1bis, b1bis, c1bis, d1bis) = trOP.prolongationNanDebutFin(a1, b1, c1, d1, typeData='pfh', typePose='COCO')
+(a2, b2, c2, d2) = trOP.interpNan(a1bis, b1bis, c1bis, d1bis, nimg, typeData='pfh', typePose='COCO')
 (a3, b3, c3, d3) = trOP.filtrageSavGol(a2, b2, c2, d2, savitzky_window, savitzky_order, typeData='pfh', typePose='COCO')
 #(a3, b3, c3, d3) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData='pfh', typePose='COCO')
 
