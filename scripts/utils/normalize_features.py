@@ -9,38 +9,85 @@ vidSuffix     = sys.argv[3]
 
 videoExtensions = ['.mp4', '.mov', '.mpg', '.mpeg', '.avi', '.flv', '.mkv', '.webm', '.wmv', '.ogg', '.3gp']
 
-nVideo  = 0
+Untouched_features = {
+'bodyFace_2Draw_hands_None': np.array([]),
+'bodyFace_2Dfeatures_hands_None': np.array([]),
+'bodyFace_2Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_2Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_2Draw_hands_HS': np.arange(0,122),
+'bodyFace_2Dfeatures_hands_HS': np.arange(0,122),
+'bodyFace_2Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_2Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_3Draw_hands_None': np.array([]),
+'bodyFace_3Dfeatures_hands_None': np.array([]),
+'bodyFace_3Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_3Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_3Draw_hands_HS': np.arange(0,122),
+'bodyFace_3Dfeatures_hands_HS': np.arange(0,122),
+'bodyFace_3Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_3Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)]))
+}
+
+N_features = {
+'bodyFace_2Draw_hands_None': 168,
+'bodyFace_2Dfeatures_hands_None': 93,
+'bodyFace_2Draw_hands_OP': 290,
+'bodyFace_2Dfeatures_hands_OP': 215,
+'bodyFace_2Draw_hands_HS': 290,
+'bodyFace_2Dfeatures_hands_HS': 215,
+'bodyFace_2Draw_hands_OP_HS': 412,
+'bodyFace_2Dfeatures_hands_OP_HS': 337,
+'bodyFace_3Draw_hands_None': 246,
+'bodyFace_3Dfeatures_hands_None': 176,
+'bodyFace_3Draw_hands_OP': 368,
+'bodyFace_3Dfeatures_hands_OP': 298,
+'bodyFace_3Draw_hands_HS': 368,
+'bodyFace_3Dfeatures_hands_HS': 298,
+'bodyFace_3Draw_hands_OP_HS': 490,
+'bodyFace_3Dfeatures_hands_OP_HS': 420
+}
+
+#nVideo  = 0
 nFrames = 0
+
+nFeatures = N_features[vidSuffix]
+avg       = np.zeros(nFeatures)
+avgSquare = np.zeros(nFeatures)
+
+print('Summing all videos')
 listOfFiles = os.listdir(path2vid)
 for entry in listOfFiles:
     filePart1, filePart2 = os.path.splitext(entry)
     if filePart2 in videoExtensions:
-        print('Summing all data')
         print(filePart1)
-        if nVideo == 0:
-            (N_frames, N_features) = (np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')).shape
-            avg       = np.zeros(N_features)
-            avgSquare = np.zeros(N_features)
+        #if nVideo == 0:
+        #    (N_frames, N_features) = (np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')).shape
+
         data = np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')
         avg       += np.nansum(data,            axis=0)
         avgSquare += np.nansum(np.square(data), axis=0)
-        nVideo  += 1
+        #nVideo  += 1
         nFrames += N_frames
 
-print('')
 
 avg       = avg/nFrames
 avgSquare = avgSquare/nFrames
 
 stDev = np.sqrt(avgSquare - np.square(avg))
 
+
+untouchedFeatures = Untouched_features[vidSuffix]
+if untouchedFeatures.size > 0:
+    avg[untouchedFeatures]   = 0
+    stDev[untouchedFeatures] = 1
+
 np.save(path2features+'final/'+vidSuffix+'-AVERAGE.npy', avg)
 np.save(path2features+'final/'+vidSuffix+'-STDEV.npy', stDev)
 
+print('Normalizing all videos')
 for entry in listOfFiles:
     filePart1, filePart2 = os.path.splitext(entry)
     if filePart2 in videoExtensions:
-        print('Normalizing all data')
         print(filePart1)
         data = np.load(path2features+'final/'+filePart1+'_'+vidSuffix+'.npy')
         data = (data-avg)/stDev

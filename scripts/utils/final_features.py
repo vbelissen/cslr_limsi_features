@@ -115,9 +115,11 @@ for i in range(nbPtsFace):
 
 if load3D:
     poseRaw_final = np.copy(dataPose)
+    poseRaw_final[1, :, :] = dataPose1[1, :, :]
     faceRaw_final = np.copy(dataFace)
 else:
     poseRaw_final = np.copy(dataPose[:, 0::2, :])
+    poseRaw_final[1, :, :] = dataPose1[1, 0::2, :]
     faceRaw_final = np.copy(dataFace[:, 0::2, :])
 poseRaw_final = np.swapaxes(poseRaw_final, 0, 2)
 poseRaw_final = np.reshape(poseRaw_final, (nimg, -1))
