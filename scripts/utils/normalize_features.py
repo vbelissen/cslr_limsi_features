@@ -12,20 +12,20 @@ videoExtensions = ['.mp4', '.mov', '.mpg', '.mpeg', '.avi', '.flv', '.mkv', '.we
 Untouched_features = {
 'bodyFace_2Draw_hands_None': np.array([]),
 'bodyFace_2Dfeatures_hands_None': np.array([]),
-'bodyFace_2Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
-'bodyFace_2Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_2Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_2Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
 'bodyFace_2Draw_hands_HS': np.arange(0,122),
 'bodyFace_2Dfeatures_hands_HS': np.arange(0,122),
-'bodyFace_2Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
-'bodyFace_2Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_2Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_2Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
 'bodyFace_3Draw_hands_None': np.array([]),
 'bodyFace_3Dfeatures_hands_None': np.array([]),
-'bodyFace_3Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
-'bodyFace_3Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
+'bodyFace_3Draw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_3Dfeatures_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
 'bodyFace_3Draw_hands_HS': np.arange(0,122),
 'bodyFace_3Dfeatures_hands_HS': np.arange(0,122),
-'bodyFace_3Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)])),
-'bodyFace_3Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21:3), np.arange(182,183+3*21:3)]))
+'bodyFace_3Draw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_3Dfeatures_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)]))
 }
 
 N_features = {
