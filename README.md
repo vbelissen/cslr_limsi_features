@@ -3,6 +3,10 @@
 - All scripts have to be run from the main folder (`cslr_limsi_features`).
 - The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.
 
+### Usage
+
+Open your shell, go to the `cslr_limsi_features` folder, and execute `./main_allVideos.sh'.
+
 ## Requirements
 
 - Openpose, tested with CUDA8.0
@@ -34,6 +38,8 @@ export CAFFE_ROOT=/people/belissen/caffe/
 export PYTHONPATH=/people/belissen/caffe/distribute/python:$PYTHONPATH
 export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
 ```
+- Setting the absolute paths correctly in `script/paths/...`
+- Put your video files in `videos` (or change `script/paths/path_to_videos.txt` to where your videos are stored
 
 
 ## Main scripts
