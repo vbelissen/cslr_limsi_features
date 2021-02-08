@@ -108,9 +108,14 @@ echo ""
 
 echo ""
 echo "-----------------------------------------------------------------"
-echo "  STEP 5: Getting hand crop images from openpose clean data and from original images"
-echo ""
-./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+if [[ "$HS" = 1 ]]; then
+  echo "  STEP 5: Getting hand crop images from openpose clean data and from original images"
+  echo ""
+  ./scripts/openpose_clean_to_hand_crops.sh -v ${VIDNAME} --framesExt ${FRAMESEXT} -n ${NDIGITS}
+else
+  echo "  Skipping STEP 5 (hand crops)"
+  echo ""
+fi
 
 echo ""
 echo "-----------------------------------------------------------------"

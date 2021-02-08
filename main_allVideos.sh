@@ -100,4 +100,10 @@ echo "-----------------------------------------------------------------"
 echo "*****************************************************************"
 echo ""
 
-./scripts/get_normalized_features.sh ${BODY3D_STRING}${FACE3D_STRING}${HS_STRING}
+if [[ "$BODY3D" = 1 ]] && [[ "$FACE3D" = 1 ]]; then
+  LOAD3D_STRING=" --load3D"
+else
+  LOAD3D_STRING=0
+fi
+
+./scripts/get_normalized_features.sh ${LOAD3D_STRING}${HS_STRING}
