@@ -3,6 +3,10 @@
 - All scripts have to be run from the main folder (`cslr_limsi_features`).
 - The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.
 
+### Usage
+
+Open your shell, go to the `cslr_limsi_features` folder, and execute `./main_allVideos.sh'.
+
 ## Requirements
 
 - Openpose, tested with CUDA8.0
@@ -28,23 +32,26 @@
     - pillow
     - numpy
     - scipy 1.1.0
-- Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`. It might be necessary to add Caffe to PATH before running the scripts, for instance by exectuting this in shell:
+- Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`. It might be necessary to add Caffe to PATH before running the scripts, for instance by executing this in shell:
 ```
 export CAFFE_ROOT=/people/belissen/caffe/
 export PYTHONPATH=/people/belissen/caffe/distribute/python:$PYTHONPATH
 export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
 ```
+- Setting the absolute paths correctly in `script/paths/...`
+- Put your video files in `videos` (or change `script/paths/path_to_videos.txt` to where your videos are stored
 
 
 ## Main scripts
 ### **`main_allVideos.sh`**
-  - Runs all scripts in `scripts/` for all videos inside `videos/`
-  - Calls `main_uniqueVideo.sh` for each video
+  - Runs all scripts in `scripts/` for all videos inside `videos/`, then normalizes final features with respect to the average and standard deviation of features computed for all videos
+  - Calls:
+    - `main_uniqueVideo.sh` for each video
+    - `get_normalized_features.sh`
   - Parameters:
+    - `--fps`: Framerate per second (all videos are supposed to be recorded at the same framerate)
     - `--framesExt`: Frame files extension for ffmpeg
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
-    - `--handOP`: OpenPose computed on hands
-    - `--faceOP`: OpenPose computed on face
     - `--body3D`: 3D Body computed
     - `--face3D`: 3D Face computed
     - `--hs`: Hand shapes probabilities (Koller cafe model)
@@ -54,7 +61,7 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_allVideos.sh --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
+  - Example: `./main_allVideos.sh --fps 25--framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
 
 ### **`main_uniqueVideo.sh`**
   - Runs all scripts in `scripts/` for one video inside `videos/`
@@ -63,17 +70,16 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `scripts/video_to_openpose.sh`
     - `scripts/frames_to_3DFace_temp.sh` (if `--face3D`, see parameters)
     - `scripts/openpose_json_to_clean_data.sh`
-    - `scripts/openpose_clean_to_hand_crops.sh`
+    - `scripts/openpose_clean_to_hand_crops.sh` (if `--hs`, see parameters)
     - `scripts/openpose_clean_to_2D_3D.sh`
     - `scripts/hand_crops_to_HS_probabilities.sh` (if `--hs`, see parameters)
-    - `scripts/get_final_features.sh`
+    - `scripts/get_final_features.sh` (for 2D features, as well as for 3D ones if `--body3D` and `--face3D`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--vidExt`: Video file extension
+    - `--fps`: Framerate per second
     - `--framesExt`: Frame files extension for ffmpeg
     - `-n`, `--nDigits`: Number of digits for frame numbering (if n=5, frames are number 00000.jpg, 00001.jpg, etc.)
-    - `--handOP`: OpenPose computed on hands
-    - `--faceOP`: OpenPose computed on face
     - `--body3D`: 3D Body computed
     - `--face3D`: 3D Face computed
     - `--hs`: Hand shapes probabilities (Koller cafe model)
@@ -83,7 +89,7 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
+  - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --fps 25 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
 
 ## Included scripts
 ### **`scripts/video_to_frames.sh`**
