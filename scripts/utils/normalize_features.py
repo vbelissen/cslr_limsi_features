@@ -12,20 +12,20 @@ videoExtensions = ['.mp4', '.mov', '.mpg', '.mpeg', '.avi', '.flv', '.mkv', '.we
 Untouched_features = {
 'bodyFace_2D_raw_hands_None': np.array([]),
 'bodyFace_2D_features_hands_None': np.array([]),
-'bodyFace_2D_raw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
-'bodyFace_2D_features_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_2D_raw_hands_OP': np.sort(np.concatenate([np.arange(0,0+3*21,3), np.arange(61,61+3*21,3)])),
+'bodyFace_2D_features_hands_OP': np.sort(np.concatenate([np.arange(0,0+3*21,3), np.arange(61,61+3*21,3)])),
 'bodyFace_2D_raw_hands_HS': np.arange(0,122),
 'bodyFace_2D_features_hands_HS': np.arange(0,122),
-'bodyFace_2D_raw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
-'bodyFace_2D_features_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_2D_raw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(183,183+3*21,3)])),
+'bodyFace_2D_features_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(183,183+3*21,3)])),
 'bodyFace_3D_raw_hands_None': np.array([]),
 'bodyFace_3D_features_hands_None': np.array([]),
-'bodyFace_3D_raw_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
-'bodyFace_3D_features_hands_OP': np.sort(np.concatenate([np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
+'bodyFace_3D_raw_hands_OP': np.sort(np.concatenate([np.arange(0,0+3*21,3), np.arange(61,61+3*21,3)])),
+'bodyFace_3D_features_hands_OP': np.sort(np.concatenate([np.arange(0,0+3*21,3), np.arange(61,61+3*21,3)])),
 'bodyFace_3D_raw_hands_HS': np.arange(0,122),
 'bodyFace_3D_features_hands_HS': np.arange(0,122),
-'bodyFace_3D_raw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)])),
-'bodyFace_3D_features_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(182,183+3*21,3)]))
+'bodyFace_3D_raw_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(183,183+3*21,3)])),
+'bodyFace_3D_features_hands_OP_HS': np.sort(np.concatenate([np.arange(0,122), np.arange(122,122+3*21,3), np.arange(183,183+3*21,3)]))
 }
 
 N_features = {
@@ -76,6 +76,7 @@ avgSquare = avgSquare/nFrames
 
 stDev = np.sqrt(avgSquare - np.square(avg))
 
+print(untouchedFeatures)
 
 untouchedFeatures = Untouched_features[vidSuffix]
 if untouchedFeatures.size > 0:
