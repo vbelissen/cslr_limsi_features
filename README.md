@@ -108,8 +108,6 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
     - `--vidExt`: Video file extension
-    - `-h`, `--handOP`: OpenPose computed on hands
-    - `-f`, `--faceOP`: OpenPose computed on face
   - Outputs:
     - `features/openpose/vidName/keypoints_json000000000000.json`
     - ...
@@ -128,8 +126,6 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
   - Calls `scripts/utils/openpose_json_to_clean_data.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_clean_numpy.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
-    - `-h`, `--handOP`: OpenPose computed on hands
-    - `-f`, `--faceOP`: OpenPose computed on face
   - Outputs:
     - `features/openpose/vidName_openpose_clean.npz`
 ### **`scripts/openpose_clean_to_hand_crops.sh`**
@@ -150,8 +146,6 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
   - Calls `scripts/utils/openpose_clean_to_2D_3D.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_2D_3D.txt` (default is `cslr_limsi_features_env2`)
   - Parameters:
     - `-v`, `--vidName`: Video name without extension
-    - `--handOP`: OpenPose computed on hands
-    - `--faceOP`: OpenPose computed on face
     - `--body3D`: 3D Body computed too
     - `--face3D`: 3D Face computed too
   - Outputs:
@@ -161,7 +155,6 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `features/temp/vidName_headAngles_from_3DBody.npy`
     - `features/temp/vidName_3DBody.npy`: 3D body estimate from model trained on LSF Mocap data, predicted from 2D openpose data
     - `features/temp/vidName_3DFace_predict_raw.npy`
-    - `features/temp/vidName_headAngles_from_3DFace.npy`
 ### **`scripts/hand_crops_to_HS_probabilities.sh`**
   - Computes Koller's model probabilities for 61 hand shapes, for each frame and each hand of a given video
   - Calls:
@@ -173,11 +166,52 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `features/temp/vidName_HS_probs_L.npy`
     - `features/temp/vidName_HS_probs_R.npy`
 ### **`scripts/get_final_features.sh`**
-  - Aaa
-  - Calls:
-    - aaa `aaa.py`, with the virtual environment defined in `scripts/virtual_env_names/aaa.txt` (default is `aaa`)
-    - Parameters:
-      - aaa
+  - Computes (un-normalized) final features, with 2D or 3D, raw or preprocessed features for body and face, and hand shape probabilities, openpose 2D data or both for hands data.
+  - Calls `scripts/utils/final_features.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_final_features.txt` (default is `cslr_limsi_features_env1`)
+  - Parameters:
+    - `-v`, `--vidName`: Video name without extension
+    - `--fps`: Framerate per second
+    - `--load3D`: when 3D body and 3D face have been computed, final 3D features can be derived
+    - `--hs`: Hand shapes probabilities (Koller cafe model)
   - Outputs:
-      - `features/final/vidName_handShapes_dom.npy`
-      - ...
+    - `features/final/vidName_bodyFace_2D_raw_hands_None.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_None.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_OP.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_OP_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_None.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_None.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP_HS.npy` (if `--load3D` and `--hs`)
+### **`scripts/get_normalized_features.sh`**
+  - Computes normalized final features from un-normalized ones, with 2D or 3D, raw or preprocessed features for body and face, and hand shape probabilities, openpose 2D data or both for hands data.
+  - Calls `scripts/utils/normalize_features.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_final_features.txt` (default is `cslr_limsi_features_env1`)
+  - Parameters:
+    - `-v`, `--vidName`: Video name without extension
+    - `--fps`: Framerate per second
+    - `--load3D`: when 3D body and 3D face have been computed, final 3D features can be derived
+    - `--hs`: Hand shapes probabilities (Koller cafe model)
+  - Outputs:
+    - `features/final/vidName_bodyFace_2D_raw_hands_None.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_None.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_OP.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_OP_HS.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_None.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_None.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP_HS.npy` (if `--load3D` and `--hs`)
