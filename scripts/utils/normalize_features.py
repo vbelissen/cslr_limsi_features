@@ -77,7 +77,6 @@ avgSquare = avgSquare/nFrames
 stDev = np.sqrt(avgSquare - np.square(avg))
 
 untouchedFeatures = Untouched_features[vidSuffix]
-print(untouchedFeatures)
 if untouchedFeatures.size > 0:
     avg[untouchedFeatures]   = 0
     stDev[untouchedFeatures] = 1
