@@ -198,19 +198,50 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--load3D`: when 3D body and 3D face have been computed, final 3D features can be derived
     - `--hs`: Hand shapes probabilities (Koller cafe model)
   - Outputs:
-    - `features/final/vidName_bodyFace_2D_raw_hands_None_normalized.npy`
-    - `features/final/vidName_bodyFace_2D_raw_hands_HS_normalized.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_raw_hands_OP_normalized.npy`
-    - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS_normalized.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_features_hands_None_normalized.npy`
-    - `features/final/vidName_bodyFace_2D_features_hands_HS_normalized.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_features_hands_OP_normalized.npy`
-    - `features/final/vidName_bodyFace_2D_features_hands_OP_HS_normalized.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_None_normalized.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_OP_normalized.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_features_hands_None_normalized.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_features_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_features_hands_OP_normalized.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_features_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
+    - for each video, with name vidName:
+      - `features/final/vidName_bodyFace_2D_raw_hands_None_normalized.npy`
+      - `features/final/vidName_bodyFace_2D_raw_hands_HS_normalized.npy` (if `--hs`)
+      - `features/final/vidName_bodyFace_2D_raw_hands_OP_normalized.npy`
+      - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS_normalized.npy` (if `--hs`)
+      - `features/final/vidName_bodyFace_2D_features_hands_None_normalized.npy`
+      - `features/final/vidName_bodyFace_2D_features_hands_HS_normalized.npy` (if `--hs`)
+      - `features/final/vidName_bodyFace_2D_features_hands_OP_normalized.npy`
+      - `features/final/vidName_bodyFace_2D_features_hands_OP_HS_normalized.npy` (if `--hs`)
+      - `features/final/vidName_bodyFace_3D_raw_hands_None_normalized.npy` (if `--load3D` and `--hs`)
+      - `features/final/vidName_bodyFace_3D_raw_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
+      - `features/final/vidName_bodyFace_3D_raw_hands_OP_normalized.npy` (if `--load3D`)
+      - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
+      - `features/final/vidName_bodyFace_3D_features_hands_None_normalized.npy` (if `--load3D`)
+      - `features/final/vidName_bodyFace_3D_features_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
+      - `features/final/vidName_bodyFace_3D_features_hands_OP_normalized.npy` (if `--load3D`)
+      - `features/final/vidName_bodyFace_3D_features_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_2D_features_hands_HS-AVERAGE.npy`
+    - `bodyFace_2D_features_hands_HS-STDEV.npy`  (if `--hs`)
+    - `bodyFace_2D_features_hands_None-AVERAGE.npy`
+    - `bodyFace_2D_features_hands_None-STDEV.npy`
+    - `bodyFace_2D_features_hands_OP_HS-AVERAGE.npy`  (if `--hs`)
+    - `bodyFace_2D_features_hands_OP_HS-STDEV.npy`  (if `--hs`)
+    - `bodyFace_2D_raw_hands_HS-AVERAGE.npy`  (if `--hs`)
+    - `bodyFace_2D_raw_hands_HS-STDEV.npy`  (if `--hs`)
+    - `bodyFace_2D_raw_hands_None-AVERAGE.npy`
+    - `bodyFace_2D_raw_hands_None-STDEV.npy`
+    - `bodyFace_2D_raw_hands_OP-AVERAGE.npy`
+    - `bodyFace_2D_raw_hands_OP_HS-AVERAGE.npy`  (if `--hs`)
+    - `bodyFace_2D_raw_hands_OP_HS-STDEV.npy`  (if `--hs`)
+    - `bodyFace_2D_raw_hands_OP-STDEV.npy`
+    - `bodyFace_3D_features_hands_HS-AVERAGE.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_features_hands_HS-STDEV.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_features_hands_None-AVERAGE.npy` (if `--load3D`)
+    - `bodyFace_3D_features_hands_None-STDEV.npy` (if `--load3D`)
+    - `bodyFace_3D_features_hands_OP-AVERAGE.npy` (if `--load3D`)
+    - `bodyFace_3D_features_hands_OP_HS-AVERAGE.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_features_hands_OP_HS-STDEV.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_features_hands_OP-STDEV.npy` (if `--load3D`)
+    - `bodyFace_3D_raw_hands_HS-AVERAGE.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_raw_hands_HS-STDEV.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_raw_hands_None-AVERAGE.npy` (if `--load3D`)
+    - `bodyFace_3D_raw_hands_None-STDEV.npy` (if `--load3D`)
+    - `bodyFace_3D_raw_hands_OP-AVERAGE.npy` (if `--load3D`)
+    - `bodyFace_3D_raw_hands_OP_HS-AVERAGE.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_raw_hands_OP_HS-STDEV.npy` (if `--load3D` and `--hs`)
+    - `bodyFace_3D_raw_hands_OP-STDEV.npy` (if `--load3D`)
