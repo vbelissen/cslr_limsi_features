@@ -19,7 +19,7 @@ confMinHand = 0.1
 savitzky_window = 17
 savitzky_order = 6
 
-(a, b, c, d) = trOP.dataReadTabPoseFaceHandLR(nimg, 0, path2features+'openpose/json/'+vidName+'/'+vidName+'_', 12, '_keypoints.json', typeData='pfh', typePose='COCO')
+(a, b, c, d) = trOP.dataReadTabPoseFaceHandLR(nimg, 0, path2features+'openpose/json/'+vidName+'/', 5, '_keypoints.json', typeData='pfh', typePose='COCO')
 
 # Mise a nan des genoux et chevilles
 a[:,  9:11, 0:2] = np.nan

@@ -11,7 +11,7 @@ Open your shell, go to the `cslr_limsi_features` folder, and execute `./main_all
 
 ## Requirements
 
-- Openpose, tested with CUDA8.0
+- Openpose 1.2.0, tested with CUDA8.0
 - Three virtual Python environments. You can use the three `.yml`files at the root of the repo to reproduce them:
   - `cslr_limsi_features_env1`:
     - python 3.7

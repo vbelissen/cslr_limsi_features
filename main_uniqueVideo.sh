@@ -85,9 +85,9 @@ echo ""
 
 echo ""
 echo "-----------------------------------------------------------------"
-echo "  STEP 2: Getting openpose json data from video"
+echo "  STEP 2: Getting openpose json data from video frames"
 echo ""
-./scripts/video_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
+./scripts/video_frames_to_openpose.sh -v ${VIDNAME} --vidExt ${VIDEXT}
 
 echo ""
 echo "-----------------------------------------------------------------"

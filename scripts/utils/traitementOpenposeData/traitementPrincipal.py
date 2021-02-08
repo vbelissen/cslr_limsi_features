@@ -88,7 +88,7 @@ def dataReadTabPoseFaceHandLR(n,indice_personne,s1,chiffres,s2,typeData,typePose
         # celle qui est la plus proche de celle de l'image précédente
         if j==0:
             # Importation des donnees de la 1ere image
-            json_data = open(s1+str(j).zfill(chiffres)+s2)
+            json_data = open(s1+str(j+1).zfill(chiffres)+s2)
             data = json.load(json_data)
 
             # Extraction visage, corps, mains
@@ -100,7 +100,7 @@ def dataReadTabPoseFaceHandLR(n,indice_personne,s1,chiffres,s2,typeData,typePose
                 d[j]=np.array(data['people'][indice_personne]['hand_right_keypoints']).ravel().reshape(-1,3)
         else:
             # Importation des donnees sur une image
-            json_data_current=open(s1+str(j).zfill(chiffres)+s2)
+            json_data_current=open(s1+str(j+1).zfill(chiffres)+s2)
             data_current = json.load(json_data_current)
 
             nb_personnes = len(data_current['people'])
