@@ -191,27 +191,26 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `features/final/vidName_bodyFace_3D_features_hands_OP.npy` (if `--load3D`)
     - `features/final/vidName_bodyFace_3D_features_hands_OP_HS.npy` (if `--load3D` and `--hs`)
 ### **`scripts/get_normalized_features.sh`**
-  - Computes normalized final features from un-normalized ones, with 2D or 3D, raw or preprocessed features for body and face, and hand shape probabilities, openpose 2D data or both for hands data.
+  - Computes normalized final features from un-normalized ones, with 2D or 3D, raw or preprocessed features for body and face, and hand shape probabilities, openpose 2D data or both for hands data. The script considers that all un-normalized features have already been computed, for all videos present in the folder defined in `script/paths/path_to_videos.txt` (default is `videos`). Make sure the extensions of your video files are included in the list `videoExtensions`at the beginning of `scripts/utils/normalize_features.py`.
+  - This script computes the average and standard deviation for all features across all videos, then normalizes everything with the simple formula `data=(data-avg)/stdev`. However, note that a few features are left un-normalized: all hand shape probabilities, as thay are already bounded in [0,1], and all hand keypoint confidence score (provided by openpose), for the same reason.
   - Calls `scripts/utils/normalize_features.py`, with the virtual environment defined in `scripts/virtual_env_names/vEnv_for_final_features.txt` (default is `cslr_limsi_features_env1`)
   - Parameters:
-    - `-v`, `--vidName`: Video name without extension
-    - `--fps`: Framerate per second
     - `--load3D`: when 3D body and 3D face have been computed, final 3D features can be derived
     - `--hs`: Hand shapes probabilities (Koller cafe model)
   - Outputs:
-    - `features/final/vidName_bodyFace_2D_raw_hands_None.npy`
-    - `features/final/vidName_bodyFace_2D_raw_hands_HS.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_raw_hands_OP.npy`
-    - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_features_hands_None.npy`
-    - `features/final/vidName_bodyFace_2D_features_hands_HS.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_2D_features_hands_OP.npy`
-    - `features/final/vidName_bodyFace_2D_features_hands_OP_HS.npy` (if `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_None.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_HS.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_OP.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_features_hands_None.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_features_hands_HS.npy` (if `--load3D` and `--hs`)
-    - `features/final/vidName_bodyFace_3D_features_hands_OP.npy` (if `--load3D`)
-    - `features/final/vidName_bodyFace_3D_features_hands_OP_HS.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_2D_raw_hands_None_normalized.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_HS_normalized.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP_normalized.npy`
+    - `features/final/vidName_bodyFace_2D_raw_hands_OP_HS_normalized.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_None_normalized.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_HS_normalized.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_2D_features_hands_OP_normalized.npy`
+    - `features/final/vidName_bodyFace_2D_features_hands_OP_HS_normalized.npy` (if `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_None_normalized.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP_normalized.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_raw_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_None_normalized.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_HS_normalized.npy` (if `--load3D` and `--hs`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP_normalized.npy` (if `--load3D`)
+    - `features/final/vidName_bodyFace_3D_features_hands_OP_HS_normalized.npy` (if `--load3D` and `--hs`)
