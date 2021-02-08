@@ -3,7 +3,7 @@
 ![code_structure](code_structure.png)
 
 - All scripts have to be run from the main folder (`cslr_limsi_features`).
-- The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.
+- The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.aa
 
 ### Usage
 
