@@ -35,8 +35,12 @@ else:
 
 if left_handed:
     handOrder = ['L', 'R']
+    print('The current video features a left-handed signer')
+    print('If it is not the case, check '+path2leftHandedList)
 else:
     handOrder = ['R', 'L']
+    print('The current video features a right-handed signer')
+    print('If it is not the case, check '+path2leftHandedList)
 
 if hsKoller:
     final_handShapes = np.zeros((nimg, 122))

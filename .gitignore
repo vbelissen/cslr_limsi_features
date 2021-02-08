@@ -18,3 +18,6 @@ features/temp/*
 
 videos/*
 !videos/.gitkeep
+!videos/DictaSign_lsf_S4_T7_B14_front_extract.mp4
+!videos/DictaSign_lsf_S7_T2_A10_front_extract.mp4
+!videos/DictaSign_lsf_S8_T4_B4_front_extract.mp4
