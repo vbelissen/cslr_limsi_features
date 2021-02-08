@@ -92,6 +92,7 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
   - Outputs:
     - See detail of other scripts
   - Example: `./main_uniqueVideo.sh -v test_video_1 --vidExt mp4 --fps 25 --framesExt jpg -n 5 --handOP --faceOP --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
+  - If some videos include left handed signers, you should create a .csv file (similar to `left_handed/left_handed_dictasign.csv`), with the name of your videos (without extensions) and 0/1 for right-handed/left-handed signers. The path to this .csv file should be set accordingly in `scripts/paths/path_to_left_handed_list.txt`).
 
 ## Included scripts
 ### **`scripts/video_to_frames.sh`**
