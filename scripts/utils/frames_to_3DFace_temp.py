@@ -49,6 +49,12 @@ for j in range(3):
     for k in range(68):
         nans, x = nan_helper(tabTot[k,j,:])
         if tabTot[k,j,~nans].size != 0:
+            if nans[0]:
+                firstNonNanWhere = np.where(~nans)[0][0]
+                tabTot[k,j,:firstNonNanWhere] = tabTot[k,j,firstNonNanWhere]
+            if nans[-1]:
+                lastNonNanWhere = np.where(~nans)[0][-1]
+                tabTot[k,j,lastNonNanWhere+1:] = tabTot[k,j,lastNonNanWhere]
             f2 = interp1d(x(~nans), tabTot[k,j,~nans], kind='linear',bounds_error=False)
             tabTot[k,j,:]= f2(range(nimg))
         tabTot[k,j,:] = signal.savgol_filter(tabTot[k,j,:], savitzky_window, savitzky_order)
