@@ -12,28 +12,28 @@ Open your shell, go to the `cslr_limsi_features` folder, and execute `./main_all
 ## Requirements
 
 - Openpose 1.2.0, tested with CUDA8.0
-- Three virtual Python environments. You can use the three `.yml`files at the root of the repo to reproduce them:
+- Three virtual Python environments. You can use the three `.yml` files at the root of the repo to reproduce them, or run the following commands:
   - `cslr_limsi_features_env1`:
-    - python 3.7
-    - numpy
-    - scipy (1.1.0)
-    - pillow
-    - pytorch (0.4.1)
-    - dlib (installed via pip)
-    - scikit-image
-    - opencv-python
-    - scikit-learn
+    - conda create --name cslr_limsi_features_env1 python=3.7
+    - conda install numpy
+    - conda install scipy=1.1.0
+    - conda install pillow
+    - conda install pytorch=0.4.1 cuda80 -c pytorch
+    - pip install dlib
+    - conda install scikit-image
+    - conda install opencv-python
+    - conda install scikit-learn
   - `cslr_limsi_features_env2`:
-    - python 3.6
-    - tensorflow-gpu 1.2.1
-    - keras 2.1.5
-    - pillow
-    - scipy (1.1.0)
+    - conda create --name cslr_limsi_features_env2 python=3.6
+    - conda install tensorflow-gpu=1.2.1
+    - pip install keras=0.3.2
+    - conda install pillow
+    - conda install scipy=1.1.0
   - `cslr_limsi_features_env3` (used with Caffe):
-    - python 2.7
-    - pillow
-    - numpy
-    - scipy 1.1.0
+    - conda create --name cslr_limsi_features_env3 python=2.7
+    - conda install pillow
+    - conda install numpy
+    - conda install scipy=1.1.0
 - Caffe, tested with Python 2.7. It should be possible to install Caffe with Python 3, and thus use only `cslr_limsi_features_env1` and `cslr_limsi_features_env2`. It might be necessary to add Caffe to PATH before running the scripts, for instance by executing this in shell:
 ```
 export CAFFE_ROOT=/people/belissen/caffe/
@@ -63,7 +63,7 @@ export PYTHONPATH=/people/belissen/caffe/python:$PYTHONPATH
     - `--keep_temporary_features`: if you want not to delete temporary features all final features are computed
   - Outputs:
     - See detail of other scripts
-  - Example: `./main_allVideos.sh --fps 25--framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
+  - Example: `./main_allVideos.sh --fps 25 --framesExt jpg -n 5 --body3D --face3D --hs --keep_full_frames --keep_hand_crop_frames --keep_openpose_json --keep_temporary_features`
 
 ### **`main_uniqueVideo.sh`**
   - Runs all scripts in `scripts/` for one video inside `videos/`
