@@ -12,7 +12,7 @@ Open your shell, go to the `cslr_limsi_features` folder, and execute `./main_all
 ## Requirements
 
 - Openpose 1.2.0, tested with CUDA8.0
-- Three virtual Python environments. You can probably use use the three `.yml` files and/or the three `requirements_***.txt` files at the root of the repo to reproduce them, or run the following commands:
+- Three virtual Python environments. You can probably use  the three `.yml` files and/or the three `requirements_***.txt` files at the root of the repo to reproduce them, or you can simply run the following commands:
   - `cslr_limsi_features_env1`:
     - conda create --name cslr_limsi_features_env1 python=3.7
     - conda install numpy
