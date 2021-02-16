@@ -1,0 +1,28 @@
+absl-py @ file:///tmp/build/80754af9/absl-py_1607439979954/work
+astor==0.8.1
+backports.weakref==1.0rc1
+bleach==1.5.0
+certifi==2020.12.5
+gast @ file:///tmp/build/80754af9/gast_1597433534803/work
+grpcio @ file:///tmp/build/80754af9/grpcio_1597424460877/work
+h5py @ file:///tmp/build/80754af9/h5py_1593454121459/work
+html5lib==0.9999999
+importlib-metadata @ file:///tmp/build/80754af9/importlib-metadata_1602276842396/work
+Keras==0.3.2
+Markdown @ file:///tmp/build/80754af9/markdown_1605111083232/work
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1603487797006/work
+olefile==0.46
+Pillow @ file:///tmp/build/80754af9/pillow_1609786736246/work
+protobuf==3.13.0
+PyYAML==5.4.1
+scipy==1.1.0
+six @ file:///home/linux1/recipes/ci/six_1610970791821/work
+tensorboard==1.10.0
+tensorflow==1.10.0
+termcolor==1.1.0
+Theano==1.0.4
+Werkzeug==1.0.1
+zipp @ file:///tmp/build/80754af9/zipp_1604001098328/work

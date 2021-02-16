@@ -1,0 +1,29 @@
+certifi==2020.12.5
+cffi @ file:///tmp/build/80754af9/cffi_1606255099073/work
+cloudpickle @ file:///tmp/build/80754af9/cloudpickle_1598884132938/work
+cycler==0.10.0
+cytoolz==0.11.0
+dask @ file:///tmp/build/80754af9/dask-core_1611341281313/work
+decorator==4.4.2
+dlib==19.21.1
+imageio @ file:///tmp/build/80754af9/imageio_1594161405741/work
+joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1607956439537/work
+kiwisolver @ file:///tmp/build/80754af9/kiwisolver_1604014532738/work
+matplotlib @ file:///tmp/build/80754af9/matplotlib-base_1603376012865/work
+networkx @ file:///tmp/build/80754af9/networkx_1598376031484/work
+numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1603480881706/work
+olefile==0.46
+Pillow @ file:///tmp/build/80754af9/pillow_1609786740831/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+pyparsing @ file:///home/linux1/recipes/ci/pyparsing_1610983426697/work
+python-dateutil==2.8.1
+PyWavelets @ file:///tmp/build/80754af9/pywavelets_1601658308664/work
+PyYAML==5.4.1
+scikit-image==0.16.2
+scikit-learn @ file:///home/conda/feedstock_root/build_artifacts/scikit-learn_1611079729065/work
+scipy==1.1.0
+six @ file:///home/linux1/recipes/ci/six_1610970791821/work
+threadpoolctl @ file:///tmp/tmp79xdzxkt/threadpoolctl-2.1.0-py3-none-any.whl
+toolz @ file:///home/linux1/recipes/ci/toolz_1610987900194/work
+torch==0.4.1
+tornado @ file:///tmp/build/80754af9/tornado_1606942283357/work
