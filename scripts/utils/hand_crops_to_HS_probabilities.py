@@ -73,10 +73,10 @@ for hand_suffix in suffixes:
         #Tab_features[j,:] = features
 
         """ Get temps """
-        predict = out['loss3/loss3'].argmax(axis = 1)
-        prob = [probs[predict[it]] for it, probs in enumerate(out['loss3/loss3'])]
+        #predict = out['loss3/loss3'].argmax(axis = 1)
+        #prob = [probs[predict[it]] for it, probs in enumerate(out['loss3/loss3'])]
 
-        Tab_probs[j,:] = probs[:]
+        Tab_probs[j,:] = out['loss3/loss3'].ravel()#probs[:]
         #Tab_predict[j] = predict
 
     #Tab_predict = Tab_predict.astype(int)
