@@ -227,16 +227,16 @@ eyebrow1_wrtUpperNose_dist = np.sqrt(np.sum(np.square(eyebrow1_wrtUpperNose_vect
 eyebrow2_wrtUpperNose_dist = np.sqrt(np.sum(np.square(eyebrow2_wrtUpperNose_vect), axis=1))
 
 # Vecteur bouche gauche-droite
-boucheGD_vect = np.swapaxes(dataFace[64, :, :] - dataFace[60, :, :], 0, 1)
+mouthLR_vect = np.swapaxes(dataFace[64, :, :] - dataFace[60, :, :], 0, 1)
 
 # Distance bouche gauche-droite
-boucheGD_dist = np.sqrt(np.sum(np.square(boucheGD_vect), axis=1))
+mouthLR_dist = np.sqrt(np.sum(np.square(mouthLR_vect), axis=1))
 
 # Vecteur bouche haut-bas
-boucheHB_vect = np.swapaxes(dataFace[66, :, :] - dataFace[62, :, :], 0, 1)
+mouthTB_vect = np.swapaxes(dataFace[66, :, :] - dataFace[62, :, :], 0, 1)
 
 # Distance bouche haut-bas
-boucheHB_dist = np.sqrt(np.sum(np.square(boucheHB_vect), axis=1))
+mouthTB_dist = np.sqrt(np.sum(np.square(mouthTB_vect), axis=1))
 
 # Position des mains 1 et 2 relative aux coudes
 hand1_wrtElbow = np.swapaxes(dataPose[4, :, :] - dataPose[3, :, :], 0, 1)
@@ -486,8 +486,8 @@ if load3D:
                                                              hand2_wrtPt1_vel,
                                                              hand1_wrtPt1_acc,
                                                              hand2_wrtPt1_acc,
-                                                             boucheGD_dist,
-                                                             boucheHB_dist,
+                                                             mouthLR_dist,
+                                                             mouthTB_dist,
                                                              eyebrow1_wrtUpperNose_dist,
                                                              eyebrow2_wrtUpperNose_dist,
                                                              hand1_wrtElbow,
@@ -563,8 +563,8 @@ else:
                                                              hand2_wrtPt1_vel[:, 0::2],
                                                              hand1_wrtPt1_acc[:, 0::2],
                                                              hand2_wrtPt1_acc[:, 0::2],
-                                                             boucheGD_dist,
-                                                             boucheHB_dist,
+                                                             mouthLR_dist,
+                                                             mouthTB_dist,
                                                              eyebrow1_wrtUpperNose_dist,
                                                              eyebrow2_wrtUpperNose_dist,
                                                              hand1_wrtElbow[:, 0::2],
