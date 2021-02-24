@@ -127,13 +127,20 @@ def dataReadTabPoseFaceHandLR(n,indice_personne,s1,chiffres,s2,typeData,typePose
                 if typeData == 'pfh' or typeData == 'ph':
                     c[j]=np.array(data_current['people'][ind_distance_min]['hand_left_keypoints']).ravel().reshape(-1,3)
                     d[j]=np.array(data_current['people'][ind_distance_min]['hand_right_keypoints']).ravel().reshape(-1,3)
-            else:
+            elif nb_personnes==1:
                 a[j]=np.array(data_current['people'][0]['pose_keypoints']).ravel().reshape(-1,3)
                 if typeData == 'pfh' or typeData == 'pf':
                     b[j]=np.array(data_current['people'][0]['face_keypoints']).ravel().reshape(-1,3)
                 if typeData == 'pfh' or typeData == 'ph':
                     c[j]=np.array(data_current['people'][0]['hand_left_keypoints']).ravel().reshape(-1,3)
                     d[j]=np.array(data_current['people'][0]['hand_right_keypoints']).ravel().reshape(-1,3)
+            else:
+                a[j]=a[j-1]
+                if typeData == 'pfh' or typeData == 'pf':
+                    b[j]=b[j-1]
+                if typeData == 'pfh' or typeData == 'ph':
+                    c[j]=c[j-1]
+                    d[j]=d[j-1]
 
     return (a,b,c,d)
 
