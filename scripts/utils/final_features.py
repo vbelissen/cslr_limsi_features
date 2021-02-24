@@ -239,38 +239,38 @@ boucheHB_vect = np.swapaxes(dataFace[66, :, :] - dataFace[62, :, :], 0, 1)
 boucheHB_dist = np.sqrt(np.sum(np.square(boucheHB_vect), axis=1))
 
 # Position des mains 1 et 2 relative aux coudes
-hand1_relElbow = np.swapaxes(dataPose[4, :, :] - dataPose[3, :, :], 0, 1)
-hand2_relElbow = np.swapaxes(dataPose[7, :, :] - dataPose[6, :, :], 0, 1)
+hand1_wrtElbow = np.swapaxes(dataPose[4, :, :] - dataPose[3, :, :], 0, 1)
+hand2_wrtElbow = np.swapaxes(dataPose[7, :, :] - dataPose[6, :, :], 0, 1)
 
 # Vitesse de deplacement des mains 1 et 2
-hand1_relElbow_vel = np.swapaxes(dataPose_vel[4, :, :]-dataPose_vel[3, :, :], 0, 1)
-hand2_relElbow_vel = np.swapaxes(dataPose_vel[7, :, :]-dataPose_vel[6, :, :], 0, 1)
+hand1_wrtElbow_vel = np.swapaxes(dataPose_vel[4, :, :]-dataPose_vel[3, :, :], 0, 1)
+hand2_wrtElbow_vel = np.swapaxes(dataPose_vel[7, :, :]-dataPose_vel[6, :, :], 0, 1)
 
 # Acc des mains 1 et 2
-hand1_relElbow_acc = np.swapaxes(dataPose_acc[4, :, :]-dataPose_acc[3, :, :], 0, 1)
-hand2_relElbow_acc = np.swapaxes(dataPose_acc[7, :, :]-dataPose_acc[6, :, :], 0, 1)
+hand1_wrtElbow_acc = np.swapaxes(dataPose_acc[4, :, :]-dataPose_acc[3, :, :], 0, 1)
+hand2_wrtElbow_acc = np.swapaxes(dataPose_acc[7, :, :]-dataPose_acc[6, :, :], 0, 1)
 
 # Position des mains 1 et 2 relative au nez
-hand1_relNez = np.swapaxes(dataPose[4, :, :] - dataPose[0, :, :], 0, 1)
-hand2_relNez = np.swapaxes(dataPose[7, :, :] - dataPose[0, :, :], 0, 1)
+hand1_wrtNose = np.swapaxes(dataPose[4, :, :] - dataPose[0, :, :], 0, 1)
+hand2_wrtNose = np.swapaxes(dataPose[7, :, :] - dataPose[0, :, :], 0, 1)
 
 # Vitesse de deplacement des mains 1 et 2
-hand1_relNez_vel = np.swapaxes(dataPose_vel[4, :, :]-dataPose_vel[0, :, :], 0, 1)
-hand2_relNez_vel = np.swapaxes(dataPose_vel[7, :, :]-dataPose_vel[0, :, :], 0, 1)
+hand1_wrtNose_vel = np.swapaxes(dataPose_vel[4, :, :]-dataPose_vel[0, :, :], 0, 1)
+hand2_wrtNose_vel = np.swapaxes(dataPose_vel[7, :, :]-dataPose_vel[0, :, :], 0, 1)
 
 # Acc des mains 1 et 2
-hand1_relNez_acc = np.swapaxes(dataPose_acc[4, :, :]-dataPose_vel[0, :, :], 0, 1)
-hand2_relNez_acc = np.swapaxes(dataPose_acc[7, :, :]-dataPose_vel[0, :, :], 0, 1)
+hand1_wrtNose_acc = np.swapaxes(dataPose_acc[4, :, :]-dataPose_vel[0, :, :], 0, 1)
+hand2_wrtNose_acc = np.swapaxes(dataPose_acc[7, :, :]-dataPose_vel[0, :, :], 0, 1)
 
 # Position des coudes 1 et 2 relative aux epaules
-elbow1_relShoulder = np.swapaxes(dataPose[3, :, :] - dataPose[2, :, :], 0, 1)
-elbow2_relShoulder = np.swapaxes(dataPose[6, :, :] - dataPose[5, :, :], 0, 1)
+elbow1_wrtShoulder = np.swapaxes(dataPose[3, :, :] - dataPose[2, :, :], 0, 1)
+elbow2_wrtShoulder = np.swapaxes(dataPose[6, :, :] - dataPose[5, :, :], 0, 1)
 
-elbow1_relShoulder_vel = np.swapaxes(dataPose_vel[3, :, :] - dataPose_vel[2, :, :], 0, 1)
-elbow2_relShoulder_vel = np.swapaxes(dataPose_vel[6, :, :] - dataPose_vel[5, :, :], 0, 1)
+elbow1_wrtShoulder_vel = np.swapaxes(dataPose_vel[3, :, :] - dataPose_vel[2, :, :], 0, 1)
+elbow2_wrtShoulder_vel = np.swapaxes(dataPose_vel[6, :, :] - dataPose_vel[5, :, :], 0, 1)
 
-elbow1_relShoulder_acc = np.swapaxes(dataPose_acc[3, :, :] - dataPose_acc[2, :, :], 0, 1)
-elbow2_relShoulder_acc = np.swapaxes(dataPose_acc[6, :, :] - dataPose_acc[5, :, :], 0, 1)
+elbow1_wrtShoulder_acc = np.swapaxes(dataPose_acc[3, :, :] - dataPose_acc[2, :, :], 0, 1)
+elbow2_wrtShoulder_acc = np.swapaxes(dataPose_acc[6, :, :] - dataPose_acc[5, :, :], 0, 1)
 
 # Position des epaules 1 et 2 relative au pt 1
 shoulder1_wrtPt1 = np.swapaxes(dataPose[2, :, :] - dataPose[1, :, :], 0, 1)
@@ -283,7 +283,7 @@ shoulder1_wrtPt1_acc = np.swapaxes(dataPose_acc[2, :, :] - dataPose_acc[1, :, :]
 shoulder2_wrtPt1_acc = np.swapaxes(dataPose_acc[5, :, :] - dataPose_acc[1, :, :], 0, 1)
 
 # Position du nez relative au pt 1
-nez_wrtPt1 = np.swapaxes(dataFace[30, :, :] - dataPose[1, :, :], 0, 1)
+nose_wrtPt1 = np.swapaxes(dataFace[30, :, :] - dataPose[1, :, :], 0, 1)
 
 # Vitesse de deplacement normalisee (indique plutot une direction)
 hand1_vel_norm = preprocessing.normalize(hand1_wrtPt1_vel, norm='l2')
@@ -294,20 +294,20 @@ hand1_acc_norm = preprocessing.normalize(hand1_wrtPt1_acc, norm='l2')
 hand2_acc_norm = preprocessing.normalize(hand2_wrtPt1_acc, norm='l2')
 
 # Vecteur main 1 - main 2
-hand1_rel_Hand2_vect = hand1_wrtPt1 - hand2_wrtPt1
-hand1_rel_Hand2_vel = hand1_wrtPt1_vel - hand2_wrtPt1_vel
-hand1_rel_Hand2_acc = hand1_wrtPt1_acc - hand2_wrtPt1_acc
+hand1_wrt_Hand2_vect = hand1_wrtPt1 - hand2_wrtPt1
+hand1_wrt_Hand2_vel = hand1_wrtPt1_vel - hand2_wrtPt1_vel
+hand1_wrt_Hand2_acc = hand1_wrtPt1_acc - hand2_wrtPt1_acc
 
 # Distance main 1 - main 2
-hand1_rel_Hand2_dist = np.sqrt(np.sum(np.square(hand1_rel_Hand2_vect), axis=1))
+hand1_wrt_Hand2_dist = np.sqrt(np.sum(np.square(hand1_wrt_Hand2_vect), axis=1))
 
 # Cosinus de langle coude
-cos_elbow1 = np.sum(np.multiply(hand1_relElbow, elbow1_relShoulder), axis=1) / (
-            np.sqrt(np.sum(np.square(hand1_relElbow), axis=1)) * np.sqrt(
-        np.sum(np.square(elbow1_relShoulder), axis=1)))
-cos_elbow2 = np.sum(np.multiply(hand2_relElbow, elbow2_relShoulder), axis=1) / (
-            np.sqrt(np.sum(np.square(hand2_relElbow), axis=1)) * np.sqrt(
-        np.sum(np.square(elbow2_relShoulder), axis=1)))
+cos_elbow1 = np.sum(np.multiply(hand1_wrtElbow, elbow1_wrtShoulder), axis=1) / (
+            np.sqrt(np.sum(np.square(hand1_wrtElbow), axis=1)) * np.sqrt(
+        np.sum(np.square(elbow1_wrtShoulder), axis=1)))
+cos_elbow2 = np.sum(np.multiply(hand2_wrtElbow, elbow2_wrtShoulder), axis=1) / (
+            np.sqrt(np.sum(np.square(hand2_wrtElbow), axis=1)) * np.sqrt(
+        np.sum(np.square(elbow2_wrtShoulder), axis=1)))
 
 #print(cos_elbow1.shape)
 cos_elbow1_tmp = cos_elbow1
@@ -343,13 +343,13 @@ cos_elbow1_acc = cos_elbow1_acc_tmp * 1 / fps
 cos_elbow2_acc = cos_elbow2_acc_tmp * 1 / fps
 
 # Vecteur orthonormal au plan du coude
-cross_elbow1_tmp = np.cross(hand1_relElbow, elbow1_relShoulder)
-cross_elbow2_tmp = np.cross(hand2_relElbow, elbow2_relShoulder)
+cross_elbow1_tmp = np.cross(hand1_wrtElbow, elbow1_wrtShoulder)
+cross_elbow2_tmp = np.cross(hand2_wrtElbow, elbow2_wrtShoulder)
 for i in range(3):
-    cross_elbow1_tmp[:, i] /= np.sqrt(np.sum(np.square(hand1_relElbow), axis=1)) * np.sqrt(
-        np.sum(np.square(elbow1_relShoulder), axis=1)) * np.sqrt(1 - np.square(cos_elbow1))
-    cross_elbow2_tmp[:, i] /= np.sqrt(np.sum(np.square(hand2_relElbow), axis=1)) * np.sqrt(
-        np.sum(np.square(elbow2_relShoulder), axis=1)) * np.sqrt(1 - np.square(cos_elbow2))
+    cross_elbow1_tmp[:, i] /= np.sqrt(np.sum(np.square(hand1_wrtElbow), axis=1)) * np.sqrt(
+        np.sum(np.square(elbow1_wrtShoulder), axis=1)) * np.sqrt(1 - np.square(cos_elbow1))
+    cross_elbow2_tmp[:, i] /= np.sqrt(np.sum(np.square(hand2_wrtElbow), axis=1)) * np.sqrt(
+        np.sum(np.square(elbow2_wrtShoulder), axis=1)) * np.sqrt(1 - np.square(cos_elbow2))
 
 ortho_elbow1 = cross_elbow1_tmp
 ortho_elbow2 = cross_elbow2_tmp
@@ -388,11 +388,11 @@ ortho_elbow1_acc = ortho_elbow1_acc_tmp * 1 / fps
 ortho_elbow2_acc = ortho_elbow2_acc_tmp * 1 / fps
 
 # Cosinus de langle epaule
-cos_shoulder1 = np.sum(np.multiply(elbow1_relShoulder, shoulder1_wrtPt1), axis=1) / (
-            np.sqrt(np.sum(np.square(elbow1_relShoulder), axis=1)) * np.sqrt(
+cos_shoulder1 = np.sum(np.multiply(elbow1_wrtShoulder, shoulder1_wrtPt1), axis=1) / (
+            np.sqrt(np.sum(np.square(elbow1_wrtShoulder), axis=1)) * np.sqrt(
         np.sum(np.square(shoulder1_wrtPt1), axis=1)))
-cos_shoulder2 = np.sum(np.multiply(elbow2_relShoulder, shoulder2_wrtPt1), axis=1) / (
-            np.sqrt(np.sum(np.square(elbow2_relShoulder), axis=1)) * np.sqrt(
+cos_shoulder2 = np.sum(np.multiply(elbow2_wrtShoulder, shoulder2_wrtPt1), axis=1) / (
+            np.sqrt(np.sum(np.square(elbow2_wrtShoulder), axis=1)) * np.sqrt(
         np.sum(np.square(shoulder2_wrtPt1), axis=1)))
 
 #print(cos_shoulder1.shape)
@@ -429,12 +429,12 @@ cos_shoulder1_acc = cos_shoulder1_acc_tmp * 1 / fps
 cos_shoulder2_acc = cos_shoulder2_acc_tmp * 1 / fps
 
 # Vecteur orthonormal au plan de lepaule
-cross_shoulder1_tmp = np.cross(elbow1_relShoulder, shoulder1_wrtPt1)
-cross_shoulder2_tmp = np.cross(elbow2_relShoulder, shoulder2_wrtPt1)
+cross_shoulder1_tmp = np.cross(elbow1_wrtShoulder, shoulder1_wrtPt1)
+cross_shoulder2_tmp = np.cross(elbow2_wrtShoulder, shoulder2_wrtPt1)
 for i in range(3):
-    cross_shoulder1_tmp[:, i] /= np.sqrt(np.sum(np.square(elbow1_relShoulder), axis=1)) * np.sqrt(
+    cross_shoulder1_tmp[:, i] /= np.sqrt(np.sum(np.square(elbow1_wrtShoulder), axis=1)) * np.sqrt(
         np.sum(np.square(shoulder1_wrtPt1), axis=1)) * np.sqrt(1 - np.square(cos_shoulder1))
-    cross_shoulder2_tmp[:, i] /= np.sqrt(np.sum(np.square(elbow2_relShoulder), axis=1)) * np.sqrt(
+    cross_shoulder2_tmp[:, i] /= np.sqrt(np.sum(np.square(elbow2_wrtShoulder), axis=1)) * np.sqrt(
         np.sum(np.square(shoulder2_wrtPt1), axis=1)) * np.sqrt(1 - np.square(cos_shoulder2))
 
 ortho_shoulder1 = cross_shoulder1_tmp
@@ -490,39 +490,39 @@ if load3D:
                                                              boucheHB_dist,
                                                              eyebrow1_wrtUpperNose_dist,
                                                              eyebrow2_wrtUpperNose_dist,
-                                                             hand1_relElbow,
-                                                             hand2_relElbow,
-                                                             hand1_relElbow_vel,
-                                                             hand2_relElbow_vel,
-                                                             hand1_relElbow_acc,
-                                                             hand2_relElbow_acc,
-                                                             hand1_relNez,
-                                                             hand2_relNez,
-                                                             hand1_relNez_vel,
-                                                             hand2_relNez_vel,
-                                                             hand1_relNez_acc,
-                                                             hand2_relNez_acc,
-                                                             elbow1_relShoulder,
-                                                             elbow2_relShoulder,
-                                                             elbow1_relShoulder_vel,
-                                                             elbow2_relShoulder_vel,
-                                                             elbow1_relShoulder_acc,
-                                                             elbow2_relShoulder_acc,
+                                                             hand1_wrtElbow,
+                                                             hand2_wrtElbow,
+                                                             hand1_wrtElbow_vel,
+                                                             hand2_wrtElbow_vel,
+                                                             hand1_wrtElbow_acc,
+                                                             hand2_wrtElbow_acc,
+                                                             hand1_wrtNose,
+                                                             hand2_wrtNose,
+                                                             hand1_wrtNose_vel,
+                                                             hand2_wrtNose_vel,
+                                                             hand1_wrtNose_acc,
+                                                             hand2_wrtNose_acc,
+                                                             elbow1_wrtShoulder,
+                                                             elbow2_wrtShoulder,
+                                                             elbow1_wrtShoulder_vel,
+                                                             elbow2_wrtShoulder_vel,
+                                                             elbow1_wrtShoulder_acc,
+                                                             elbow2_wrtShoulder_acc,
                                                              shoulder1_wrtPt1,
                                                              shoulder2_wrtPt1,
                                                              shoulder1_wrtPt1_vel,
                                                              shoulder2_wrtPt1_vel,
                                                              shoulder1_wrtPt1_acc,
                                                              shoulder2_wrtPt1_acc,
-                                                             nez_wrtPt1,
+                                                             nose_wrtPt1,
                                                              hand1_vel_norm,
                                                              hand2_vel_norm,
                                                              hand1_acc_norm,
                                                              hand2_acc_norm,
-                                                             hand1_rel_Hand2_vect,
-                                                             hand1_rel_Hand2_vel,
-                                                             hand1_rel_Hand2_acc,
-                                                             hand1_rel_Hand2_dist,
+                                                             hand1_wrt_Hand2_vect,
+                                                             hand1_wrt_Hand2_vel,
+                                                             hand1_wrt_Hand2_acc,
+                                                             hand1_wrt_Hand2_dist,
                                                              cos_elbow1,
                                                              cos_elbow2,
                                                              cos_elbow1_vel,
@@ -567,39 +567,39 @@ else:
                                                              boucheHB_dist,
                                                              eyebrow1_wrtUpperNose_dist,
                                                              eyebrow2_wrtUpperNose_dist,
-                                                             hand1_relElbow[:, 0::2],
-                                                             hand2_relElbow[:, 0::2],
-                                                             hand1_relElbow_vel[:, 0::2],
-                                                             hand2_relElbow_vel[:, 0::2],
-                                                             hand1_relElbow_acc[:, 0::2],
-                                                             hand2_relElbow_acc[:, 0::2],
-                                                             hand1_relNez[:, 0::2],
-                                                             hand2_relNez[:, 0::2],
-                                                             hand1_relNez_vel[:, 0::2],
-                                                             hand2_relNez_vel[:, 0::2],
-                                                             hand1_relNez_acc[:, 0::2],
-                                                             hand2_relNez_acc[:, 0::2],
-                                                             elbow1_relShoulder[:, 0::2],
-                                                             elbow2_relShoulder[:, 0::2],
-                                                             elbow1_relShoulder_vel[:, 0::2],
-                                                             elbow2_relShoulder_vel[:, 0::2],
-                                                             elbow1_relShoulder_acc[:, 0::2],
-                                                             elbow2_relShoulder_acc[:, 0::2],
+                                                             hand1_wrtElbow[:, 0::2],
+                                                             hand2_wrtElbow[:, 0::2],
+                                                             hand1_wrtElbow_vel[:, 0::2],
+                                                             hand2_wrtElbow_vel[:, 0::2],
+                                                             hand1_wrtElbow_acc[:, 0::2],
+                                                             hand2_wrtElbow_acc[:, 0::2],
+                                                             hand1_wrtNose[:, 0::2],
+                                                             hand2_wrtNose[:, 0::2],
+                                                             hand1_wrtNose_vel[:, 0::2],
+                                                             hand2_wrtNose_vel[:, 0::2],
+                                                             hand1_wrtNose_acc[:, 0::2],
+                                                             hand2_wrtNose_acc[:, 0::2],
+                                                             elbow1_wrtShoulder[:, 0::2],
+                                                             elbow2_wrtShoulder[:, 0::2],
+                                                             elbow1_wrtShoulder_vel[:, 0::2],
+                                                             elbow2_wrtShoulder_vel[:, 0::2],
+                                                             elbow1_wrtShoulder_acc[:, 0::2],
+                                                             elbow2_wrtShoulder_acc[:, 0::2],
                                                              shoulder1_wrtPt1[:, 0::2],
                                                              shoulder2_wrtPt1[:, 0::2],
                                                              shoulder1_wrtPt1_vel[:, 0::2],
                                                              shoulder2_wrtPt1_vel[:, 0::2],
                                                              shoulder1_wrtPt1_acc[:, 0::2],
                                                              shoulder2_wrtPt1_acc[:, 0::2],
-                                                             nez_wrtPt1[:, 0::2],
+                                                             nose_wrtPt1[:, 0::2],
                                                              hand1_vel_norm[:, 0::2],
                                                              hand2_vel_norm[:, 0::2],
                                                              hand1_acc_norm[:, 0::2],
                                                              hand2_acc_norm[:, 0::2],
-                                                             hand1_rel_Hand2_vect[:, 0::2],
-                                                             hand1_rel_Hand2_vel[:, 0::2],
-                                                             hand1_rel_Hand2_acc[:, 0::2],
-                                                             hand1_rel_Hand2_dist,
+                                                             hand1_wrt_Hand2_vect[:, 0::2],
+                                                             hand1_wrt_Hand2_vel[:, 0::2],
+                                                             hand1_wrt_Hand2_acc[:, 0::2],
+                                                             hand1_wrt_Hand2_dist,
                                                              cos_elbow1,
                                                              cos_elbow2,
                                                              cos_elbow1_vel,
