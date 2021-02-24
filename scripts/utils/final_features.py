@@ -183,10 +183,10 @@ for i in range(nimg):
     if load3D:
         headAngles_vel[i, :] = headAngles[ifin, :] - headAngles[ideb, :]
 
-dataFace_vel *= (1/fps)
-dataPose_vel *= (1/fps)
+dataFace_vel *= fps
+dataPose_vel *= fps
 if load3D:
-    headAngles_vel *= (1/fps)
+    headAngles_vel *= fps
 
 for i in range(nimg):
     if i == 0:
@@ -200,10 +200,10 @@ for i in range(nimg):
     if load3D:
         headAngles_acc[i, :] = headAngles_vel[ifin, :] - headAngles_vel[ideb, :]
 
-dataFace_acc *= (1/fps)
-dataPose_acc *= (1/fps)
+dataFace_acc *= fps
+dataPose_acc *= fps
 if load3D:
-    headAngles_acc *= (1/fps)
+    headAngles_acc *= fps
 
 
 # Position des mains 1 et 2 (relative au point 1)
@@ -326,8 +326,8 @@ for i in range(cos_elbow1.shape[0]):
     cos_elbow1_vel_tmp[i] = cos_elbow1_tmp[ifin] - cos_elbow1_tmp[ideb]
     cos_elbow2_vel_tmp[i] = cos_elbow2_tmp[ifin] - cos_elbow2_tmp[ideb]
 
-cos_elbow1_vel = cos_elbow1_vel_tmp * 1 / fps
-cos_elbow2_vel = cos_elbow2_vel_tmp * 1 / fps
+cos_elbow1_vel = cos_elbow1_vel_tmp * fps
+cos_elbow2_vel = cos_elbow2_vel_tmp * fps
 
 for i in range(cos_elbow1.shape[0]):
     if i == 0:
@@ -339,8 +339,8 @@ for i in range(cos_elbow1.shape[0]):
     cos_elbow1_acc_tmp[i] = cos_elbow1_vel_tmp[ifin] - cos_elbow1_vel_tmp[ideb]
     cos_elbow2_acc_tmp[i] = cos_elbow2_vel_tmp[ifin] - cos_elbow2_vel_tmp[ideb]
 
-cos_elbow1_acc = cos_elbow1_acc_tmp * 1 / fps
-cos_elbow2_acc = cos_elbow2_acc_tmp * 1 / fps
+cos_elbow1_acc = cos_elbow1_acc_tmp * fps
+cos_elbow2_acc = cos_elbow2_acc_tmp * fps
 
 # Vecteur orthonormal au plan du coude
 cross_elbow1_tmp = np.cross(hand1_wrtElbow, elbow1_wrtShoulder)
@@ -371,8 +371,8 @@ for i in range(ortho_elbow1.shape[0]):
     ortho_elbow1_vel_tmp[i,:] = ortho_elbow1_tmp[ifin,:] - ortho_elbow1_tmp[ideb,:]
     ortho_elbow2_vel_tmp[i,:] = ortho_elbow2_tmp[ifin,:] - ortho_elbow2_tmp[ideb,:]
 
-ortho_elbow1_vel = ortho_elbow1_vel_tmp * 1 / fps
-ortho_elbow2_vel = ortho_elbow2_vel_tmp * 1 / fps
+ortho_elbow1_vel = ortho_elbow1_vel_tmp * fps
+ortho_elbow2_vel = ortho_elbow2_vel_tmp * fps
 
 for i in range(ortho_elbow1.shape[0]):
     if i == 0:
@@ -384,8 +384,8 @@ for i in range(ortho_elbow1.shape[0]):
     ortho_elbow1_acc_tmp[i,:] = ortho_elbow1_vel_tmp[ifin,:] - ortho_elbow1_vel_tmp[ideb,:]
     ortho_elbow2_acc_tmp[i,:] = ortho_elbow2_vel_tmp[ifin,:] - ortho_elbow2_vel_tmp[ideb,:]
 
-ortho_elbow1_acc = ortho_elbow1_acc_tmp * 1 / fps
-ortho_elbow2_acc = ortho_elbow2_acc_tmp * 1 / fps
+ortho_elbow1_acc = ortho_elbow1_acc_tmp * fps
+ortho_elbow2_acc = ortho_elbow2_acc_tmp * fps
 
 # Cosinus de langle epaule
 cos_shoulder1 = np.sum(np.multiply(elbow1_wrtShoulder, shoulder1_wrtPt1), axis=1) / (
@@ -412,8 +412,8 @@ for i in range(cos_shoulder1.shape[0]):
     cos_shoulder1_vel_tmp[i] = cos_shoulder1_tmp[ifin] - cos_shoulder1_tmp[ideb]
     cos_shoulder2_vel_tmp[i] = cos_shoulder2_tmp[ifin] - cos_shoulder2_tmp[ideb]
 
-cos_shoulder1_vel = cos_shoulder1_vel_tmp * 1 / fps
-cos_shoulder2_vel = cos_shoulder2_vel_tmp * 1 / fps
+cos_shoulder1_vel = cos_shoulder1_vel_tmp * fps
+cos_shoulder2_vel = cos_shoulder2_vel_tmp * fps
 
 for i in range(cos_shoulder1.shape[0]):
     if i == 0:
@@ -425,8 +425,8 @@ for i in range(cos_shoulder1.shape[0]):
     cos_shoulder1_acc_tmp[i] = cos_shoulder1_vel_tmp[ifin] - cos_shoulder1_vel_tmp[ideb]
     cos_shoulder2_acc_tmp[i] = cos_shoulder2_vel_tmp[ifin] - cos_shoulder2_vel_tmp[ideb]
 
-cos_shoulder1_acc = cos_shoulder1_acc_tmp * 1 / fps
-cos_shoulder2_acc = cos_shoulder2_acc_tmp * 1 / fps
+cos_shoulder1_acc = cos_shoulder1_acc_tmp * fps
+cos_shoulder2_acc = cos_shoulder2_acc_tmp * fps
 
 # Vecteur orthonormal au plan de lepaule
 cross_shoulder1_tmp = np.cross(elbow1_wrtShoulder, shoulder1_wrtPt1)
@@ -456,8 +456,8 @@ for i in range(ortho_shoulder1.shape[0]):
     ortho_shoulder1_vel_tmp[i, :] = ortho_shoulder1_tmp[ifin, :] - ortho_shoulder1_tmp[ideb, :]
     ortho_shoulder2_vel_tmp[i, :] = ortho_shoulder2_tmp[ifin, :] - ortho_shoulder2_tmp[ideb, :]
 
-ortho_shoulder1_vel = ortho_shoulder1_vel_tmp * 1 / fps
-ortho_shoulder2_vel = ortho_shoulder2_vel_tmp * 1 / fps
+ortho_shoulder1_vel = ortho_shoulder1_vel_tmp * fps
+ortho_shoulder2_vel = ortho_shoulder2_vel_tmp * fps
 
 for i in range(ortho_shoulder1.shape[0]):
     if i == 0:
@@ -469,8 +469,8 @@ for i in range(ortho_shoulder1.shape[0]):
     ortho_shoulder1_acc_tmp[i, :] = ortho_shoulder1_vel_tmp[ifin, :] - ortho_shoulder1_vel_tmp[ideb, :]
     ortho_shoulder2_acc_tmp[i, :] = ortho_shoulder2_vel_tmp[ifin, :] - ortho_shoulder2_vel_tmp[ideb, :]
 
-ortho_shoulder1_acc = ortho_shoulder1_acc_tmp * 1 / fps
-ortho_shoulder2_acc = ortho_shoulder2_acc_tmp * 1 / fps
+ortho_shoulder1_acc = ortho_shoulder1_acc_tmp * fps
+ortho_shoulder2_acc = ortho_shoulder2_acc_tmp * fps
 
 
 
