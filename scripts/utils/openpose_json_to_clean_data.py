@@ -34,10 +34,10 @@ a[:, 12:14,   2] = 0
 (a0, b0, c0, d0) = trOP.prolongationNanDebutFin(a, b, c, d, typeData='pfh', typePose='COCO')
 
 
-(a1, b1, c1, d1) = trOP.nettoyageComplet(a0, b0, c0, d0, confMoy, confMinPose, confMinFace, confMinHand, typeData='pfh')
-(a1bis, b1bis, c1bis, d1bis) = trOP.prolongationNanDebutFin(a1, b1, c1, d1, typeData='pfh', typePose='COCO')
-(a2, b2, c2, d2) = trOP.interpNan(a1bis, b1bis, c1bis, d1bis, nimg, typeData='pfh', typePose='COCO')
-(a3, b3, c3, d3) = trOP.filtrageSavGol(a2, b2, c2, d2, savitzky_window, savitzky_order, typeData='pfh', typePose='COCO')
+#(a1, b1, c1, d1) = trOP.nettoyageComplet(a0, b0, c0, d0, confMoy, confMinPose, confMinFace, confMinHand, typeData='pfh')
+#(a1bis, b1bis, c1bis, d1bis) = trOP.prolongationNanDebutFin(a1, b1, c1, d1, typeData='pfh', typePose='COCO')
+(a2, b2, c2, d2) = trOP.interpNan(a0, b0, c0, d0, nimg, typeData='pfh', typePose='COCO')#trOP.interpNan(a1bis, b1bis, c1bis, d1bis, nimg, typeData='pfh', typePose='COCO')
+#(a3, b3, c3, d3) = trOP.filtrageSavGol(a2, b2, c2, d2, savitzky_window, savitzky_order, typeData='pfh', typePose='COCO')
 #(a3, b3, c3, d3) = trOP.interpNan(a1,b1,c1,d1,nimg,typeData='pfh', typePose='COCO')
 
-np.savez(path2features+'openpose/clean_data/'+vidName+'_openpose_clean', a3=a3 , b3=b3, c3=c3, d3=d3)
+np.savez(path2features+'openpose/clean_data/'+vidName+'_openpose_clean', a3=a2 , b3=b2, c3=c2, d3=d2)
