@@ -4,6 +4,11 @@
 
 - All scripts have to be run from the main folder (`cslr_limsi_features`).
 - The whole pipeline uses three Anaconda virtual Python environment (see below). Their names are stored in `scripts/virtual_env_names/`.
+- Uses:
+  - OpenPose
+  - Oscar Koller's Deep Hand model
+  - Adrian Bulat's Face Alignment model
+  - A 2D to 3D body skeleton reconstruction model, inspired from Ruiqi Zhao's model. Train and test code is in `scripts/utils/reconstruction/`
 
 ### Usage
 
