@@ -154,5 +154,5 @@ echo "  STEP 9: Cleaning temporary files"
 echo ""
 if [[ "$KEEP_FULL_FRAMES" = 0 ]]; then rm -rf ${path2frames}${VIDNAME}; fi;
 if [[ "$KEEP_HAND_CROP_FRAMES" = 0 ]]; then rm -rf ${path2handFrames}${VIDNAME}; fi;
-if [[ "$KEEP_OPENPOSE_JSON" = 0 ]]; then rm -rf ${path2openpose}json/${VIDNAME}; fi;
+if [[ "$KEEP_OPENPOSE_JSON" = 0 ]]; then rm -rf "${path2features}openpose/json/${VIDNAME}"; fi;
 if [[ "$KEEP_TEMPORARY_FEATURES" = 0 ]]; then rm "${path2features}temp/${VIDNAME}"*; fi;
